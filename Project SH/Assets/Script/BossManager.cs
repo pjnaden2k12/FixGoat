@@ -1,68 +1,57 @@
 ﻿using UnityEngine;
-using UnityEngine.UI; // Thêm dòng này để sử dụng các lớp UI như Image
+using UnityEngine.UI;
 
 public class BossManager : MonoBehaviour
 {
-    
+    public GameObject bossPrefab; // Prefab của boss
     public Transform spawnPoint; // Vị trí sinh ra boss
-    public Transform targetPoint; // Điểm mà boss sẽ di chuyển tới
-    public GameObject bossHealthUIPrefab; // Prefab của thanh máu boss
-    private GameObject bossInstance;
-    private GameObject bossHealthUIInstance;
+    public Image healthBarFill; // Thanh máu của boss
+    public Transform targetPoint; // Điểm mục tiêu của boss
 
-    
-    private float healthRegenDelay = 90f; // Thời gian chờ để hồi máu (1 phút 30 giây)
-    private bool bossSpawned = false;
+    private GameObject currentBoss; // Boss hiện tại
+    private float spawnDelay = 120f; // Thời gian chờ trước khi sinh boss
+    private bool hasSpawnedBoss = false; // Cờ kiểm tra xem boss đã được sinh ra chưa
 
     void Start()
     {
-        SpawnBoss();
+        // Gọi phương thức SpawnBoss sau spawnDelay giây
+        Invoke("SpawnBoss", spawnDelay);
     }
 
     void SpawnBoss()
     {
-        if (!bossSpawned)
+        // Kiểm tra nếu boss chưa được sinh ra
+        if (!hasSpawnedBoss)
         {
-            
-            bossHealthUIInstance = Instantiate(bossHealthUIPrefab, Vector3.zero, Quaternion.identity); // Tạo UI thanh máu
-
-            // Gán UI thanh máu cho boss
-            BossHealthUI bossHealthUI = bossHealthUIInstance.GetComponent<BossHealthUI>();
-            if (bossHealthUI != null)
+            if (bossPrefab != null && spawnPoint != null && targetPoint != null)
             {
-                bossHealthUI.healthBarFill = bossInstance.GetComponentInChildren<Image>(); // Gán Image của thanh máu
-                bossHealthUI.UpdateHealthBar();
+                currentBoss = Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
+                Debug.Log("Boss đã được sinh ra!");
+
+                // Thiết lập thanh máu cho boss
+                BossHealth bossHealth = currentBoss.GetComponent<BossHealth>();
+                if (bossHealth != null)
+                {
+                    bossHealth.healthBarFill = healthBarFill;
+                }
+
+                // Thiết lập điểm mục tiêu của boss
+                BossMovement bossMovement = currentBoss.GetComponent<BossMovement>();
+                if (bossMovement != null)
+                {
+                    bossMovement.targetPoint = targetPoint;
+                }
+
+                // Đặt cờ đã sinh boss
+                hasSpawnedBoss = true;
             }
-
-            bossSpawned = true;
-
-            // Bắt đầu di chuyển boss tới mục tiêu
-            BossMovement bossMovement = bossInstance.GetComponent<BossMovement>();
-            if (bossMovement != null)
+            else
             {
-                bossMovement.MoveToTarget(targetPoint);
+                Debug.LogWarning("Boss Prefab, vị trí sinh ra, hoặc điểm mục tiêu không được thiết lập!");
             }
-
-            // Bắt đầu hồi máu sau thời gian nhất định
-            Invoke("RegenerateBossHealth", healthRegenDelay);
-        }
-    }
-
-    void RegenerateBossHealth()
-    {
-        if (bossInstance != null)
-        {
-            BossHealth bossHealth = bossInstance.GetComponent<BossHealth>();
-            if (bossHealth != null)
+            if (Input.GetKeyDown(KeyCode.Space)) // Nhấn phím Space để gây thiệt hại
             {
-                bossHealth.RegenerateHealth(0.7f); // Hồi 70% máu
-            }
-
-            // Cập nhật thanh máu sau khi hồi máu
-            BossHealthUI bossHealthUI = bossHealthUIInstance.GetComponent<BossHealthUI>();
-            if (bossHealthUI != null)
-            {
-                bossHealthUI.UpdateHealthBar();
+                GetComponent<BossHealth>().TakeDamage(10f);
             }
         }
     }

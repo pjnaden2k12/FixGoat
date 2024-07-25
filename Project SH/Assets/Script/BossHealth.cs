@@ -1,38 +1,86 @@
 ﻿using UnityEngine;
+using UnityEngine.UI; // Để sử dụng UI Image
+using System.Collections;
 
 public class BossHealth : MonoBehaviour
 {
     public float maxHealth = 100f; // Máu tối đa của boss
+    public Image healthBarFill; // Thanh máu
     private float currentHealth;
+    private float healthRegenInterval = 10f; // Thời gian hồi máu
+    private float healthRegenAmount = 0.05f; // % hồi máu
+
+    public bool IsAttacking { get; set; } // Thuộc tính cho biết boss có đang tấn công không
 
     void Start()
     {
         currentHealth = maxHealth;
+
+        // Đặt thanh máu ban đầu
+        if (healthBarFill != null)
+        {
+            healthBarFill.fillAmount = currentHealth / maxHealth;
+        }
+
+        InvokeRepeating("RegenerateHealth", healthRegenInterval, healthRegenInterval);
     }
 
-    public void TakeDamage(float amount)
+    private void RegenerateHealth()
     {
-        currentHealth -= amount;
-        if (currentHealth <= 0f)
+        if (currentHealth < maxHealth)
+        {
+            currentHealth += maxHealth * healthRegenAmount;
+            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+            // Cập nhật thanh máu
+            if (healthBarFill != null)
+            {
+                healthBarFill.fillAmount = currentHealth / maxHealth;
+            }
+
+            Debug.Log("Boss hồi máu!");
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        // Cập nhật thanh máu
+        if (healthBarFill != null)
+        {
+            healthBarFill.fillAmount = currentHealth / maxHealth;
+        }
+
+        if (currentHealth <= 0)
         {
             Die();
         }
     }
 
-    public void RegenerateHealth(float percentage)
+    private void Die()
     {
-        currentHealth = Mathf.Min(maxHealth, currentHealth + maxHealth * percentage);
-    }
-
-    public float GetHealthPercentage()
-    {
-        return currentHealth / maxHealth;
-    }
-
-    void Die()
-    {
-        // Xử lý khi boss chết
-        Debug.Log("Boss chết!");
+        // Xử lý khi boss chết (ví dụ: xóa boss, phát thưởng, v.v.)
+        Debug.Log("Boss đã chết!");
         Destroy(gameObject);
+    }
+
+    public IEnumerator AttackTarget()
+    {
+        IsAttacking = true;
+
+        // Cập nhật trạng thái animation
+        GetComponent<Animator>().SetBool("isRunning", false);
+        GetComponent<Animator>().SetBool("isAttacking", true);
+
+        // Thực hiện animation tấn công tại đây
+        Debug.Log("Boss tấn công tường thành!");
+
+        // Chờ animation tấn công hoàn tất (ví dụ 1 giây)
+        yield return new WaitForSeconds(1f);
+
+        GetComponent<Animator>().SetBool("isAttacking", false);
+        IsAttacking = false;
     }
 }
