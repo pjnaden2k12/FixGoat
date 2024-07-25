@@ -65,22 +65,4 @@ public class BossHealth : MonoBehaviour
         Debug.Log("Boss đã chết!");
         Destroy(gameObject);
     }
-
-    public IEnumerator AttackTarget()
-    {
-        IsAttacking = true;
-
-        // Cập nhật trạng thái animation
-        GetComponent<Animator>().SetBool("isRunning", false);
-        GetComponent<Animator>().SetBool("isAttacking", true);
-
-        // Thực hiện animation tấn công tại đây
-        Debug.Log("Boss tấn công tường thành!");
-
-        // Chờ animation tấn công hoàn tất (ví dụ 1 giây)
-        yield return new WaitForSeconds(1f);
-
-        GetComponent<Animator>().SetBool("isAttacking", false);
-        IsAttacking = false;
-    }
 }
