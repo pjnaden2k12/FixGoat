@@ -5,7 +5,7 @@ public class BossSpaw : MonoBehaviour
     public GameObject bossPrefab; // Prefab của boss
     public Transform spawnPoint; // Vị trí sinh ra boss
 
-    private float spawnDelay = 120f; // Thời gian chờ trước khi sinh boss
+    private float spawnDelay = 2f; // Thời gian chờ trước khi sinh boss
 
     void Start()
     {

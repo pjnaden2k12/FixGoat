@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - WallDef
+  - TowerPosition1
+  - TowerPosition2
+  - TowerPosition3
+  - TowerPosition4
   layers:
   - Default
   - TransparentFX
