@@ -10,7 +10,7 @@ public class ExampleScript : MonoBehaviour
         targetObject.SetActive(false);
 
         // Sau 5 giây, kích hoạt lại targetObject
-        Invoke("ReactivateObject", 120f);
+        Invoke("ReactivateObject", 1f);
     }
 
     void ReactivateObject()
