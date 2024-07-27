@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3958530312023981825}
   - component: {fileID: 4663141321671354852}
   - component: {fileID: 1566470984607869582}
+  - component: {fileID: 1078880820853487227}
   m_Layer: 0
   m_Name: "Boss gi\xE1p s\u1EAFt  "
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.61, y: 2.67, z: 0}
-  m_LocalScale: {x: 0.97743297, y: 0.8708945, z: 1}
+  m_LocalScale: {x: 1.336835, y: 1.1911224, z: 1.3677}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -225,7 +226,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5056b109a17d0448d89d2f946ca246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0.1
   targetPoint: {fileID: 0}
   attackDamage: 20
   attackInterval: 2
+--- !u!114 &1078880820853487227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7958193770112309022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94dbe45b69cbc7041b6690dea6f01511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossHPUI: {fileID: 0}
+  bossHPBarFill: {fileID: 0}
+  bossNameText: {fileID: 0}
