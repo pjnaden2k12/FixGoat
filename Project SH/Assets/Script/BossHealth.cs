@@ -11,7 +11,11 @@ public class BossHealth : MonoBehaviour
     private float healthRegenAmount = 0.05f; // % hồi máu
 
     public bool IsAttacking { get; set; } // Thuộc tính cho biết boss có đang tấn công không
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> main
     void Start()
     {
         currentHealth = maxHealth;
