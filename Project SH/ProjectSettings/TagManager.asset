@@ -9,6 +9,8 @@ TagManager:
   - TowerPosition2
   - TowerPosition3
   - TowerPosition4
+  - Wall
+  - Enemy
   layers:
   - Default
   - TransparentFX

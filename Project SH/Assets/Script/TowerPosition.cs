@@ -6,7 +6,14 @@ public class TowerPlacementPoint : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // Gọi phương thức trong TowerManager để hiển thị bảng tương ứng với vị trí này
-        TowerManager.Instance.ShowTowerPanel(positionIndex, gameObject);
+        // Kiểm tra sự tồn tại của TowerManager và gọi phương thức để hiển thị bảng
+        if (TowerManager.Instance != null)
+        {
+            TowerManager.Instance.ShowTowerPanel(positionIndex, gameObject);
+        }
+        else
+        {
+            Debug.LogError("TowerManager instance is not set.");
+        }
     }
 }
