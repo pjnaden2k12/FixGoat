@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+<<<<<<< HEAD
 using System.Collections;
 
 public class BossMovement : MonoBehaviour
@@ -7,6 +8,16 @@ public class BossMovement : MonoBehaviour
     public Transform targetPoint; // Vị trí tường thành
     public float attackDamage = 20f; // Sát thương của boss khi tấn công
     public float attackInterval = 2f; // Thời gian giữa các lần tấn công
+=======
+using System.Collections; // Đảm bảo thêm namespace này
+
+public class BossMovement : MonoBehaviour
+{
+    public float speed = 3.5f;
+    public Transform targetPoint;
+    public float attackDamage = 20f;
+    public float attackInterval = 2f;
+>>>>>>> main
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -20,6 +31,7 @@ public class BossMovement : MonoBehaviour
 
     void Update()
     {
+<<<<<<< HEAD
         if (targetPoint == null) return;
 
         // Tính toán hướng di chuyển và di chuyển boss
@@ -28,10 +40,18 @@ public class BossMovement : MonoBehaviour
         direction.Normalize();
 
         if (distance > 0.1f && !isAttacking)
+=======
+        // Di chuyển boss về phía targetPoint
+        Vector2 direction = (Vector2)targetPoint.position - rb.position;
+        direction.Normalize();
+
+        if (!isAttacking)
+>>>>>>> main
         {
             rb.velocity = direction * speed;
             animator.SetBool("isRunning", true);
         }
+<<<<<<< HEAD
         else
         {
             rb.velocity = Vector2.zero;
@@ -71,6 +91,35 @@ public class BossMovement : MonoBehaviour
         animator.SetBool("isAttacking", false);
         yield return new WaitForSeconds(attackInterval);
 
+=======
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            // Khi boss va chạm với tường thành, bắt đầu tấn công
+            StartCoroutine(AttackTarget(collision.gameObject.GetComponent<FortressHealth>()));
+        }
+    }
+
+    private IEnumerator AttackTarget(FortressHealth fortress)
+    {
+        isAttacking = true;
+        rb.velocity = Vector2.zero; // Dừng di chuyển
+        animator.SetBool("isRunning", false);
+        animator.SetBool("isAttacking", true);
+
+        while (fortress != null && fortress.CurrentHealth > 0)
+        {
+            fortress.TakeDamage(attackDamage);
+            Debug.Log("Tường thành bị thiệt hại: " + attackDamage);
+
+            yield return new WaitForSeconds(attackInterval);
+        }
+
+        animator.SetBool("isAttacking", false);
+>>>>>>> main
         isAttacking = false;
     }
 }
