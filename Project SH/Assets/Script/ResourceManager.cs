@@ -8,6 +8,15 @@ public class ResourceManager : MonoBehaviour
     public int diamonds { get; private set; }
     public int towerPieces { get; private set; }
 
+    // Chỉ số vĩnh viễn
+    public int wallHealthBonus { get; private set; }
+    public int wallDefenseBonus { get; private set; }
+    public int healthRegenBonus { get; private set; }
+
+    // Tiến hóa
+    public int evolutionLevel { get; private set; } = 0;
+    public int evolveCost = 1000; // Chi phí tiến hóa cơ bản
+
     // Định nghĩa sự kiện để thông báo UI cập nhật
     public delegate void ResourceChanged();
     public event ResourceChanged OnResourceChanged;
@@ -20,9 +29,12 @@ public class ResourceManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             // Thiết lập giá trị ban đầu cho các tài nguyên
-            gold = 500;
-            diamonds = 10;
-            towerPieces = 100;
+            gold = 9412;
+            diamonds = 413;
+            towerPieces = 1555;
+            wallHealthBonus = 0;
+            wallDefenseBonus = 0;
+            healthRegenBonus = 0;
         }
         else
         {
@@ -30,12 +42,14 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
+    // Thêm vàng
     public void AddGold(int amount)
     {
         gold += amount;
         NotifyResourceChanged();
     }
 
+    // Tiêu vàng
     public void SpendGold(int amount)
     {
         if (gold >= amount)
@@ -45,16 +59,18 @@ public class ResourceManager : MonoBehaviour
         }
         else
         {
-            // Xử lý khi không đủ vàng
+            Debug.LogWarning("Không đủ vàng.");
         }
     }
 
+    // Thêm kim cương
     public void AddDiamonds(int amount)
     {
         diamonds += amount;
         NotifyResourceChanged();
     }
 
+    // Tiêu kim cương
     public void SpendDiamonds(int amount)
     {
         if (diamonds >= amount)
@@ -64,19 +80,49 @@ public class ResourceManager : MonoBehaviour
         }
         else
         {
-            // Xử lý khi không đủ kim cương
+            Debug.LogWarning("Không đủ kim cương.");
         }
     }
 
+    // Thêm mảnh tường
     public void AddTowerPieces(int amount)
     {
         towerPieces += amount;
         NotifyResourceChanged();
     }
 
+    // Tiến hóa nhân vật
+    public void Evolve()
+    {
+        int cost = evolveCost * (evolutionLevel + 1);
+        if (gold >= cost)
+        {
+            SpendGold(cost);
+            evolutionLevel++;
+            UpdateWallBonuses();
+            NotifyResourceChanged();
+        }
+        else
+        {
+            Debug.LogWarning("Không đủ vàng để tiến hóa.");
+        }
+    }
+
+    // Cập nhật các chỉ số vĩnh viễn khi tiến hóa
+    private void UpdateWallBonuses()
+    {
+        // Cập nhật các chỉ số vĩnh viễn tương ứng với cấp độ tiến hóa
+        // Ví dụ: Giả sử mỗi cấp tiến hóa tăng chỉ số thêm 10%
+        wallHealthBonus = 100 * evolutionLevel;
+        wallDefenseBonus = 50 * evolutionLevel;
+        healthRegenBonus = 10 * evolutionLevel;
+    }
+
+    // Thông báo sự thay đổi tài nguyên
     private void NotifyResourceChanged()
     {
-        // Kích hoạt sự kiện thông báo thay đổi tài nguyên
         OnResourceChanged?.Invoke();
     }
+    
 }
+

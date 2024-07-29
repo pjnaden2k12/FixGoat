@@ -4,20 +4,21 @@ public class FortressHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
     private float currentHealth;
-    public float defense = 10f; // Giảm sát thương nhận vào
-    public float healthRegen = 5f; // Hồi máu mỗi giây
+    private float currentDefense;
+    private float currentHealthRegen;
 
     public float CurrentHealth
     {
         get { return currentHealth; }
     }
 
-    void Start()
+    private void Start()
     {
         currentHealth = maxHealth;
+        ApplyPermanentBonuses();
     }
 
-    void Update()
+    private void Update()
     {
         RegenerateHealth();
     }
@@ -25,7 +26,7 @@ public class FortressHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         // Áp dụng sát thương sau khi giảm bởi phòng thủ (defense)
-        float actualDamage = Mathf.Max(damage - defense, 0);
+        float actualDamage = Mathf.Max(damage - currentDefense, 0);
         currentHealth -= actualDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
@@ -40,8 +41,16 @@ public class FortressHealth : MonoBehaviour
     private void RegenerateHealth()
     {
         // Hồi máu theo thời gian
-        currentHealth += healthRegen * Time.deltaTime;
+        currentHealth += currentHealthRegen * Time.deltaTime;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+    }
+
+    private void ApplyPermanentBonuses()
+    {
+        // Cập nhật chỉ số vĩnh viễn từ ResourceManager
+        currentDefense = ResourceManager.Instance.wallDefenseBonus;
+        currentHealthRegen = ResourceManager.Instance.healthRegenBonus;
+        maxHealth += ResourceManager.Instance.wallHealthBonus;
     }
 
     private void Die()

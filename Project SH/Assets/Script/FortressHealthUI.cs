@@ -10,8 +10,15 @@ public class FortressHealthUI : MonoBehaviour
 
     void Start()
     {
+        if (fortressHealth == null)
+        {
+            Debug.LogError("FortressHealth chưa được gán!");
+            return;
+        }
+
         // Set the maximum value for the health slider
         healthSlider.maxValue = fortressHealth.maxHealth;
+        healthSlider.value = fortressHealth.CurrentHealth; // Ensure the slider starts at the correct value
         UpdateHealthUI();
     }
 
@@ -22,6 +29,12 @@ public class FortressHealthUI : MonoBehaviour
 
     void UpdateHealthUI()
     {
+        if (fortressHealth == null)
+        {
+            Debug.LogError("FortressHealth chưa được gán!");
+            return;
+        }
+
         // Cập nhật thanh trượt sức khỏe và thành phần văn bản TextMeshPro
         healthSlider.value = fortressHealth.CurrentHealth;
         healthText.text = "Health: " + Mathf.RoundToInt(fortressHealth.CurrentHealth) + "/" + Mathf.RoundToInt(fortressHealth.maxHealth);
