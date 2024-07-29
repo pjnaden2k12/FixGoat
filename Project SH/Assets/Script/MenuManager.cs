@@ -1,54 +1,92 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public Button shopButton; // Nút Shop
-    public Button equipmentButton; // Nút Equipment
-    public Button battleButton; // Nút Battle
-    public Button towerButton; // Nút Tower
-    public Button leaderboardButton; // Nút Leaderboard
+    public Image shopImage;
+    public Image equipmentImage;
+    
+    public Image gachaImage;
+    public Image leaderboardImage;
+    
 
-    void Start()
+    public Button shopButton;
+    public Button equipmentButton;
+    public Button battleButton;
+    public Button gachaButton;
+    public Button leaderboardButton;
+
+    public Button previousLevelButton;
+    public Button nextLevelButton;
+    public Image levelDisplay;
+
+    private void Start()
     {
-        // Gán sự kiện cho các nút
-      
-        shopButton.onClick.AddListener(OpenShop);
-        equipmentButton.onClick.AddListener(OpenEquipment);
-        battleButton.onClick.AddListener(OpenBattle);
-        towerButton.onClick.AddListener(OpenTower);
-        leaderboardButton.onClick.AddListener(OpenLeaderboard);
-    }
+        HideAllImages();
+        // Gán sự kiện cho các nút bấm
+        shopButton.onClick.AddListener(ShowShopImage);
+        equipmentButton.onClick.AddListener(ShowEquipmentImage);
+        battleButton.onClick.AddListener(GoToMainMenu);
+        gachaButton.onClick.AddListener(ShowGachaImage);
+        leaderboardButton.onClick.AddListener(ShowLeaderboardImage);
 
+        previousLevelButton.onClick.AddListener(ShowPreviousLevel);
+        nextLevelButton.onClick.AddListener(ShowNextLevel);
 
-    void OpenShop()
-    {
-        // Mở màn hình Shop
-        SceneManager.LoadScene("ShopScene"); // Thay "ShopScene" bằng tên scene của Shop
-    }
-
-    void OpenEquipment()
-    {
-        // Mở màn hình Equipment
-        SceneManager.LoadScene("EquipmentScene"); // Thay "EquipmentScene" bằng tên scene của Equipment
-    }
-
-    void OpenBattle()
-    {
         
-        SceneManager.LoadScene("MapScene"); 
     }
 
-    void OpenTower()
+    private void ShowShopImage()
     {
-        // Mở màn hình Tower
-        SceneManager.LoadScene("TowerScene"); // Thay "TowerScene" bằng tên scene của Tower
+        HideAllImages();
+        shopImage.gameObject.SetActive(true);
     }
 
-    void OpenLeaderboard()
+    private void ShowEquipmentImage()
     {
-        // Mở màn hình Leaderboard
-        SceneManager.LoadScene("LeaderboardScene"); // Thay "LeaderboardScene" bằng tên scene của Leaderboard
+        HideAllImages();
+        equipmentImage.gameObject.SetActive(true);
+    }
+
+
+    private void ShowGachaImage()
+    {
+        HideAllImages();
+        gachaImage.gameObject.SetActive(true);
+    }
+
+    private void ShowLeaderboardImage()
+    {
+        HideAllImages();
+        leaderboardImage.gameObject.SetActive(true);
+    }
+
+    private void GoToMainMenu()
+    {
+        // Tải lại scene chính hoặc hiển thị lại màn hình chính nếu cùng trong một scene
+        SceneManager.LoadScene("MainMenuScene"); // Thay "MainMenuScene" bằng tên của scene chính của bạn
+    }
+
+    private void HideAllImages()
+    {
+        shopImage.gameObject.SetActive(false);
+        equipmentImage.gameObject.SetActive(false);
+        
+        gachaImage.gameObject.SetActive(false);
+        leaderboardImage.gameObject.SetActive(false);
+        
+    }
+
+    private void ShowPreviousLevel()
+    {
+        // Thực hiện logic để chuyển đến màn chơi trước đó
+        Debug.Log("Showing Previous Level");
+    }
+
+    private void ShowNextLevel()
+    {
+        // Thực hiện logic để chuyển đến màn chơi tiếp theo
+        Debug.Log("Showing Next Level");
     }
 }

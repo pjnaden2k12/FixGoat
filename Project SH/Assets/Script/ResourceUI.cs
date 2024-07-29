@@ -12,10 +12,7 @@ public class ResourceUIManager : MonoBehaviour
     public Image towerPiecesIcon; // Hình ảnh biểu tượng mảnh tháp
     public TMP_Text towerPiecesText; // Thay Text bằng TMP_Text
 
-    public Sprite defaultAvatarSprite; // Sprite cho avatar mặc định
-    public Sprite goldSprite; // Sprite cho vàng
-    public Sprite diamondsSprite; // Sprite cho kim cương
-    public Sprite towerPiecesSprite; // Sprite cho mảnh tháp
+   
 
     private void Awake()
     {
@@ -24,14 +21,7 @@ public class ResourceUIManager : MonoBehaviour
     }
 
     private void Start()
-    {
-        // Đặt hình ảnh cho các tài nguyên
-        goldIcon.sprite = goldSprite;
-        diamondsIcon.sprite = diamondsSprite;
-        towerPiecesIcon.sprite = towerPiecesSprite;
-
-        // Đặt hình ảnh cho avatar
-        avatarImage.sprite = defaultAvatarSprite;
+    {      
 
         // Cập nhật UI với giá trị ban đầu
         UpdateResourceUI();
