@@ -142,6 +142,10 @@ MonoBehaviour:
   thanhmaubossgiapsat: {fileID: 1605746902}
   luongmauhientai: 0
   luongmautoida: 1000
+  recoveryAmount: 200
+  recoveryInterval: 5
+  explosionEffect: {fileID: 4907827335149133346, guid: a23e53fce4b745b428126963a1f4bb8a, type: 3}
+  animator: {fileID: 0}
 --- !u!1 &525086869
 GameObject:
   m_ObjectHideFlags: 0
