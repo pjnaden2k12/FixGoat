@@ -4,12 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public Image shopImage;
-    public Image equipmentImage;
-    
-    public Image gachaImage;
-    public Image leaderboardImage;
-    
+    public RectTransform shopPanel;
+    public RectTransform equipmentPanel;
+    public RectTransform gachaPanel;
+    public RectTransform leaderboardPanel;
 
     public Button shopButton;
     public Button equipmentButton;
@@ -17,76 +15,91 @@ public class MenuManager : MonoBehaviour
     public Button gachaButton;
     public Button leaderboardButton;
 
-    public Button previousLevelButton;
-    public Button nextLevelButton;
-    public Image levelDisplay;
+    public float slideDuration = 0.5f; // Thời gian cho hiệu ứng slide
+    public float panelWidth = 360f; // Độ rộng của panel (tùy thuộc vào kích thước của bạn)
+    private Vector3 hiddenPosition = new Vector3(-1600, 0, 0); // Vị trí ẩn các panel bên trái
+
+    private RectTransform currentActivePanel;
+    private Button currentLockedButton;
+    private bool isTransitioning = false; // Flag để theo dõi quá trình chuyển đổi
 
     private void Start()
     {
-        HideAllImages();
+        HideAllPanels();
+
         // Gán sự kiện cho các nút bấm
-        shopButton.onClick.AddListener(ShowShopImage);
-        equipmentButton.onClick.AddListener(ShowEquipmentImage);
+        shopButton.onClick.AddListener(() => OnButtonClicked(shopButton, shopPanel));
+        equipmentButton.onClick.AddListener(() => OnButtonClicked(equipmentButton, equipmentPanel));
         battleButton.onClick.AddListener(GoToMainMenu);
-        gachaButton.onClick.AddListener(ShowGachaImage);
-        leaderboardButton.onClick.AddListener(ShowLeaderboardImage);
-
-        previousLevelButton.onClick.AddListener(ShowPreviousLevel);
-        nextLevelButton.onClick.AddListener(ShowNextLevel);
-
-        
+        gachaButton.onClick.AddListener(() => OnButtonClicked(gachaButton, gachaPanel));
+        leaderboardButton.onClick.AddListener(() => OnButtonClicked(leaderboardButton, leaderboardPanel));
     }
 
-    private void ShowShopImage()
+    private void OnButtonClicked(Button clickedButton, RectTransform targetPanel)
     {
-        HideAllImages();
-        shopImage.gameObject.SetActive(true);
+        if (!isTransitioning)
+        {
+            if (currentLockedButton != null && currentLockedButton != clickedButton)
+            {
+                currentLockedButton.interactable = true; // Mở khóa nút hiện tại nếu nó không phải là nút vừa được bấm
+            }
+
+            currentLockedButton = clickedButton;
+            currentLockedButton.interactable = false; // Khóa nút vừa được bấm
+            ShowPanel(targetPanel);
+        }
     }
 
-    private void ShowEquipmentImage()
+    private void ShowPanel(RectTransform targetPanel)
     {
-        HideAllImages();
-        equipmentImage.gameObject.SetActive(true);
+        if (currentActivePanel != null)
+        {
+            LeanTween.move(currentActivePanel, hiddenPosition, slideDuration).setOnComplete(() =>
+            {
+                currentActivePanel.gameObject.SetActive(false);
+                currentActivePanel = null;
+                ActivatePanel(targetPanel);
+            });
+        }
+        else
+        {
+            ActivatePanel(targetPanel);
+        }
     }
 
-
-    private void ShowGachaImage()
+    private void ActivatePanel(RectTransform targetPanel)
     {
-        HideAllImages();
-        gachaImage.gameObject.SetActive(true);
-    }
-
-    private void ShowLeaderboardImage()
-    {
-        HideAllImages();
-        leaderboardImage.gameObject.SetActive(true);
+        if (targetPanel != null)
+        {
+            targetPanel.gameObject.SetActive(true);
+            targetPanel.anchoredPosition = new Vector2(panelWidth, 0);
+            LeanTween.move(targetPanel, Vector2.zero, slideDuration).setOnComplete(() =>
+            {
+                currentActivePanel = targetPanel;
+                isTransitioning = false; // Mở khóa các nút sau khi chuyển đổi hoàn tất
+            });
+        }
+        else
+        {
+            isTransitioning = false; // Đảm bảo flag được hạ nếu không có panel mới
+        }
     }
 
     private void GoToMainMenu()
     {
-        // Tải lại scene chính hoặc hiển thị lại màn hình chính nếu cùng trong một scene
-        SceneManager.LoadScene("MainMenuScene"); // Thay "MainMenuScene" bằng tên của scene chính của bạn
+        SceneManager.LoadScene("MainMenuScene");
     }
 
-    private void HideAllImages()
+    private void HideAllPanels()
     {
-        shopImage.gameObject.SetActive(false);
-        equipmentImage.gameObject.SetActive(false);
-        
-        gachaImage.gameObject.SetActive(false);
-        leaderboardImage.gameObject.SetActive(false);
-        
-    }
+        shopPanel.anchoredPosition = hiddenPosition;
+        equipmentPanel.anchoredPosition = hiddenPosition;
+        gachaPanel.anchoredPosition = hiddenPosition;
+        leaderboardPanel.anchoredPosition = hiddenPosition;
 
-    private void ShowPreviousLevel()
-    {
-        // Thực hiện logic để chuyển đến màn chơi trước đó
-        Debug.Log("Showing Previous Level");
-    }
-
-    private void ShowNextLevel()
-    {
-        // Thực hiện logic để chuyển đến màn chơi tiếp theo
-        Debug.Log("Showing Next Level");
+        shopPanel.gameObject.SetActive(false);
+        equipmentPanel.gameObject.SetActive(false);
+        gachaPanel.gameObject.SetActive(false);
+        leaderboardPanel.gameObject.SetActive(false);
     }
 }
