@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossMovement : MonoBehaviour
+public class enemymove : MonoBehaviour
 {
     public float speed = 3.5f; // Tốc độ di chuyển của boss
     public Transform targetPoint; // Vị trí tường thành

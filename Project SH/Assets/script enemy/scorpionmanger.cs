@@ -36,7 +36,7 @@ public class scorpionmanager : MonoBehaviour
                 }
 
                 // Thiết lập điểm mục tiêu của boss
-                BossMovement bossMovement = currentBoss.GetComponent<BossMovement>();
+                scorpionmove bossMovement = currentBoss.GetComponent<scorpionmove>();
                 if (bossMovement != null)
                 {
                     bossMovement.targetPoint = targetPoint;

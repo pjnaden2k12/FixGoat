@@ -36,7 +36,7 @@ public class enemymanager : MonoBehaviour
                 }
 
                 // Thiết lập điểm mục tiêu của boss
-                BossMovement bossMovement = currentBoss.GetComponent<BossMovement>();
+                enemymove bossMovement = currentBoss.GetComponent<enemymove>();
                 if (bossMovement != null)
                 {
                     bossMovement.targetPoint = targetPoint;
