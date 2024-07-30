@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EvolutionUIManager : MonoBehaviour
 {
-    public Text evolutionLevelText;
-    public Text wallHealthBonusText;
-    public Text wallDefenseBonusText;
-    public Text healthRegenBonusText;
-    public Image characterImage; // Hình ảnh nhân vật
+    public TextMeshProUGUI evolutionLevelText;
+    public TextMeshProUGUI wallHealthBonusText;
+    public TextMeshProUGUI wallDefenseBonusText;
+    public TextMeshProUGUI healthRegenBonusText;
+    public Image characterImage;
     public Button evolveButton;
+    public TextMeshProUGUI evolveButtonText;
 
-    // Thêm sprite cho các cấp độ tiến hóa
     public Sprite characterSpriteLevel1;
     public Sprite characterSpriteLevel2;
     public Sprite characterSpriteLevel5;
@@ -35,22 +36,29 @@ public class EvolutionUIManager : MonoBehaviour
         wallDefenseBonusText.text = "Wall Defense Bonus: " + ResourceManager.Instance.wallDefenseBonus;
         healthRegenBonusText.text = "Health Regen Bonus: " + ResourceManager.Instance.healthRegenBonus;
 
-        // Cập nhật hình ảnh nhân vật tùy theo level tiến hóa
         characterImage.sprite = GetCharacterSpriteForLevel(ResourceManager.Instance.evolutionLevel);
+
+        if (ResourceManager.Instance.evolutionLevel >= ResourceManager.Instance.maxEvolutionLevel)
+        {
+            evolveButtonText.text = "Max Level";
+            evolveButton.interactable = false;
+        }
+        else
+        {
+            evolveButtonText.text = "Evolve";
+            evolveButton.interactable = true;
+        }
     }
 
     private Sprite GetCharacterSpriteForLevel(int level)
     {
-        switch (level)
-        {
-            case 2:
-                return characterSpriteLevel2;
-            case 5:
-                return characterSpriteLevel5;
-            case 10:
-                return characterSpriteLevel10;
-            default:
-                return characterSpriteLevel1;
-        }
+        if (level >= 10)
+            return characterSpriteLevel10;
+        else if (level >= 5)
+            return characterSpriteLevel5;
+        else if (level >= 2)
+            return characterSpriteLevel2;
+        else
+            return characterSpriteLevel1;
     }
 }

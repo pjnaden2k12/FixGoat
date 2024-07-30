@@ -16,6 +16,7 @@ public class ResourceManager : MonoBehaviour
     // Tiến hóa
     public int evolutionLevel { get; private set; } = 0;
     public int evolveCost = 1000; // Chi phí tiến hóa cơ bản
+    public int maxEvolutionLevel = 10; // Cấp độ tiến hóa tối đa
 
     // Định nghĩa sự kiện để thông báo UI cập nhật
     public delegate void ResourceChanged();
@@ -29,9 +30,9 @@ public class ResourceManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             // Thiết lập giá trị ban đầu cho các tài nguyên
-            gold = 9412;
-            diamonds = 413;
-            towerPieces = 1555;
+            gold = 999999;
+            diamonds = 10;
+            towerPieces = 100;
             wallHealthBonus = 0;
             wallDefenseBonus = 0;
             healthRegenBonus = 0;
@@ -94,6 +95,12 @@ public class ResourceManager : MonoBehaviour
     // Tiến hóa nhân vật
     public void Evolve()
     {
+        if (evolutionLevel >= maxEvolutionLevel)
+        {
+            Debug.LogWarning("Đã đạt cấp độ tiến hóa tối đa.");
+            return;
+        }
+
         int cost = evolveCost * (evolutionLevel + 1);
         if (gold >= cost)
         {
@@ -123,6 +130,4 @@ public class ResourceManager : MonoBehaviour
     {
         OnResourceChanged?.Invoke();
     }
-    
 }
-
