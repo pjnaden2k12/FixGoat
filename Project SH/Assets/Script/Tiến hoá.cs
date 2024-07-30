@@ -31,21 +31,21 @@ public class EvolutionUIManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        evolutionLevelText.text = "Evolution Level: " + ResourceManager.Instance.evolutionLevel;
-        wallHealthBonusText.text = "Wall Health Bonus: " + ResourceManager.Instance.wallHealthBonus;
-        wallDefenseBonusText.text = "Wall Defense Bonus: " + ResourceManager.Instance.wallDefenseBonus;
-        healthRegenBonusText.text = "Health Regen Bonus: " + ResourceManager.Instance.healthRegenBonus;
+        evolutionLevelText.text = "Tiến Hoá Cấp: " + ResourceManager.Instance.evolutionLevel;
+        wallHealthBonusText.text = "Máu Tường Thành Thêm: " + ResourceManager.Instance.wallHealthBonus;
+        wallDefenseBonusText.text = "Thủ Tường Thành Thêm: " + ResourceManager.Instance.wallDefenseBonus;
+        healthRegenBonusText.text = "Hồi Máu Tường Thành Thêm: " + ResourceManager.Instance.healthRegenBonus;
 
         characterImage.sprite = GetCharacterSpriteForLevel(ResourceManager.Instance.evolutionLevel);
 
         if (ResourceManager.Instance.evolutionLevel >= ResourceManager.Instance.maxEvolutionLevel)
         {
-            evolveButtonText.text = "Max Level";
+            evolveButtonText.text = "Cấp Tối Đa";
             evolveButton.interactable = false;
         }
         else
         {
-            evolveButtonText.text = "Evolve";
+            evolveButtonText.text = "Tiến Hoá";
             evolveButton.interactable = true;
         }
     }
