@@ -3,9 +3,9 @@ using System.Collections;
 
 public class enemymove : MonoBehaviour
 {
-    public float speed = 3.5f; // Tốc độ di chuyển của boss
-    public Transform targetPoint; // Vị trí tường thành
-    public float attackDamage = 20f; // Sát thương của boss khi tấn công
+    public float speed = 3.5f; // Tốc độ di chuyển của địch
+    public Transform targetPoint; // Điểm mục tiêu, như là tường hoặc người chơi
+    public float attackDamage = 20f; // Sát thương gây ra khi tấn công
     public float attackInterval = 2f; // Thời gian giữa các lần tấn công
 
     private Rigidbody2D rb;
@@ -22,7 +22,7 @@ public class enemymove : MonoBehaviour
     {
         if (targetPoint == null) return;
 
-        // Tính toán hướng di chuyển và di chuyển boss
+        // Tính toán hướng di chuyển và di chuyển địch
         Vector2 direction = (Vector2)targetPoint.position - rb.position;
         float distance = direction.magnitude;
         direction.Normalize();
@@ -31,16 +31,16 @@ public class enemymove : MonoBehaviour
         {
             rb.velocity = direction * speed;
             animator.SetBool("isRunning", true);
+            animator.SetBool("isAttacking", false); // Đảm bảo tắt hoạt ảnh tấn công nếu đang chạy
         }
         else
         {
             rb.velocity = Vector2.zero;
             animator.SetBool("isRunning", false);
-            animator.SetBool("isAttacking", false);
         }
 
-        // Kiểm tra nếu boss đã đến điểm mục tiêu thì dừng lại và tấn công
-        if (distance < 0.1f && !isAttacking)
+        // Nếu địch đến điểm mục tiêu thì dừng lại và tấn công
+        if (distance <= 0.1f && !isAttacking)
         {
             StartCoroutine(AttackTarget());
         }
@@ -50,19 +50,17 @@ public class enemymove : MonoBehaviour
     {
         isAttacking = true;
 
-        // Đặt trạng thái tấn công
+        // Đặt trạng thái tấn công và kích hoạt hoạt ảnh tấn công
         animator.SetBool("isAttacking", true);
-
-        // Thực hiện animation tấn công tại đây
         Debug.Log("Quái tấn công tường thành!");
 
-        // Gây sát thương lên tường thành
-     
+        // Gây sát thương lên mục tiêu (cần thêm logic để lấy thành phần sức khỏe của mục tiêu)
+        // Ví dụ: targetPoint.GetComponent<Health>().TakeDamage(attackDamage);
 
-        // Chờ animation tấn công hoàn tất (ví dụ 1 giây)
+        // Chờ hoạt ảnh tấn công hoàn tất (đặt thời gian phù hợp với hoạt ảnh của bạn)
         yield return new WaitForSeconds(1f);
 
-        // Kết thúc animation tấn công và chờ trước khi tấn công lần tiếp theo
+        // Tắt trạng thái tấn công và đợi trước khi tấn công lần tiếp theo
         animator.SetBool("isAttacking", false);
         yield return new WaitForSeconds(attackInterval);
 
