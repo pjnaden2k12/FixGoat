@@ -7,9 +7,9 @@ public class TowerPlacementPoint : MonoBehaviour
     private void OnMouseDown()
     {
         // Kiểm tra sự tồn tại của TowerManager và gọi phương thức để hiển thị bảng
-        if (TowerManager.Instance != null)
+        if (TowerManagerInGame.Instance != null)
         {
-            TowerManager.Instance.ShowTowerPanel(positionIndex, gameObject);
+            TowerManagerInGame.Instance.ShowTowerPanel(positionIndex, gameObject);
         }
         else
         {

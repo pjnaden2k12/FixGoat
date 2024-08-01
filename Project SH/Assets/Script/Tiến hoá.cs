@@ -32,9 +32,9 @@ public class EvolutionUIManager : MonoBehaviour
     private void UpdateUI()
     {
         evolutionLevelText.text = "Tiến Hoá Cấp: " + ResourceManager.Instance.evolutionLevel;
-        wallHealthBonusText.text = "Máu Tường Thành Thêm: " + ResourceManager.Instance.wallHealthBonus;
-        wallDefenseBonusText.text = "Thủ Tường Thành Thêm: " + ResourceManager.Instance.wallDefenseBonus;
-        healthRegenBonusText.text = "Hồi Máu Tường Thành Thêm: " + ResourceManager.Instance.healthRegenBonus;
+        wallHealthBonusText.text = "Máu Thêm: " + ResourceManager.Instance.wallHealthBonus;
+        wallDefenseBonusText.text = "Thủ Thêm: " + ResourceManager.Instance.wallDefenseBonus;
+        healthRegenBonusText.text = "Hồi Máu Thêm: " + ResourceManager.Instance.healthRegenBonus;
 
         characterImage.sprite = GetCharacterSpriteForLevel(ResourceManager.Instance.evolutionLevel);
 

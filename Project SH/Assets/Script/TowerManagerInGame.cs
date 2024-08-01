@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using TMPro;
 
-public class TowerManager : MonoBehaviour
+public class TowerManagerInGame : MonoBehaviour
 {
-    public static TowerManager Instance;
+    public static TowerManagerInGame Instance;
 
     public GameObject towerPrefab; // Prefab của tháp
     public GameObject buyPanel; // Panel mua tháp
