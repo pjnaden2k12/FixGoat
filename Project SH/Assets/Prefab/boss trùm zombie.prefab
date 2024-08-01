@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4058025040947113077}
   - component: {fileID: 378346961898082297}
   - component: {fileID: 1813817836928931746}
-  - component: {fileID: 8460791838564957002}
   m_Layer: 0
   m_Name: "boss tr\xF9m zombie"
   m_TagString: Untagged
@@ -196,16 +195,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   targetPoint: {fileID: 0}
---- !u!114 &8460791838564957002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1639443364077381963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f465bf669aea8f41822cac9c1e39b19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _thanhMau: {fileID: 0}

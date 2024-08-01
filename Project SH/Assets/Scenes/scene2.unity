@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 232871670}
   - component: {fileID: 232871672}
   - component: {fileID: 232871671}
+  - component: {fileID: 232871673}
   m_Layer: 5
   m_Name: thanh mau
   m_TagString: Untagged
@@ -256,7 +257,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1ef6b2f891a2e13419eb3fae1a3083a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3cecb18fe241bb14b95aad5c014b5713, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -274,6 +275,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 232871669}
   m_CullTransparentMesh: 1
+--- !u!114 &232871673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232871669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f465bf669aea8f41822cac9c1e39b19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thanhMau: {fileID: 232871671}
 --- !u!1 &426806101
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +359,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460683499}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -377,7 +391,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3cecb18fe241bb14b95aad5c014b5713, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ef6b2f891a2e13419eb3fae1a3083a9, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -534,7 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f465bf669aea8f41822cac9c1e39b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1377723046
+--- !u!114 &1377723053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -543,12 +557,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1377723038}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bee84c6514310614d9bd55ee9ed67972, type: 3}
+  m_Script: {fileID: 11500000, guid: 327cfcf5a818d124391fd5adb6741753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thanhMau: {fileID: 0}
+  thanhmaubossgiapsat: {fileID: 232871673}
   luongmauhientai: 0
   luongmautoida: 1000
+  recoveryAmount: 200
+  recoveryInterval: 1
+  explosionEffect: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!1 &1607935189
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,8 +729,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 232871670}
   - {fileID: 460683500}
+  - {fileID: 232871670}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -790,7 +808,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1639443364077381963, guid: e5bc778e3f5d5c945ae0bcb75f745fb5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1377723046}
+      addedObject: {fileID: 1377723053}
   m_SourcePrefab: {fileID: 100100000, guid: e5bc778e3f5d5c945ae0bcb75f745fb5, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
