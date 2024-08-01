@@ -1,54 +1,105 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public Button shopButton; // Nút Shop
-    public Button equipmentButton; // Nút Equipment
-    public Button battleButton; // Nút Battle
-    public Button towerButton; // Nút Tower
-    public Button leaderboardButton; // Nút Leaderboard
+    public RectTransform shopPanel;
+    public RectTransform equipmentPanel;
+    public RectTransform gachaPanel;
+    public RectTransform leaderboardPanel;
 
-    void Start()
+    public Button shopButton;
+    public Button equipmentButton;
+    public Button battleButton;
+    public Button gachaButton;
+    public Button leaderboardButton;
+
+    public float slideDuration = 0.5f; // Thời gian cho hiệu ứng slide
+    public float panelWidth = 360f; // Độ rộng của panel (tùy thuộc vào kích thước của bạn)
+    private Vector3 hiddenPosition = new Vector3(-1600, 0, 0); // Vị trí ẩn các panel bên trái
+
+    private RectTransform currentActivePanel;
+    private Button currentLockedButton;
+    private bool isTransitioning = false; // Flag để theo dõi quá trình chuyển đổi
+
+    private void Start()
     {
-        // Gán sự kiện cho các nút
-      
-        shopButton.onClick.AddListener(OpenShop);
-        equipmentButton.onClick.AddListener(OpenEquipment);
-        battleButton.onClick.AddListener(OpenBattle);
-        towerButton.onClick.AddListener(OpenTower);
-        leaderboardButton.onClick.AddListener(OpenLeaderboard);
+        HideAllPanels();
+
+        // Gán sự kiện cho các nút bấm
+        shopButton.onClick.AddListener(() => OnButtonClicked(shopButton, shopPanel));
+        equipmentButton.onClick.AddListener(() => OnButtonClicked(equipmentButton, equipmentPanel));
+        battleButton.onClick.AddListener(GoToMainMenu);
+        gachaButton.onClick.AddListener(() => OnButtonClicked(gachaButton, gachaPanel));
+        leaderboardButton.onClick.AddListener(() => OnButtonClicked(leaderboardButton, leaderboardPanel));
     }
 
-
-    void OpenShop()
+    private void OnButtonClicked(Button clickedButton, RectTransform targetPanel)
     {
-        // Mở màn hình Shop
-        SceneManager.LoadScene("ShopScene"); // Thay "ShopScene" bằng tên scene của Shop
+        if (!isTransitioning)
+        {
+            if (currentLockedButton != null && currentLockedButton != clickedButton)
+            {
+                currentLockedButton.interactable = true; // Mở khóa nút hiện tại nếu nó không phải là nút vừa được bấm
+            }
+
+            currentLockedButton = clickedButton;
+            currentLockedButton.interactable = false; // Khóa nút vừa được bấm
+            ShowPanel(targetPanel);
+        }
     }
 
-    void OpenEquipment()
+    private void ShowPanel(RectTransform targetPanel)
     {
-        // Mở màn hình Equipment
-        SceneManager.LoadScene("EquipmentScene"); // Thay "EquipmentScene" bằng tên scene của Equipment
+        if (currentActivePanel != null)
+        {
+            LeanTween.move(currentActivePanel, hiddenPosition, slideDuration).setOnComplete(() =>
+            {
+                currentActivePanel.gameObject.SetActive(false);
+                currentActivePanel = null;
+                ActivatePanel(targetPanel);
+            });
+        }
+        else
+        {
+            ActivatePanel(targetPanel);
+        }
     }
 
-    void OpenBattle()
+    private void ActivatePanel(RectTransform targetPanel)
     {
-        
-        SceneManager.LoadScene("MapScene"); 
+        if (targetPanel != null)
+        {
+            targetPanel.gameObject.SetActive(true);
+            targetPanel.anchoredPosition = new Vector2(panelWidth, 0);
+            LeanTween.move(targetPanel, Vector2.zero, slideDuration).setOnComplete(() =>
+            {
+                currentActivePanel = targetPanel;
+                isTransitioning = false; // Mở khóa các nút sau khi chuyển đổi hoàn tất
+            });
+        }
+        else
+        {
+            isTransitioning = false; // Đảm bảo flag được hạ nếu không có panel mới
+        }
     }
 
-    void OpenTower()
+    private void GoToMainMenu()
     {
-        // Mở màn hình Tower
-        SceneManager.LoadScene("TowerScene"); // Thay "TowerScene" bằng tên scene của Tower
+        SceneManager.LoadScene("MainMenuScene");
     }
 
-    void OpenLeaderboard()
+    private void HideAllPanels()
     {
-        // Mở màn hình Leaderboard
-        SceneManager.LoadScene("LeaderboardScene"); // Thay "LeaderboardScene" bằng tên scene của Leaderboard
+        shopPanel.anchoredPosition = hiddenPosition;
+        equipmentPanel.anchoredPosition = hiddenPosition;
+        gachaPanel.anchoredPosition = hiddenPosition;
+        leaderboardPanel.anchoredPosition = hiddenPosition;
+
+        shopPanel.gameObject.SetActive(false);
+        equipmentPanel.gameObject.SetActive(false);
+        gachaPanel.gameObject.SetActive(false);
+        leaderboardPanel.gameObject.SetActive(false);
     }
 }
