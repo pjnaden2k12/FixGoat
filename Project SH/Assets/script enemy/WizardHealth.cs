@@ -2,7 +2,7 @@
 using UnityEngine.UI; // Để sử dụng UI Image
 using System.Collections;
 
-public class enemyhealth : MonoBehaviour
+public class WirzardHealth : MonoBehaviour
 {
     public float maxHealth = 100f; // Máu tối đa của boss
     public Image healthBarFill; // Thanh máu
@@ -19,7 +19,6 @@ public class enemyhealth : MonoBehaviour
         {
             healthBarFill.fillAmount = currentHealth / maxHealth;
         }
-
     }
 
     public void TakeDamage(float damage)
@@ -49,4 +48,3 @@ public class enemyhealth : MonoBehaviour
         TakeDamage(10f); // Số máu bị giảm khi nhấp chuột
     }
 }
-
