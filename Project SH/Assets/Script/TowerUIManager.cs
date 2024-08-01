@@ -32,7 +32,7 @@ public class TowerManagerUI : MonoBehaviour
         {
             // Hiển thị thông tin chi tiết cho tháp bị khóa
             towerDetailImage.sprite = towerImages[towerIndex];
-            towerDetailText.text = "Để mở khóa tháp này, hãy mở khóa trong game.";
+            towerDetailText.text = "Công: ???\nTốc độ: ???\nKĩ năng: ???";
             towerInfoPanel.SetActive(true);
         }
     }

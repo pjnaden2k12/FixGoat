@@ -35,9 +35,9 @@ public class ResourceManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             // Thiết lập giá trị ban đầu cho các tài nguyên
-            gold = 999999;
-            diamonds = 10;
-            towerPieces = 100;
+            gold = 99999;
+            diamonds = 1999;
+            towerPieces = 1000;
             wallHealthBonus = 0;
             wallDefenseBonus = 0;
             healthRegenBonus = 0;

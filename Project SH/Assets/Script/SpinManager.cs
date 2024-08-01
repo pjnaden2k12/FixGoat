@@ -44,7 +44,7 @@ public class SpinManager : MonoBehaviour
             StartCoroutine(ChestShakeEffect());
 
             // Đặt delay để hiển thị rewardPanel sau 2 giây
-            StartCoroutine(DisplayRewardPanelAfterDelay(2f));
+            StartCoroutine(DisplayRewardPanelAfterDelay(1.5f));
         }
         else
         {
@@ -56,7 +56,7 @@ public class SpinManager : MonoBehaviour
     {
         
         Vector3 originalPosition = chestImage.transform.position;
-        float shakeDuration = 0.5f; // Thời gian rung
+        float shakeDuration = 1f; // Thời gian rung
         float elapsedTime = 0f;
         float shakeMagnitude = 10f; // Độ mạnh của rung
 
