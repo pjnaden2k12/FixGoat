@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3f861e7dd7a155d428533f0b2c7ec141
+guid: 85822dae5d9cf744d99a6fd1a36e6b78
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,28 +121,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Knight_01__IDLE_000_0
-      rect:
-        serializedVersion: 2
-        x: 544
-        y: 201
-        width: 883
-        height: 799
-      alignment: 9
-      pivot: {x: 0.4941938, y: 0.50841516}
-      border: {x: 0, y: 0, z: 0, w: 1}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f051534f6942ddf4892fca66cffa9256
-      internalID: 558961737
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -153,8 +132,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Knight_01__IDLE_000_0: 558961737
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

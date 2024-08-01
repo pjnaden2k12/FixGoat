@@ -7,11 +7,16 @@ public class ResourceManager : MonoBehaviour
     public int gold { get; private set; }
     public int diamonds { get; private set; }
     public int towerPieces { get; private set; }
+    public int universalStones { get; private set; } // Đá vạn năng
 
-    // Chỉ số vĩnh viễn
+    // Chỉ số vĩnh viễn cho tường thành
     public int wallHealthBonus { get; private set; }
     public int wallDefenseBonus { get; private set; }
     public int healthRegenBonus { get; private set; }
+
+    // Chỉ số vĩnh viễn cho các tháp
+    public float towerDamageBonus { get; private set; }
+    public float towerAttackSpeedBonus { get; private set; }
 
     // Tiến hóa
     public int evolutionLevel { get; private set; } = 0;
@@ -30,12 +35,14 @@ public class ResourceManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             // Thiết lập giá trị ban đầu cho các tài nguyên
-            gold = 999999;
-            diamonds = 10;
-            towerPieces = 100;
+            gold = 99999;
+            diamonds = 1999;
+            towerPieces = 1000;
             wallHealthBonus = 0;
             wallDefenseBonus = 0;
             healthRegenBonus = 0;
+            towerDamageBonus = 0;
+            towerAttackSpeedBonus = 0;
         }
         else
         {
@@ -85,11 +92,54 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    // Thêm mảnh tường
+    // Thêm mảnh tháp
     public void AddTowerPieces(int amount)
     {
         towerPieces += amount;
         NotifyResourceChanged();
+    }
+
+    public void SpendTowerPieces(int amount)
+    {
+        if (towerPieces >= amount)
+        {
+            towerPieces -= amount;
+            NotifyResourceChanged();
+        }
+        else
+        {
+            Debug.LogWarning("Không đủ mảnh tháp.");
+        }
+    }
+    // Thêm đá vạn năng
+    public void AddUniversalStone(int amount)
+    {
+        universalStones += amount;
+        NotifyResourceChanged();
+    }
+
+    // Tiêu đá vạn năng để nâng cấp tất cả các tháp
+    public void UpgradeAllTowers()
+    {
+        if (universalStones > 0)
+        {
+            universalStones--; // Tiêu đá vạn năng
+
+            // Nâng cấp tất cả các tháp
+            towerDamageBonus += 5; // Tăng sát thương của tháp
+            towerAttackSpeedBonus += 0.1f; // Tăng tốc độ tấn công của tháp
+
+            NotifyResourceChanged();
+        }
+        else
+        {
+            Debug.LogWarning("Không đủ đá vạn năng!");
+        }
+    }
+    // Lấy số lượng đá vạn năng
+    public int GetUniversalStoneCount()
+    {
+        return universalStones;
     }
 
     // Tiến hóa nhân vật
@@ -115,16 +165,29 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    // Cập nhật các chỉ số vĩnh viễn khi tiến hóa
+    // Cập nhật các chỉ số vĩnh viễn cho tường thành khi tiến hóa
     private void UpdateWallBonuses()
     {
-        // Cập nhật các chỉ số vĩnh viễn tương ứng với cấp độ tiến hóa
-        // Ví dụ: Giả sử mỗi cấp tiến hóa tăng chỉ số thêm 10%
         wallHealthBonus = 100 * evolutionLevel;
         wallDefenseBonus = 50 * evolutionLevel;
         healthRegenBonus = 10 * evolutionLevel;
     }
 
+    
+
+    // Đổi 100 mảnh tháp lấy 1 đá vạn năng
+    public void ExchangeTowerPiecesForUniversalStone()
+    {
+        if (towerPieces >= 100)
+        {
+            towerPieces -= 100;
+            AddUniversalStone(1);
+        }
+        else
+        {
+            Debug.LogWarning("Không đủ mảnh tháp để đổi.");
+        }
+    }
     // Thông báo sự thay đổi tài nguyên
     private void NotifyResourceChanged()
     {
