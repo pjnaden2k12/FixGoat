@@ -1,85 +1,64 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class capnhatthanhmaubosstrumzombie : MonoBehaviour
 {
     public thanhmaubossgiapsat thanhmaubossgiapsat;
     public float luongmauhientai;
     public float luongmautoida = 1000;
-    public float recoveryAmount = 0.1f; // 10% máu tối đa
-    public float recoveryInterval = 10.0f; // Thời gian hồi máu (10 giây)
-    public GameObject hieuUngNo; // Tham chiếu đến prefab hiệu ứng nổ
-    public float thoiGianChoTruocKhiNo = 1.0f; // Thời gian tồn tại của hiệu ứng nổ
+    public GameObject explosionEffect; // Prefab hiệu ứng nổ
+    public Animator animator; // Animator Controller của boss
     private bool isDead = false;
+    private bool effectTriggered = false; // Biến kiểm soát hiệu ứng
 
     // Start is called before the first frame update
     void Start()
     {
-        // Đặt lượng máu hiện tại bằng lượng máu tối đa khi bắt đầu
         luongmauhientai = luongmautoida;
         thanhmaubossgiapsat.CapNhatThanhMau(luongmauhientai, luongmautoida);
-        StartCoroutine(HoiMau());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseDown()
     {
-        // Kiểm tra sự kiện nhấp chuột
-        if (Input.GetMouseButtonDown(0)) // Kiểm tra nếu nhấp chuột trái
+        if (!isDead)
         {
-            // Kiểm tra xem có nhấp vào boss trùm zombie không
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
-
-            if (hit.collider != null && hit.collider.gameObject == gameObject)
-            {
-                // Giảm máu khi nhấp vào boss
-                GiamMau(200);
-            }
-        }
-    }
-
-    // Hàm để giảm máu
-    public void GiamMau(float luong)
-    {
-        luongmauhientai -= luong;
-        if (luongmauhientai < 0)
-        {
-            luongmauhientai = 0;
-        }
-        thanhmaubossgiapsat.CapNhatThanhMau(luongmauhientai, luongmautoida);
-
-        if (luongmauhientai == 0 && !isDead)
-        {
-            BatDauNo();
-        }
-    }
-
-    // Hàm để bắt đầu quá trình nổ
-    void BatDauNo()
-    {
-        isDead = true;
-        // Hiển thị hiệu ứng nổ
-        GameObject explosion = Instantiate(hieuUngNo, transform.position, transform.rotation);
-        // Tiêu diệt boss ngay lập tức
-        Destroy(gameObject);
-        // Tiêu diệt hiệu ứng nổ sau một khoảng thời gian ngắn
-        Destroy(explosion, thoiGianChoTruocKhiNo);
-    }
-
-    // Coroutine để hồi máu
-    private IEnumerator HoiMau()
-    {
-        while (!isDead)
-        {
-            luongmauhientai += luongmautoida * recoveryAmount;
-            if (luongmauhientai > luongmautoida)
-            {
-                luongmauhientai = luongmautoida;
-            }
+            luongmauhientai -= 200;
             thanhmaubossgiapsat.CapNhatThanhMau(luongmauhientai, luongmautoida);
-            yield return new WaitForSeconds(recoveryInterval);
+
+            if (luongmauhientai <= 0)
+            {
+                StartCoroutine(Die());
+            }
+        }
+    }
+
+    private IEnumerator Die()
+    {
+        if (isDead) yield break; // Kiểm tra nếu boss đã chết, thoát khỏi coroutine
+
+        isDead = true;
+        luongmauhientai = 0;
+        thanhmaubossgiapsat.CapNhatThanhMau(luongmauhientai, luongmautoida);
+        Debug.Log("Boss is dead.");
+
+        // Hiển thị hiệu ứng nổ chỉ một lần
+        GameObject explosion = null;
+        if (explosionEffect != null)
+        {
+            explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        }
+
+        // Đợi animation hoàn tất (ở đây là 0 giây)
+        yield return new WaitForSeconds(0f);
+
+        // Xóa đối tượng boss khỏi cảnh
+        Destroy(gameObject);
+
+        // Xóa hiệu ứng nổ sau 2 giây
+        if (explosion != null)
+        {
+            Destroy(explosion, 0.6f);
         }
     }
 }

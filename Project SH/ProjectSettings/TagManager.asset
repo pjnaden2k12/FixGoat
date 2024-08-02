@@ -12,6 +12,7 @@ TagManager:
   - Wall
   - Enemy
   - vacham
+  - hieuungbattu
   layers:
   - Default
   - TransparentFX
