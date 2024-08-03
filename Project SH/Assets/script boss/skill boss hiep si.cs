@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class capnhatthanhmaubosshiepsi : MonoBehaviour
 {
@@ -96,6 +95,9 @@ public class capnhatthanhmaubosshiepsi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (activeInvulnerabilityEffect != null)
+        {
+            activeInvulnerabilityEffect.transform.position = transform.position + invulnerabilityEffectOffset;
+        }
     }
 }

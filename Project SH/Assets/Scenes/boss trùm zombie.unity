@@ -641,6 +641,9 @@ MonoBehaviour:
   luongmauhientai: 0
   luongmautoida: 1000
   explosionEffect: {fileID: 5360637549244111605, guid: 982f1a3f27f9bbb43b0839a08fe80062, type: 3}
+  minionPrefab: {fileID: 1488286251969338476, guid: da27a6c1938a7c649942bbdcea367dc0, type: 3}
+  minionsParent: {fileID: 1053551143}
+  targetPoint: {fileID: 1053551143}
   animator: {fileID: 0}
 --- !u!1 &1607935189
 GameObject:

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BossMovement : MonoBehaviour
@@ -11,6 +12,7 @@ public class BossMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>(); // Lấy Animator component
+       
     }
 
     void Update()
@@ -58,5 +60,11 @@ public class BossMovement : MonoBehaviour
             rb.velocity = Vector2.zero; // Dừng lại
             AttackTarget(); // Kích hoạt tấn công
         }
+    }
+
+    private IEnumerator DestroyAfterTime(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject); // Hủy quái con sau 5 giây
     }
 }

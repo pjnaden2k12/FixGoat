@@ -8,6 +8,9 @@ public class capnhatthanhmaubosstrumzombie : MonoBehaviour
     public float luongmauhientai;
     public float luongmautoida = 1000;
     public GameObject explosionEffect; // Prefab hiệu ứng nổ
+    public GameObject minionPrefab; // Prefab của quái con
+    public Transform minionsParent; // Đối tượng cha sẽ chứa các quái con
+    public Transform targetPoint; // Điểm mục tiêu của quái con
     public Animator animator; // Animator Controller của boss
     private bool isDead = false;
     private bool effectTriggered = false; // Biến kiểm soát hiệu ứng
@@ -17,6 +20,7 @@ public class capnhatthanhmaubosstrumzombie : MonoBehaviour
     {
         luongmauhientai = luongmautoida;
         thanhmaubossgiapsat.CapNhatThanhMau(luongmauhientai, luongmautoida);
+        StartCoroutine(SpawnMinionsAfterDelay(5f)); // Gọi Coroutine để sinh ra quái con sau 5 giây
     }
 
     private void OnMouseDown()
@@ -59,6 +63,25 @@ public class capnhatthanhmaubosstrumzombie : MonoBehaviour
         if (explosion != null)
         {
             Destroy(explosion, 0.6f);
+        }
+    }
+
+    private IEnumerator SpawnMinionsAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Sinh ra quái con và đặt làm con của minionsParent
+        if (minionPrefab != null && minionsParent != null)
+        {
+            GameObject minion = Instantiate(minionPrefab, transform.position, Quaternion.identity);
+            minion.transform.SetParent(minionsParent);
+
+            // Gán targetPoint cho quái con
+            BossMovement bossMovement = minion.GetComponent<BossMovement>();
+            if (bossMovement != null)
+            {
+                bossMovement.MoveToTarget(targetPoint);
+            }
         }
     }
 }
