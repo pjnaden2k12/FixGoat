@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class GoblinHealth : MonoBehaviour
+public class BGoblinHealth : MonoBehaviour
 {
     public float maxHealth = 100f; // Máu tối đa của boss
     public Image healthBarFill; // Thanh máu

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class GoblinManager : MonoBehaviour
+public class SwordManManager : MonoBehaviour
 {
     public GameObject bossPrefab; // Prefab của boss
     public Transform spawnPoint; // Vị trí sinh ra boss
@@ -29,14 +29,14 @@ public class GoblinManager : MonoBehaviour
                 Debug.Log("Boss đã được sinh ra!");
 
                 // Thiết lập thanh máu cho boss
-                GoblinHealth enemyHealth = currentBoss.GetComponent<GoblinHealth>();
+                SwordManHealth enemyHealth = currentBoss.GetComponent<SwordManHealth>();
                 if (enemyHealth != null)
                 {
                     enemyHealth.healthBarFill = healthBarFill;
                 }
 
                 // Thiết lập điểm mục tiêu của boss
-                GoblinMove bossMovement = currentBoss.GetComponent<GoblinMove>();
+                SwordManMove bossMovement = currentBoss.GetComponent<SwordManMove>();
                 if (bossMovement != null)
                 {
                     bossMovement.targetPoint = targetPoint;
@@ -51,7 +51,7 @@ public class GoblinManager : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Space)) // Nhấn phím Space để gây thiệt hại
             {
-                GetComponent<GoblinHealth>().TakeDamage(10f);
+                GetComponent<SwordManHealth>().TakeDamage(10f);
             }
         }
     }

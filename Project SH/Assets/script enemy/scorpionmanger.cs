@@ -51,7 +51,7 @@ public class scorpionmanager : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Space)) // Nhấn phím Space để gây thiệt hại
             {
-                GetComponent<enemyhealth>().TakeDamage(10f);
+                GetComponent<scorpionhealth>().TakeDamage(10f);
             }
         }
     }

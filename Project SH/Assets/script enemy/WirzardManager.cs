@@ -29,7 +29,7 @@ public class WirzardManager : MonoBehaviour
                 Debug.Log("Boss đã được sinh ra!");
 
                 // Thiết lập thanh máu cho boss
-                enemyhealth enemyHealth = currentBoss.GetComponent<enemyhealth>();
+                WirzardHealth enemyHealth = currentBoss.GetComponent<WirzardHealth>();
                 if (enemyHealth != null)
                 {
                     enemyHealth.healthBarFill = healthBarFill;
@@ -51,7 +51,7 @@ public class WirzardManager : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Space)) // Nhấn phím Space để gây thiệt hại
             {
-                GetComponent<enemyhealth>().TakeDamage(10f);
+                GetComponent<WirzardHealth>().TakeDamage(10f);
             }
         }
     }
