@@ -64,10 +64,12 @@ public class TowerManagerUI : MonoBehaviour
 
     private void ShowTowerInfoPanel(int towerIndex)
     {
+        Tower currentTower = TowerManager.Instance.towers[towerIndex];
         // Cập nhật thông tin chi tiết cho tháp được mở khóa
         towerDetailImage.sprite = towerSprites[towerIndex];
-        towerDetailText.text = towerDescriptions[towerIndex];
+        towerDetailText.text = $"Công: {currentTower.baseDamage}\nTốc độ: {currentTower.baseAttackSpeed}\nTầm bắn: {currentTower.baseRange}\n{towerDescriptions[towerIndex]}";
         towerInfoPanel.SetActive(true);
+
     }
 
     private void CloseTowerInfoPanel()
@@ -83,7 +85,7 @@ public class TowerManagerUI : MonoBehaviour
         {
             ResourceManager.Instance.SpendTowerPieces(25);
             TowerManager.Instance.UnlockTower(currentTowerIndex); // Cập nhật trạng thái tháp
-            ShowTowerInfoPanel(currentTowerIndex);
+            ShowTowerInfoPanel(currentTowerIndex); // Cập nhật thông tin tháp sau khi mở khóa
             unlockButton.interactable = false;
         }
         else
