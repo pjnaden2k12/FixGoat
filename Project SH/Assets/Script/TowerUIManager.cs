@@ -45,7 +45,7 @@ public class TowerManagerUI : MonoBehaviour
         {
             // Hiển thị thông tin placeholder cho tháp bị khóa
             towerDetailImage.sprite = placeholderSprite;
-            towerDetailText.text = "Công: ???\nTốc độ: ???\nKĩ năng: ???";
+            towerDetailText.text = "Công: ???\nTốc độ: ???\nKĩ năng: ???\nTầm bắn: ???\n???";
 
             // Đảm bảo nút mở khóa có thể nhấn được
             unlockButton.interactable = true;
