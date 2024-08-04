@@ -111,6 +111,10 @@ public class ResourceManager : MonoBehaviour
             Debug.LogWarning("Không đủ mảnh tháp.");
         }
     }
+    public int GetTowerPieces()
+    {
+        return towerPieces;
+    }
     // Thêm đá vạn năng
     public void AddUniversalStone(int amount)
     {

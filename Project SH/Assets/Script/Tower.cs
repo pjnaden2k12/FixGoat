@@ -5,7 +5,7 @@ public class Tower : MonoBehaviour
     public int level = 1; // Cấp độ của tháp
     public float baseDamage = 10f; // Sát thương cơ bản
     public float baseAttackSpeed = 1f; // Tốc độ tấn công cơ bản
-    public bool unlocked; // Trạng thái mở khóa của tháp
+    public bool unlocked =  false; // Trạng thái mở khóa của tháp
     public Sprite sprite; // Hình ảnh của tháp
 
     private float damage; // Sát thương hiện tại
@@ -16,7 +16,6 @@ public class Tower : MonoBehaviour
         UpdateStats(); // Cập nhật thông số khi bắt đầu
     }
 
-    // Phương thức nâng cấp tháp
     public void Upgrade()
     {
         if (level < 3) // Kiểm tra cấp độ tối đa
@@ -30,7 +29,6 @@ public class Tower : MonoBehaviour
         }
     }
 
-    // Cập nhật thông số của tháp dựa trên cấp độ và chỉ số tăng cường
     private void UpdateStats()
     {
         switch (level)
@@ -53,27 +51,32 @@ public class Tower : MonoBehaviour
         Debug.Log($"Tower Level: {level}, Damage: {damage}, Attack Speed: {attackSpeed}");
     }
 
-    // Phương thức để lấy sát thương của tháp (có thể sử dụng cho các hệ thống khác)
     public float GetDamage()
     {
         return damage;
     }
 
-    // Phương thức để lấy tốc độ tấn công của tháp (có thể sử dụng cho các hệ thống khác)
     public float GetAttackSpeed()
     {
         return attackSpeed;
     }
 
-    // Phương thức kiểm tra xem tháp đã được mở khóa chưa
     public bool IsUnlocked()
     {
         return unlocked;
     }
 
-    // Phương thức để lấy hình ảnh của tháp
+    public void Unlock()
+    {
+        unlocked = true;
+    }
+
     public Sprite GetSprite()
     {
         return sprite;
+    }
+    public void SetLocked(bool locked)
+    {
+        unlocked = !locked;
     }
 }
