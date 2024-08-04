@@ -12,7 +12,7 @@ public class BossMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>(); // Lấy Animator component
-       
+
     }
 
     void Update()

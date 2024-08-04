@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BossAttack : MonoBehaviour
+public class BAttack : MonoBehaviour
 {
     public Animator animator; // Animator của Boss
 

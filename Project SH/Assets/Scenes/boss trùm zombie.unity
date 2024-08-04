@@ -772,6 +772,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 378346961898082297, guid: e5bc778e3f5d5c945ae0bcb75f745fb5, type: 3}
+      propertyPath: m_Size.x
+      value: 4.453888
+      objectReference: {fileID: 0}
+    - target: {fileID: 378346961898082297, guid: e5bc778e3f5d5c945ae0bcb75f745fb5, type: 3}
+      propertyPath: m_Size.y
+      value: 2.945157
+      objectReference: {fileID: 0}
+    - target: {fileID: 378346961898082297, guid: e5bc778e3f5d5c945ae0bcb75f745fb5, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.44326496
+      objectReference: {fileID: 0}
+    - target: {fileID: 378346961898082297, guid: e5bc778e3f5d5c945ae0bcb75f745fb5, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.35777903
+      objectReference: {fileID: 0}
     - target: {fileID: 1639443364077381963, guid: e5bc778e3f5d5c945ae0bcb75f745fb5, type: 3}
       propertyPath: m_Name
       value: "boss tr\xF9m zombie"
@@ -780,6 +796,10 @@ PrefabInstance:
       propertyPath: targetPoint
       value: 
       objectReference: {fileID: 1053551143}
+    - target: {fileID: 4058025040947113077, guid: e5bc778e3f5d5c945ae0bcb75f745fb5, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6814095443298012228, guid: e5bc778e3f5d5c945ae0bcb75f745fb5, type: 3}
       propertyPath: thanhmaubossgiapsat
       value: 
