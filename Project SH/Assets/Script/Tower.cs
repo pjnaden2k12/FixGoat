@@ -15,11 +15,8 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
-        // Đảm bảo rằng các thuộc tính đã được khởi tạo đúng cách
-        if (baseDamage <= 0 || baseAttackSpeed <= 0 || baseRange <= 0)
-        {
-            Debug.LogError("Base values must be greater than 0");
-        }
+        
+        
         UpdateStats(); // Cập nhật thông số khi bắt đầu
     }
 
@@ -36,24 +33,26 @@ public class Tower : MonoBehaviour
         }
     }
 
-    private void UpdateStats()
+    public void UpdateStats()
     {
+       
         switch (level)
         {
+            
             case 1:
-                damage = baseDamage;
-                attackSpeed = baseAttackSpeed;
-                range = baseRange;
+                damage = baseDamage * 1f;
+                attackSpeed = baseAttackSpeed * 1f;
+                range = baseRange * 1f;
                 break;
             case 2:
-                damage = baseDamage * 1.5f; // Tăng sát thương ở cấp độ 2
-                attackSpeed = baseAttackSpeed * 1.2f; // Tăng tốc độ tấn công ở cấp độ 2
-                range = baseRange * 1.2f; // Tăng tầm bắn ở cấp độ 2
+                damage = baseDamage * 2f; // Tăng sát thương ở cấp độ 2
+                attackSpeed = baseAttackSpeed * 1.5f; // Tăng tốc độ tấn công ở cấp độ 2
+                range = baseRange * 1.5f; // Tăng tầm bắn ở cấp độ 2
                 break;
             case 3:
-                damage = baseDamage * 2f; // Tăng sát thương ở cấp độ 3
-                attackSpeed = baseAttackSpeed * 1.5f; // Tăng tốc độ tấn công ở cấp độ 3
-                range = baseRange * 1.5f; // Tăng tầm bắn ở cấp độ 3
+                damage = baseDamage * 3f; // Tăng sát thương ở cấp độ 3
+                attackSpeed = baseAttackSpeed * 2f; // Tăng tốc độ tấn công ở cấp độ 3
+                range = baseRange * 2f; // Tăng tầm bắn ở cấp độ 3
                 break;
         }
 
@@ -63,6 +62,12 @@ public class Tower : MonoBehaviour
 
     public float GetDamage()
     {
+        if( damage == 0f)
+        {
+            UpdateStats();
+        }
+
+        
         return damage;
     }
 

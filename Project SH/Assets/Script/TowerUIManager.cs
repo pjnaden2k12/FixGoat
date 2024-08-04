@@ -45,7 +45,7 @@ public class TowerManagerUI : MonoBehaviour
         {
             // Hiển thị thông tin placeholder cho tháp bị khóa
             towerDetailImage.sprite = placeholderSprite;
-            towerDetailText.text = "Công: ???\nTốc độ: ???\nKĩ năng: ???\nTầm bắn: ???\n???";
+            towerDetailText.text = "Công: ???\nTốc độ: ???\nTầm bắn: ???\nĐặc điểm: ???";
 
             // Đảm bảo nút mở khóa có thể nhấn được
             unlockButton.interactable = true;
@@ -67,7 +67,7 @@ public class TowerManagerUI : MonoBehaviour
         Tower currentTower = TowerManager.Instance.towers[towerIndex];
         // Cập nhật thông tin chi tiết cho tháp được mở khóa
         towerDetailImage.sprite = towerSprites[towerIndex];
-        towerDetailText.text = $"Công: {currentTower.baseDamage}\nTốc độ: {currentTower.baseAttackSpeed}\nTầm bắn: {currentTower.baseRange}\n{towerDescriptions[towerIndex]}";
+        towerDetailText.text = $"Công: {currentTower.GetDamage()}\nTốc độ: {currentTower.GetAttackSpeed()}\nTầm bắn: {currentTower.GetRange()}\nĐặc điểm: {towerDescriptions[towerIndex]}";
         towerInfoPanel.SetActive(true);
 
     }

@@ -103,8 +103,12 @@ MonoBehaviour:
   level: 1
   baseDamage: 10
   baseAttackSpeed: 1
-  unlocked: 0
+  baseRange: 5
+  unlocked: 1
   sprite: {fileID: 0}
+  damage: 0
+  attackSpeed: 0
+  range: 0
 --- !u!1 &842190696234318145
 GameObject:
   m_ObjectHideFlags: 0
