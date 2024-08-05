@@ -31,7 +31,7 @@ public class capnhatthanhmaubosshiepsi : MonoBehaviour
 
             if (luongmauhientai <= luongmautoida * 0.6f && !effectTriggered)
             {
-                StartCoroutine(MakeInvulnerable(10f)); // Boss không chịu sát thương trong 10 giây
+                StartCoroutine(MakeInvulnerable(1f)); // Boss không chịu sát thương trong 10 giây
                 effectTriggered = true; // Đánh dấu rằng hiệu ứng đã được kích hoạt
             }
 
@@ -88,7 +88,7 @@ public class capnhatthanhmaubosshiepsi : MonoBehaviour
         // Xóa hiệu ứng nổ sau 2 giây
         if (explosion != null)
         {
-            Destroy(explosion, 1f);
+            Destroy(explosion, 0.9f);
         }
     }
 
