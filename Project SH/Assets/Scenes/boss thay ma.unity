@@ -413,12 +413,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c2f717169a2444c9ded47210833f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thanhmaubossgiapsat: {fileID: 0}
+  thanhmaubossgiapsat: {fileID: 80042389}
   luongmauhientai: 0
   luongmautoida: 1000
   explosionEffect: {fileID: 0}
-  invulnerabilityEffect: {fileID: 0}
-  invulnerabilityEffectOffset: {x: 0, y: 0, z: 0}
   animator: {fileID: 0}
 --- !u!1 &1488081757
 GameObject:
