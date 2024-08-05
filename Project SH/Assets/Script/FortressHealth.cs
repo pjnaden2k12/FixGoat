@@ -2,10 +2,18 @@
 
 public class FortressHealth : MonoBehaviour
 {
-    public float maxHealth = 100f;
+    private float maxHealth = 100f;
     private float currentHealth;
     private float currentDefense;
     private float currentHealthRegen;
+
+    private float timeSinceLastDamage; // Biến để theo dõi thời gian từ lần cuối bị tấn công
+    public float healthRegenDelay = 3f; // Thời gian chờ trước khi bắt đầu hồi máu
+
+    public float MaxHealth
+    {
+        get { return maxHealth; }
+    }
 
     public float CurrentHealth
     {
@@ -14,18 +22,22 @@ public class FortressHealth : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = maxHealth;
         ApplyPermanentBonuses();
+        currentHealth = maxHealth; // Đặt máu hiện tại bằng với máu tối đa đã được cập nhật
     }
 
     private void Update()
     {
-        RegenerateHealth();
+        timeSinceLastDamage += Time.deltaTime;
+
+        if (timeSinceLastDamage >= healthRegenDelay)
+        {
+            RegenerateHealth();
+        }
     }
 
     public void TakeDamage(float damage)
     {
-        // Áp dụng sát thương sau khi giảm bởi phòng thủ (defense)
         float actualDamage = Mathf.Max(damage - currentDefense, 0);
         currentHealth -= actualDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
@@ -36,18 +48,18 @@ public class FortressHealth : MonoBehaviour
         {
             Die();
         }
+
+        timeSinceLastDamage = 0f; // Reset thời gian từ lần cuối bị tấn công
     }
 
     private void RegenerateHealth()
     {
-        // Hồi máu theo thời gian
         currentHealth += currentHealthRegen * Time.deltaTime;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
     }
 
     private void ApplyPermanentBonuses()
     {
-        // Cập nhật chỉ số vĩnh viễn từ ResourceManager
         currentDefense = ResourceManager.Instance.wallDefenseBonus;
         currentHealthRegen = ResourceManager.Instance.healthRegenBonus;
         maxHealth += ResourceManager.Instance.wallHealthBonus;
@@ -56,7 +68,6 @@ public class FortressHealth : MonoBehaviour
     private void Die()
     {
         Debug.Log("Tường thành đã bị phá hủy!");
-        // Thực hiện các hành động khi tường thành bị phá hủy, ví dụ: kết thúc trò chơi
         Destroy(gameObject);
     }
 }

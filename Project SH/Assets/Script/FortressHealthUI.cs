@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Import the TextMesh Pro namespace
+using TMPro;
 
 public class FortressHealthUI : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class FortressHealthUI : MonoBehaviour
         }
 
         // Set the maximum value for the health slider
-        healthSlider.maxValue = fortressHealth.maxHealth;
+        healthSlider.maxValue = fortressHealth.MaxHealth; // Cập nhật thanh trượt với giá trị hiện tại
         healthSlider.value = fortressHealth.CurrentHealth; // Ensure the slider starts at the correct value
         UpdateHealthUI();
     }
@@ -37,6 +37,6 @@ public class FortressHealthUI : MonoBehaviour
 
         // Cập nhật thanh trượt sức khỏe và thành phần văn bản TextMeshPro
         healthSlider.value = fortressHealth.CurrentHealth;
-        healthText.text = "Health: " + Mathf.RoundToInt(fortressHealth.CurrentHealth) + "/" + Mathf.RoundToInt(fortressHealth.maxHealth);
+        healthText.text = "Health: " + Mathf.RoundToInt(fortressHealth.CurrentHealth) + "/" + Mathf.RoundToInt(fortressHealth.MaxHealth);
     }
 }

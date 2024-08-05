@@ -1,0 +1,76 @@
+﻿using UnityEngine;
+
+public class TowerManager : MonoBehaviour
+{
+    public static TowerManager Instance { get; private set; }
+
+    public Tower[] towers; // Mảng các tháp
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        InitializeTowers();
+    }
+
+    private void InitializeTowers()
+    {
+        foreach (Tower tower in towers)
+        {
+            tower.SetLocked(true); // Mặc định tất cả các tháp đều bị khóa khi bắt đầu
+        }
+    }
+
+    public void UnlockTower(int index)
+    {
+        if (index >= 0 && index <= towers.Length)
+        {
+            Tower tower = towers[index];
+            if (tower.IsUnlocked())
+            {
+                Debug.LogWarning($"Tháp {index} đã được mở khóa.");
+                return;
+            }
+
+            // Kiểm tra nếu có đủ tài nguyên để mở khóa tháp
+            if (ResourceManager.Instance.GetTowerPieces() >= 25)
+            {
+                ResourceManager.Instance.SpendTowerPieces(25);
+                tower.Unlock();
+                Debug.Log($"Tháp {index} đã được mở khóa.");
+            }
+            else
+            {
+                Debug.LogWarning("Không đủ mảnh tháp để mở khóa.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Chỉ số tháp không hợp lệ.");
+        }
+    }
+
+    public Tower GetTower(int index)
+    {
+        if (index >= 0 && index < towers.Length)
+        {
+            return towers[index];
+        }
+        else
+        {
+            Debug.LogWarning("Chỉ số tháp không hợp lệ.");
+            return null;
+        }
+    }
+}
