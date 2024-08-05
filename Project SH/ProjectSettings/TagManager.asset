@@ -11,6 +11,9 @@ TagManager:
   - TowerPosition4
   - Wall
   - Enemy
+  - vacham
+  - hieuungbattu
+  - no
   layers:
   - Default
   - TransparentFX
