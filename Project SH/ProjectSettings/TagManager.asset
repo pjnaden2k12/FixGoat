@@ -11,6 +11,7 @@ TagManager:
   - TowerPosition4
   - Wall
   - Enemy
+  - Enemy2
   layers:
   - Default
   - TransparentFX

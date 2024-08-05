@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyHealth : MonoBehaviour
+public class MagicHealth : MonoBehaviour
 {
     public int maxHealth = 100; // Máu tối đa của quái vật
     private int currentHealth; // Máu hiện tại của quái vật
