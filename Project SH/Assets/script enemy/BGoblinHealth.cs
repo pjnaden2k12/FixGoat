@@ -12,6 +12,7 @@ public class BGoblinHealth : MonoBehaviour
     public float attackRange = 1.0f; // Phạm vi để quái vật bắt đầu tấn công
 
     private Rigidbody rb;
+    private bool isAttacking = false; // Trạng thái tấn công của quái vật
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class BGoblinHealth : MonoBehaviour
 
     void Update()
     {
-        if (!isDead)
+        if (!isDead && !isAttacking)
         {
             Move();
         }
@@ -110,11 +111,12 @@ public class BGoblinHealth : MonoBehaviour
             float distanceToTarget = Vector3.Distance(transform.position, targetPoint.position);
             if (distanceToTarget <= attackRange)
             {
-                // Kích hoạt animation tấn công
+                // Kích hoạt animation tấn công và dừng di chuyển
                 if (animator != null)
                 {
                     animator.SetTrigger("Attack");
                 }
+                isAttacking = true; // Đặt trạng thái tấn công
             }
         }
         else
