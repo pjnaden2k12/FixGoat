@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7, y: 321}
+  m_AnchoredPosition: {x: 7, y: 296}
   m_SizeDelta: {x: 221.0882, y: 22.0038}
   m_Pivot: {x: 0.5312244, y: 1.0711813}
 --- !u!1 &865175805032326683
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 2118618455480950890}
   m_Layer: 0
   m_Name: "boss hi\u1EC7p s\u0129"
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -290,8 +290,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1354497225
-  m_SortingLayer: 7
+  m_SortingLayerID: 460863499
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: aa0311b44f8f7ba45a486631a14b5da3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -354,7 +354,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -409,10 +409,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 327cfcf5a818d124391fd5adb6741753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thanhmaubossgiapsat: {fileID: 0}
+  thanhmaubossgiapsat: {fileID: 797757232572979420}
   luongmauhientai: 0
   luongmautoida: 1000
-  explosionEffect: {fileID: 5498268287655258964, guid: ba6a243b0ff96c843af4b661ea88db9a, type: 3}
+  explosionEffect: {fileID: 557299091393983607, guid: f561d8896e11cdc41b487453304ef516, type: 3}
   invulnerabilityEffect: {fileID: 6787242501032142227, guid: ba6cd8370e3db2a48a3a0d89c4ce8a88, type: 3}
   invulnerabilityEffectOffset: {x: -1, y: -1, z: 0}
   animator: {fileID: 6900155802541144995, guid: ba6cd8370e3db2a48a3a0d89c4ce8a88, type: 3}
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de34907ceb274a04f81f380893f90339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.5
+  speed: 1
   targetPoint: {fileID: 0}
 --- !u!1 &9059683861657059625
 GameObject:

@@ -1196,8 +1196,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -69.3, y: 0}
+  m_SizeDelta: {x: 35.8388, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &546993891
 MonoBehaviour:
@@ -2452,17 +2452,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1140306737 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 797757232572979420, guid: 5fcbcca10a77d184fbbf0a25a799e6b1, type: 3}
-  m_PrefabInstance: {fileID: 1621528115}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f465bf669aea8f41822cac9c1e39b19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1194968070
 GameObject:
   m_ObjectHideFlags: 0
@@ -4217,32 +4206,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2118618455480950890, guid: 5fcbcca10a77d184fbbf0a25a799e6b1, type: 3}
       propertyPath: speed
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2118618455480950890, guid: 5fcbcca10a77d184fbbf0a25a799e6b1, type: 3}
       propertyPath: targetPoint
       value: 
       objectReference: {fileID: 1194968071}
-    - target: {fileID: 2187736330547445268, guid: 5fcbcca10a77d184fbbf0a25a799e6b1, type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2187736330547445268, guid: 5fcbcca10a77d184fbbf0a25a799e6b1, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 460863499
-      objectReference: {fileID: 0}
-    - target: {fileID: 6488517983882824969, guid: 5fcbcca10a77d184fbbf0a25a799e6b1, type: 3}
-      propertyPath: explosionEffect
-      value: 
-      objectReference: {fileID: 557299091393983607, guid: f561d8896e11cdc41b487453304ef516, type: 3}
-    - target: {fileID: 6488517983882824969, guid: 5fcbcca10a77d184fbbf0a25a799e6b1, type: 3}
-      propertyPath: thanhmaubossgiapsat
-      value: 
-      objectReference: {fileID: 1140306737}
-    - target: {fileID: 7539662953901131745, guid: 5fcbcca10a77d184fbbf0a25a799e6b1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 296
-      objectReference: {fileID: 0}
     - target: {fileID: 7891667944295590476, guid: 5fcbcca10a77d184fbbf0a25a799e6b1, type: 3}
       propertyPath: m_Name
       value: "boss hi\u1EC7p s\u0129"
@@ -4819,7 +4788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c72e43d1fb62a4d875fa065dd92df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 6768774017856910223, guid: 47855731a5c31aa489f2ef91fd64bc6a, type: 3}
+  towerPrefab: {fileID: 3047024377214578298, guid: e785cd04355a16e4aa6dd246cfe49861, type: 3}
   buyPanel: {fileID: 1666554133}
   upgradePanel: {fileID: 1734492791}
   buyPriceText: {fileID: 1073522325}

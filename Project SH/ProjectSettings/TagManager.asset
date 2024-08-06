@@ -14,6 +14,7 @@ TagManager:
   - vacham
   - hieuungbattu
   - no
+  - Boss
   layers:
   - Default
   - TransparentFX
