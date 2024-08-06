@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7833025453570119406}
   - component: {fileID: 5402552365907220354}
   - component: {fileID: 2391653802583719647}
+  - component: {fileID: 375343891093817554}
   m_Layer: 0
   m_Name: Tower Fire
   m_TagString: Untagged
@@ -32,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2019146009908080554}
+  - {fileID: 3732100022412124033}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5402552365907220354
@@ -104,9 +106,21 @@ MonoBehaviour:
   baseRange: 5
   unlocked: 0
   sprite: {fileID: 0}
-  damage: 0
-  attackSpeed: 0
-  range: 0
+--- !u!114 &375343891093817554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882669298980104042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17bbbcaa6eb88540a398dd8d824cc1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 2391653802583719647}
+  bulletPrefab: {fileID: 0}
+  firePoint: {fileID: 3732100022412124033}
 --- !u!1 &6819171397378399147
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,8 +192,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1110199855
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: -319493878, guid: e97a99f867a8d3b4693234575b1bac48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -213,3 +227,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &8579380590837140615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3732100022412124033}
+  m_Layer: 0
+  m_Name: "\u0110i\u1EC3m b\u1EAFn"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3732100022412124033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8579380590837140615}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.13, y: 1.5600002, z: -0.037408125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7833025453570119406}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

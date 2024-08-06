@@ -62,10 +62,7 @@ public class Tower : MonoBehaviour
 
     public float GetDamage()
     {
-        if( damage == 0f)
-        {
-            UpdateStats();
-        }
+        
 
         
         return damage;

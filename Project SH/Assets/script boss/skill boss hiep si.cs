@@ -22,16 +22,21 @@ public class capnhatthanhmaubosshiepsi : MonoBehaviour
         thanhmaubossgiapsat.CapNhatThanhMau(luongmauhientai, luongmautoida);
     }
 
-    private void OnMouseDown()
+    //private void OnMouseDown()
+    //{
+    //    TakeDamage(200); // Gọi phương thức TakeDamage khi boss bị click
+    //}
+
+    public void TakeDamage(float damage)
     {
         if (!isDead && !isInvulnerable)
         {
-            luongmauhientai -= 200;
+            luongmauhientai -= damage;
             thanhmaubossgiapsat.CapNhatThanhMau(luongmauhientai, luongmautoida);
 
             if (luongmauhientai <= luongmautoida * 0.6f && !effectTriggered)
             {
-                StartCoroutine(MakeInvulnerable(1f)); // Boss không chịu sát thương trong 10 giây
+                StartCoroutine(MakeInvulnerable(10f)); // Boss không chịu sát thương trong 1 giây
                 effectTriggered = true; // Đánh dấu rằng hiệu ứng đã được kích hoạt
             }
 
