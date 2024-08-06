@@ -438,7 +438,7 @@ MonoBehaviour:
   thanhmaubossgiapsat: {fileID: 80042389}
   luongmauhientai: 0
   luongmautoida: 1000
-  explosionEffect: {fileID: 557299091393983607, guid: f561d8896e11cdc41b487453304ef516, type: 3}
+  explosionEffect: {fileID: 7071952418447646015, guid: a489c2f653598e842bdd8b3cd1795963, type: 3}
   animator: {fileID: 0}
 --- !u!1 &1488081757
 GameObject:
@@ -797,11 +797,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4865596183072772082, guid: 6c5b20ede75dc2e4182828f9e014c3d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.22
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4865596183072772082, guid: 6c5b20ede75dc2e4182828f9e014c3d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.26
+      value: 5.05
       objectReference: {fileID: 0}
     - target: {fileID: 4865596183072772082, guid: 6c5b20ede75dc2e4182828f9e014c3d2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -839,6 +839,18 @@ PrefabInstance:
       propertyPath: targetPoint
       value: 
       objectReference: {fileID: 1488081758}
+    - target: {fileID: 7530360466294555904, guid: 6c5b20ede75dc2e4182828f9e014c3d2, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6372688
+      objectReference: {fileID: 0}
+    - target: {fileID: 7530360466294555904, guid: 6c5b20ede75dc2e4182828f9e014c3d2, type: 3}
+      propertyPath: m_Size.y
+      value: 2.1939526
+      objectReference: {fileID: 0}
+    - target: {fileID: 7530360466294555904, guid: 6c5b20ede75dc2e4182828f9e014c3d2, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.2980237
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
