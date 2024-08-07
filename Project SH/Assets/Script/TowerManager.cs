@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class TowerManager : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class TowerManager : MonoBehaviour
 
     public void UnlockTower(int index)
     {
-        if (index >= 0 && index <= towers.Length)
+        if (index >= 0 && index < towers.Length)
         {
             Tower tower = towers[index];
             if (tower.IsUnlocked())
@@ -72,5 +73,18 @@ public class TowerManager : MonoBehaviour
             Debug.LogWarning("Chỉ số tháp không hợp lệ.");
             return null;
         }
+    }
+
+    public List<Tower> GetUnlockedTowers()
+    {
+        List<Tower> unlockedTowers = new List<Tower>();
+        foreach (Tower tower in towers)
+        {
+            if (tower.IsUnlocked())
+            {
+                unlockedTowers.Add(tower);
+            }
+        }
+        return unlockedTowers;
     }
 }

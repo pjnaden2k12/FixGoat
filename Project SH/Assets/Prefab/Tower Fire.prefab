@@ -102,8 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   baseDamage: 10
-  baseAttackSpeed: 1
-  baseRange: 5
+  baseAttackSpeed: 4
+  baseRange: 15
   unlocked: 0
   sprite: {fileID: 0}
 --- !u!114 &375343891093817554
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tower: {fileID: 2391653802583719647}
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 2233475089550797335, guid: 129f4513632345a4c8ee64ba8232811e, type: 3}
   firePoint: {fileID: 3732100022412124033}
 --- !u!1 &6819171397378399147
 GameObject:

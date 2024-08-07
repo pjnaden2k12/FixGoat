@@ -60,6 +60,12 @@ public class FortressHealth : MonoBehaviour
 
     private void ApplyPermanentBonuses()
     {
+        if (ResourceManager.Instance == null)
+        {
+            Debug.LogError("ResourceManager.Instance is null. Make sure ResourceManager is initialized.");
+            return;
+        }
+
         currentDefense = ResourceManager.Instance.wallDefenseBonus;
         currentHealthRegen = ResourceManager.Instance.healthRegenBonus;
         maxHealth += ResourceManager.Instance.wallHealthBonus;

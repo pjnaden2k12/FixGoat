@@ -208,8 +208,5 @@ MonoBehaviour:
   baseDamage: 10
   baseAttackSpeed: 1
   baseRange: 5
-  unlocked: 1
+  unlocked: 0
   sprite: {fileID: 0}
-  damage: 0
-  attackSpeed: 0
-  range: 0

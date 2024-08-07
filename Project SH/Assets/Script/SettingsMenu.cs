@@ -42,9 +42,18 @@ public class SettingsMenu : MonoBehaviour
         Application.Quit();
 #endif
     }
+
     public void ResumeGame()
     {
         // Tiếp tục trò chơi
+        settingsPanel.SetActive(false);
+        gameTimer.TogglePause(false);
+    }
+
+    public void GoToMainMenu()
+    {
+        // Trở về menu chính mà không load lại scene hiện tại
+        SceneManager.LoadScene("MainMenuScene");
         settingsPanel.SetActive(false);
         gameTimer.TogglePause(false);
     }

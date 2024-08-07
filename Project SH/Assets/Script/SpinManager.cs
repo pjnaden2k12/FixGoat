@@ -78,7 +78,7 @@ public class SpinManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         (string reward, Sprite rewardSprite) = GetRandomReward();
-        rewardText.text = "Phần thưởng: " + reward;
+        rewardText.text = "" + reward;
         rewardImage.sprite = rewardSprite; // Cập nhật hình ảnh phần thưởng
 
         // Hiển thị panel phần thưởng

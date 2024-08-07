@@ -33,6 +33,12 @@ public class TowerManagerUI : MonoBehaviour
 
     private void Start()
     {
+        // Kiểm tra và đảm bảo các tham chiếu UI đã được gán
+        if (closeButton == null || unlockButton == null || towerInfoPanel == null || towerDetailImage == null || towerDetailText == null)
+        {
+            Debug.LogError("Some UI elements are not assigned in the inspector!");
+            return;
+        }
         closeButton.onClick.AddListener(CloseTowerInfoPanel);
         unlockButton.onClick.AddListener(UnlockCurrentTower);
     }

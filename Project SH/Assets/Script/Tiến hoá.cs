@@ -10,7 +10,7 @@ public class EvolutionUIManager : MonoBehaviour
     public TextMeshProUGUI healthRegenBonusText;
     public Image characterImage;
     public Button evolveButton;
-    public TextMeshProUGUI evolveButtonText;
+   
 
     public Sprite characterSpriteLevel1;
     public Sprite characterSpriteLevel2;
@@ -40,12 +40,12 @@ public class EvolutionUIManager : MonoBehaviour
 
         if (ResourceManager.Instance.evolutionLevel >= ResourceManager.Instance.maxEvolutionLevel)
         {
-            evolveButtonText.text = "Cấp Tối Đa";
+            
             evolveButton.interactable = false;
         }
         else
         {
-            evolveButtonText.text = "Tiến Hoá";
+            
             evolveButton.interactable = true;
         }
     }

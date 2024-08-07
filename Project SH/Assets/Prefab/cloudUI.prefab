@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1031866318191685556}
   - component: {fileID: 4868888220210709062}
   - component: {fileID: 3533362902028854156}
-  - component: {fileID: 8071877342704423321}
+  - component: {fileID: 8734570784657921189}
   m_Layer: 5
   m_Name: cloudUI
   m_TagString: Untagged
@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 246.17, y: 260.36}
+  m_AnchoredPosition: {x: 324.2, y: 260.37}
   m_SizeDelta: {x: 132.3375, y: 128.2953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4868888220210709062
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8071877342704423321
+--- !u!114 &8734570784657921189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3129429108313793148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc8eb8fa0b8c76e43a638a531fdbc9e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 01c82ef3cf77ac744ac265dece7bc244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 1

@@ -197,4 +197,5 @@ public class ResourceManager : MonoBehaviour
     {
         OnResourceChanged?.Invoke();
     }
+
 }

@@ -6,14 +6,23 @@ public class TowerPlacementPoint : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // Kiểm tra sự tồn tại của TowerManager và gọi phương thức để hiển thị bảng
         if (TowerManagerInGame.Instance != null)
         {
-            TowerManagerInGame.Instance.ShowTowerPanel(positionIndex, gameObject);
+            Tower existingTower = GetComponentInChildren<Tower>();
+            if (existingTower == null)
+            {
+                // Vị trí chưa có tháp, hiển thị bảng mua tháp
+                TowerManagerInGame.Instance.DisplayBuyPanel(positionIndex, gameObject);
+            }
+            else
+            {
+                // Vị trí đã có tháp, hiển thị bảng nâng cấp tháp
+                TowerManagerInGame.Instance.DisplayUpgradePanel(existingTower);
+            }
         }
         else
         {
-            Debug.LogError("TowerManager instance is not set.");
+            Debug.LogError("TowerManagerInGame instance is not set.");
         }
     }
 }

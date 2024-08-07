@@ -2,6 +2,8 @@
 
 public class Tower : MonoBehaviour
 {
+    public static Tower Instance { get; private set; }
+
     public int level = 1; // Cấp độ của tháp
     public float baseDamage = 10f; // Sát thương cơ bản
     public float baseAttackSpeed = 1f; // Tốc độ tấn công cơ bản
