@@ -6,13 +6,13 @@ public class BGoblinMove : MonoBehaviour
     public Transform target;  // Điểm đến mà đối tượng sẽ di chuyển tới
     private Animator animator;  // Animator của đối tượng
     private bool hasReachedTarget = false;  // Kiểm tra nếu đối tượng đã đến vị trí đích
-    private Enemy1Health enemyHealth;  // Hệ thống máu của quái
+    private BGoblinHealth enemyHealth;  // Hệ thống máu của quái
 
     void Start()
     {
         // Lấy component Animator và EnemyHealth của đối tượng
         animator = GetComponent<Animator>();
-        enemyHealth = GetComponent<Enemy1Health>();
+        enemyHealth = GetComponent<BGoblinHealth>();
     }
 
     void Update()
