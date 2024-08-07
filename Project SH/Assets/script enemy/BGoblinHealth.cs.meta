@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Project SH/Assets/health.cs.meta
+guid: cd07bb8cf8d4a0440b7cab160a156df4
+========
+guid: 37b615d724f717b48bb48121b6b00e0c
+>>>>>>>> XuanTung:Project SH/Assets/script enemy/BGoblinHealth.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

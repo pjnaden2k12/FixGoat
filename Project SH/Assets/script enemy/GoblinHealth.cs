@@ -1,87 +1,128 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class GoblinHealth : MonoBehaviour
 {
-    public float maxHealth = 100f; // Máu tối đa của boss
-    public Image healthBarFill; // Thanh máu
-    private float currentHealth;
+    public int maxHealth = 100; // Máu tối đa của quái vật
+    private int currentHealth; // Máu hiện tại của quái vật
+    private Animator animator; // Animator của quái vật
+    private bool isDead = false; // Trạng thái chết của quái vật
+    public float moveSpeed = 0.05f; // Tốc độ di chuyển của quái vật
+    public Transform targetPoint; // Điểm mục tiêu mà quái vật sẽ di chuyển đến
+    public float attackRange = 1.0f; // Phạm vi để quái vật bắt đầu tấn công
 
-    public bool IsAttacking { get; set; } // Thuộc tính cho biết boss có đang tấn công không
-
-    public float fadeDuration = 1.5f; // Thời gian làm mờ dần
-    public float dieAnimationDuration = 2.0f; // Thời gian của animation chết
-
-    private SpriteRenderer spriteRenderer;
-    private Animator animator;
+    private Rigidbody rb;
+    private bool isAttacking = false; // Trạng thái tấn công của quái vật
 
     void Start()
     {
+        // Khởi tạo máu hiện tại bằng máu tối đa khi bắt đầu
         currentHealth = maxHealth;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        // Lấy Animator component
         animator = GetComponent<Animator>();
 
-        // Đặt thanh máu ban đầu
-        if (healthBarFill != null)
+        rb = GetComponent<Rigidbody>();
+        if (rb != null)
         {
-            healthBarFill.fillAmount = currentHealth / maxHealth;
+            rb.useGravity = false; // Tắt lực hấp dẫn để kiểm soát di chuyển bằng script
+            rb.isKinematic = true; // Đặt Rigidbody thành kinematic để không bị ảnh hưởng bởi các lực vật lý
         }
     }
 
-    public void TakeDamage(float damage)
+    void Update()
     {
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-
-        // Cập nhật thanh máu
-        if (healthBarFill != null)
+        if (!isDead && !isAttacking)
         {
-            healthBarFill.fillAmount = currentHealth / maxHealth;
+            Move();
         }
+    }
 
+    // Hàm gọi để gây sát thương cho quái vật
+    public void TakeDamage(int damageAmount)
+    {
+        if (isDead)
+            return;
+
+        currentHealth -= damageAmount; // Giảm máu hiện tại
+        Debug.Log("Damage taken: " + damageAmount + " Current Health: " + currentHealth);
+
+        // Kiểm tra nếu máu bằng hoặc ít hơn 0
         if (currentHealth <= 0)
         {
-            Die();
+            Die(); // Gọi hàm xử lý khi quái vật chết
         }
     }
 
-    private void Die()
+    // Hàm xử lý khi quái vật chết
+    void Die()
     {
-        animator.SetTrigger("Die"); // Kích hoạt animation chết
-        StartCoroutine(WaitForDieAnimation());
-    }
+        if (isDead)
+            return;
 
-    private IEnumerator WaitForDieAnimation()
-    {
-        yield return new WaitForSeconds(dieAnimationDuration); // Chờ đợi cho animation chết hoàn thành
+        isDead = true;
+        Debug.Log("Enemy died!");
+
+        // Kích hoạt animation chết
+        if (animator != null)
+        {
+            animator.SetTrigger("Die");
+        }
+
+        // Bắt đầu coroutine để làm mờ dần rồi biến mất
         StartCoroutine(FadeOutAndDestroy());
     }
 
-    private IEnumerator FadeOutAndDestroy()
+    // Coroutine để làm mờ dần rồi biến mất
+    IEnumerator FadeOutAndDestroy()
     {
-        Color originalColor = spriteRenderer.color;
-        float fadeSpeed = 1f / fadeDuration;
-
-        for (float t = 0; t < 1; t += Time.deltaTime * fadeSpeed)
+        // Giả sử quái vật có Renderer với vật liệu hỗ trợ alpha blending
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null)
         {
-            Color newColor = originalColor;
-            newColor.a = Mathf.Lerp(1, 0, t);
-            spriteRenderer.color = newColor;
-            yield return null;
+            Color color = renderer.material.color;
+            for (float t = 0; t < 1; t += Time.deltaTime / 2f) // Thời gian làm mờ dần là 2 giây
+            {
+                color.a = Mathf.Lerp(1, 0, t);
+                renderer.material.color = color;
+                yield return null;
+            }
+            color.a = 0;
+            renderer.material.color = color;
         }
 
-        // Đảm bảo rằng màu alpha là 0
-        Color finalColor = originalColor;
-        finalColor.a = 0;
-        spriteRenderer.color = finalColor;
-
+        // Tiêu diệt đối tượng sau khi làm mờ
         Destroy(gameObject);
     }
 
     void OnMouseDown()
     {
         // Giảm máu khi nhấp chuột
-        TakeDamage(10f); // Số máu bị giảm khi nhấp chuột
+        TakeDamage(10); // Số máu bị giảm khi nhấp chuột
+    }
+
+    void Move()
+    {
+        if (targetPoint != null)
+        {
+            // Di chuyển quái vật về phía điểm mục tiêu
+            transform.position = Vector3.MoveTowards(transform.position, targetPoint.position, moveSpeed * Time.deltaTime);
+
+            // Kiểm tra khoảng cách đến điểm mục tiêu
+            float distanceToTarget = Vector3.Distance(transform.position, targetPoint.position);
+            if (distanceToTarget <= attackRange)
+            {
+                // Kích hoạt animation tấn công và dừng di chuyển
+                if (animator != null)
+                {
+                    animator.SetTrigger("Attack");
+                }
+                isAttacking = true; // Đặt trạng thái tấn công
+            }
+        }
+        else
+        {
+            // Nếu không có điểm mục tiêu, di chuyển xuống dưới
+            transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
+        }
     }
 }

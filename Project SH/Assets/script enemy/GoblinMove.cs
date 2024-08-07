@@ -1,69 +1,51 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class GoblinMove : MonoBehaviour
 {
-    public float speed = 3.5f; // Tốc độ di chuyển của địch
-    public Transform targetPoint; // Điểm mục tiêu, như là tường hoặc người chơi
-    public float attackDamage = 20f; // Sát thương gây ra khi tấn công
-    public float attackInterval = 2f; // Thời gian giữa các lần tấn công
-
-    private Rigidbody2D rb;
-    private Animator animator;
-    private bool isAttacking = false;
+    public float speed = 0.2f;  // Tốc độ di chuyển (đơn vị mỗi giây)
+    public Transform target;  // Điểm đến mà đối tượng sẽ di chuyển tới
+    private Animator animator;  // Animator của đối tượng
+    private bool hasReachedTarget = false;  // Kiểm tra nếu đối tượng đã đến vị trí đích
+    private Enemy1Health enemyHealth;  // Hệ thống máu của quái
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        // Lấy component Animator và EnemyHealth của đối tượng
         animator = GetComponent<Animator>();
+        enemyHealth = GetComponent<Enemy1Health>();
     }
 
     void Update()
     {
-        if (targetPoint == null) return;
-
-        // Tính toán hướng di chuyển và di chuyển địch
-        Vector2 direction = (Vector2)targetPoint.position - rb.position;
-        float distance = direction.magnitude;
-        direction.Normalize();
-
-        if (distance > 0.1f && !isAttacking)
+        if (target != null && !hasReachedTarget)
         {
-            rb.velocity = direction * speed;
-            animator.SetBool("isRunning", true);
-            animator.SetBool("isAttacking", false); // Đảm bảo tắt hoạt ảnh tấn công nếu đang chạy
-        }
-        else
-        {
-            rb.velocity = Vector2.zero;
-            animator.SetBool("isRunning", false);
-        }
+            // Tính toán khoảng cách di chuyển trong mỗi khung hình
+            float step = speed * Time.deltaTime;
 
-        // Nếu địch đến điểm mục tiêu thì dừng lại và tấn công
-        if (distance <= 0.1f && !isAttacking)
-        {
-            StartCoroutine(AttackTarget());
+            // Di chuyển đối tượng đến vị trí đích
+            transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+
+            // Kiểm tra nếu đối tượng đã đến vị trí đích
+            if (Vector3.Distance(transform.position, target.position) < 0.001f)
+            {
+                // Đối tượng đã đến vị trí đích, dừng lại
+                hasReachedTarget = true;
+
+                // Kích hoạt animation tấn công
+                if (animator != null)
+                {
+                    animator.SetTrigger("Attack");
+                }
+            }
         }
     }
 
-    private IEnumerator AttackTarget()
+    // Hàm để nhận sát thương từ bên ngoài
+    public void ReceiveDamage(int damage)
     {
-        isAttacking = true;
-
-        // Đặt trạng thái tấn công và kích hoạt hoạt ảnh tấn công
-        animator.SetBool("isAttacking", true);
-        Debug.Log("Quái tấn công tường thành!");
-
-        // Gây sát thương lên mục tiêu (cần thêm logic để lấy thành phần sức khỏe của mục tiêu)
-        // Ví dụ: targetPoint.GetComponent<Health>().TakeDamage(attackDamage);
-
-        // Chờ hoạt ảnh tấn công hoàn tất (đặt thời gian phù hợp với hoạt ảnh của bạn)
-        yield return new WaitForSeconds(1f);
-
-        // Tắt trạng thái tấn công và đợi trước khi tấn công lần tiếp theo
-        animator.SetBool("isAttacking", false);
-        yield return new WaitForSeconds(attackInterval);
-
-        isAttacking = false;
+        if (enemyHealth != null)
+        {
+            enemyHealth.TakeDamage(damage);
+        }
     }
 }
