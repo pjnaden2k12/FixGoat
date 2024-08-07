@@ -4,7 +4,7 @@ using UnityEngine;
 public class thoigianxuathien : MonoBehaviour
 {
     public GameObject targetObject;
-    public float timeFail = 1f;
+    public float timeFail = 240f;
     // Start is called before the first frame update
     void Start()
     {

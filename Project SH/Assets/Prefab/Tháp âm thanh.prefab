@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1110199855
+  m_SortingLayerID: -2076499635
   m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1ec84a97c3fa7304faecd88c80d82420, type: 3}
@@ -102,11 +102,8 @@ MonoBehaviour:
   baseDamage: 10
   baseAttackSpeed: 1
   baseRange: 5
-  unlocked: 1
+  unlocked: 0
   sprite: {fileID: 0}
-  damage: 0
-  attackSpeed: 0
-  range: 0
 --- !u!1 &8679610570633297025
 GameObject:
   m_ObjectHideFlags: 0

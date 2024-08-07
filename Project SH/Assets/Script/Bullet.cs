@@ -43,16 +43,16 @@ public class Bullet : MonoBehaviour
 
     void HitTarget()
     {
-        // Gây sát thương cho mục tiêu
-        //if (target.CompareTag("Enemy"))
-        //{
-        //    target.GetComponent<Enemy>().TakeDamage(damage);
-        //}
-        //else if (target.CompareTag("Boss"))
-        //{
+        //Gây sát thương cho mục tiêu
+        if (target.CompareTag("Enemy"))
+        {
+            target.GetComponent<enemyAI>().TakeDamage(damage);
+        }
+        else if (target.CompareTag("Boss"))
+        {
             target.GetComponent<capnhatthanhmaubosshiepsi>().TakeDamage(damage);
-        
 
+        }
         // Hủy đạn sau khi va chạm
         Destroy(gameObject);
     }

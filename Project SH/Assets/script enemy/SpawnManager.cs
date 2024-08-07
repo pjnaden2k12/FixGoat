@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;       // Mảng chứa các loại quái vật (prefab)
-    public float spawnInterval = 10f;       // Khoảng thời gian giữa các lần spawn
+    public float spawnInterval = 2f;       // Khoảng thời gian giữa các lần spawn
     public Transform[] spawnPoints;         // Mảng chứa các điểm spawn
     public Transform[] targetPoints;        // Mảng chứa các điểm mục tiêu trên tường thành
 
-    private int spawnCount;                 // Số lượng quái vật sẽ được spawn trong mỗi lần spawn
+    private float spawnCount;                 // Số lượng quái vật sẽ được spawn trong mỗi lần spawn
 
     void Start()
     {
-        spawnCount = 1; // Khởi tạo số lượng quái vật sẽ được spawn lần đầu tiên
+        spawnCount = 0.01f; // Khởi tạo số lượng quái vật sẽ được spawn lần đầu tiên
         StartCoroutine(SpawnEnemiesCoroutine());
     }
 
@@ -48,10 +49,6 @@ public class SpawnManager : MonoBehaviour
         int randomTargetIndex = Random.Range(0, targetPoints.Length);
         Transform targetPoint = targetPoints[randomTargetIndex];
 
-        BGoblinHealth enemyHealth = enemy.GetComponent<BGoblinHealth>();
-        if (enemyHealth != null)
-        {
-            enemyHealth.targetPoint = targetPoint;
-        }
+        enemy.GetComponent<enemyAI>().SetTarget(targetPoint.position);
     }
 }

@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy2
+  - Enemy
+  - TowerPosition1
+  - Boss
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -40,4 +45,34 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer 1
+    uniqueID: 3117143471
+    locked: 0
+  - name: New Layer 2
+    uniqueID: 2732665321
+    locked: 0
+  - name: New Layer 3
+    uniqueID: 3079381455
+    locked: 0
+  - name: New Layer 4
+    uniqueID: 1328185313
+    locked: 0
+  - name: New Layer 5
+    uniqueID: 673015107
+    locked: 0
+  - name: New Layer 6
+    uniqueID: 2648495519
+    locked: 0
+  - name: New Layer 7
+    uniqueID: 2377853455
+    locked: 0
+  - name: New Layer 8
+    uniqueID: 3908236397
+    locked: 0
+  - name: New Layer 9
+    uniqueID: 1351254551
+    locked: 0
+  - name: New Layer 10
+    uniqueID: 2218467661
     locked: 0
