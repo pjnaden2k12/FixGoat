@@ -14,15 +14,14 @@ public class TowerManagerInGame : MonoBehaviour
     public TextMeshProUGUI upgradeInfoText; // Text hiển thị thông tin nâng cấp tháp
     public Button removeButton; // Nút xóa tháp
     public Button exitButton; // Nút thoát khỏi bảng
-    public Button nextPanelButton; // Nút để chuyển đến panel tiếp theo
-    public Button prevPanelButton; // Nút để quay lại panel trước đó
+   
     public Button upgradeButton; // Nút nâng cấp tháp
 
     private GameObject currentTowerPosition; // Vị trí hiện tại để đặt tháp
     private Tower currentTower; // Tháp hiện tại (nếu có)
     private int currentPositionIndex; // Chỉ số của vị trí đang được xử lý
     private int currentPage = 0; // Trang hiện tại
-    private const int towersPerPage = 3; // Số tháp hiển thị trên mỗi trang
+    private const int towersPerPage = 10; // Số tháp hiển thị trên mỗi trang
 
     void Awake()
     {
@@ -45,8 +44,7 @@ public class TowerManagerInGame : MonoBehaviour
         // Đăng ký sự kiện cho các nút
         removeButton.onClick.AddListener(RemoveTower);
         exitButton.onClick.AddListener(ClosePanels);
-        nextPanelButton.onClick.AddListener(NextPage);
-        prevPanelButton.onClick.AddListener(PrevPage);
+       
         upgradeButton.onClick.AddListener(UpgradeTower);
     }
 
@@ -85,21 +83,18 @@ public class TowerManagerInGame : MonoBehaviour
         {
             Tower tower = unlockedTowers[i];
             GameObject buttonObject = Instantiate(towerButtonPrefab, buyPanelContent);
-            Button button = buttonObject.GetComponent<Button>();
             Image towerImage = buttonObject.GetComponentInChildren<Image>();
-            TMP_Text buttonText = buttonObject.GetComponentInChildren<TMP_Text>();
 
-            // Cập nhật hình ảnh và thông tin của nút tháp
-            towerImage.sprite = tower.GetComponent<SpriteRenderer>().sprite; // Hoặc sprite của bạn
-            buttonText.text = $"Buy (50 gears)";
+            // Cập nhật hình ảnh của nút tháp
+            towerImage.sprite = tower.GetComponent<SpriteRenderer>().sprite;
 
             // Đăng ký sự kiện cho nút mua
+            Button button = buttonObject.GetComponent<Button>();
             button.onClick.AddListener(() => BuyTower(tower));
         }
 
         // Cập nhật trạng thái nút điều hướng
-        prevPanelButton.gameObject.SetActive(currentPage > 0);
-        nextPanelButton.gameObject.SetActive(currentPage < totalPages - 1);
+        
 
         buyPanel.SetActive(true);
     }
@@ -139,8 +134,6 @@ public class TowerManagerInGame : MonoBehaviour
     public void DisplayUpgradePanel(Tower tower)
     {
         currentTower = tower;
-     
-
         if (tower != null)
         {
             Tower towerScript = tower.GetComponent<Tower>();
@@ -167,7 +160,6 @@ public class TowerManagerInGame : MonoBehaviour
         }
     }
 
-
     void RemoveTower()
     {
         if (currentTower != null)
@@ -177,7 +169,6 @@ public class TowerManagerInGame : MonoBehaviour
             ClosePanels(); // Đóng bảng và tiếp tục trò chơi
         }
     }
-
 
     // Đóng tất cả các panel
     void ClosePanels()

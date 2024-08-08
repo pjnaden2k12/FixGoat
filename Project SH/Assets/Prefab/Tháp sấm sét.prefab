@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5326593058319551119}
   - component: {fileID: 5243063627192179102}
   m_Layer: 0
-  m_Name: Blue Effect Bullet Impact Explosion 32x32_0
+  m_Name: "s\u1EA5m s\xE9t"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2076499635
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 641443030, guid: e97a99f867a8d3b4693234575b1bac48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -106,6 +106,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &2016936390026389159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2568475598870676144}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2568475598870676144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016936390026389159}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.39, y: 11.24, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1341196058733897064}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6787331825856451133
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +148,7 @@ GameObject:
   - component: {fileID: 1341196058733897064}
   - component: {fileID: 5407291775369583902}
   - component: {fileID: 1060405954691543683}
+  - component: {fileID: 7895771605070270719}
   m_Layer: 0
   m_Name: "Th\xE1p s\u1EA5m s\xE9t"
   m_TagString: Untagged
@@ -138,6 +170,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3077183124031219462}
+  - {fileID: 2568475598870676144}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5407291775369583902
@@ -208,5 +241,20 @@ MonoBehaviour:
   baseDamage: 10
   baseAttackSpeed: 1
   baseRange: 5
-  unlocked: 1
+  unlocked: 0
   sprite: {fileID: 0}
+--- !u!114 &7895771605070270719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6787331825856451133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c14db5dcecc42aa4daee31dd6da913f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 1060405954691543683}
+  lightningBoltPrefab: {fileID: 996213978505491771, guid: 1965f1a8ea620004da3338e66f8d06e1, type: 3}
+  firePoint: {fileID: 2568475598870676144}
