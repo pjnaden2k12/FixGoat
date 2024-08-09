@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LevelMenuController : MonoBehaviour
 {
@@ -51,7 +52,7 @@ public class LevelMenuController : MonoBehaviour
     void PlayCurrentLevel()
     {
         // Load scenes tương ứng với level hiện tại
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Level" + (currentLevelIndex + 1));
+        SceneManager.LoadScene("Level" + (currentLevelIndex + 1));
     }
 
     IEnumerator SmoothTransition(Sprite newSprite, Vector3 direction)

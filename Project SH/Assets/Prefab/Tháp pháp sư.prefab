@@ -103,7 +103,7 @@ MonoBehaviour:
   baseAttackSpeed: 1
   baseRange: 5
   unlocked: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: -929167022, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
 --- !u!1 &5754079990727277275
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,8 +175,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2076499635
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 1885728934, guid: 625e8eab1211b7f4bb5784330e504cfb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

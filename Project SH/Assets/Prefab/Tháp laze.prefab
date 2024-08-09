@@ -294,4 +294,4 @@ MonoBehaviour:
   baseAttackSpeed: 1
   baseRange: 5
   unlocked: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 1386168252, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}

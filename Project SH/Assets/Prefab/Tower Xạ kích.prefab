@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2391653802583719647}
   - component: {fileID: 375343891093817554}
   m_Layer: 0
-  m_Name: Tower Fire
+  m_Name: "Tower X\u1EA1 k\xEDch"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,8 +104,8 @@ MonoBehaviour:
   baseDamage: 10
   baseAttackSpeed: 4
   baseRange: 15
-  unlocked: 1
-  sprite: {fileID: 0}
+  unlocked: 0
+  sprite: {fileID: 2089052584, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
 --- !u!114 &375343891093817554
 MonoBehaviour:
   m_ObjectHideFlags: 0

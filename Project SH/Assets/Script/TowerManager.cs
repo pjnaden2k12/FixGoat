@@ -22,17 +22,10 @@ public class TowerManager : MonoBehaviour
 
     private void Start()
     {
-        InitializeTowers();
+        
     }
 
-    private void InitializeTowers()
-    {
-        foreach (Tower tower in towers)
-        {
-            tower.SetLocked(true); // Mặc định tất cả các tháp đều bị khóa khi bắt đầu
-        }
-    }
-
+   
     public void UnlockTower(int index)
     {
         if (index >= 0 && index < towers.Length)

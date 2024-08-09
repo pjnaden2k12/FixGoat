@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.IO;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class ResourceManager : MonoBehaviour
     public delegate void ResourceChanged();
     public event ResourceChanged OnResourceChanged;
 
+    private string resourcesFilePath;
+
     private void Awake()
     {
         if (Instance == null)
@@ -34,7 +37,44 @@ public class ResourceManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
+            // Xác định đường dẫn tệp văn bản
+            string folderName = "resourceSave";
+            string folderPath = Path.Combine(Application.persistentDataPath, folderName);
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            resourcesFilePath = Path.Combine(folderPath, "resources.txt");
+
             // Thiết lập giá trị ban đầu cho các tài nguyên
+            LoadResources();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void LoadResources()
+    {
+        if (File.Exists(resourcesFilePath))
+        {
+            string[] lines = File.ReadAllLines(resourcesFilePath);
+            gold = int.Parse(lines[0].Split(':')[1].Trim());
+            diamonds = int.Parse(lines[1].Split(':')[1].Trim());
+            towerPieces = int.Parse(lines[2].Split(':')[1].Trim());
+            universalStones = int.Parse(lines[3].Split(':')[1].Trim());
+            wallHealthBonus = int.Parse(lines[4].Split(':')[1].Trim());
+            wallDefenseBonus = int.Parse(lines[5].Split(':')[1].Trim());
+            healthRegenBonus = int.Parse(lines[6].Split(':')[1].Trim());
+            towerDamageBonus = float.Parse(lines[7].Split(':')[1].Trim());
+            towerAttackSpeedBonus = float.Parse(lines[8].Split(':')[1].Trim());
+            evolutionLevel = int.Parse(lines[9].Split(':')[1].Trim());
+        }
+        else
+        {
+            // Thiết lập giá trị ban đầu nếu tệp không tồn tại
             gold = 99999;
             diamonds = 1999;
             towerPieces = 1000;
@@ -44,10 +84,22 @@ public class ResourceManager : MonoBehaviour
             towerDamageBonus = 0;
             towerAttackSpeedBonus = 0;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+    }
+
+    private void SaveResources()
+    {
+        string data = $"Gold: {gold}\n" +
+                      $"Diamonds: {diamonds}\n" +
+                      $"Tower Pieces: {towerPieces}\n" +
+                      $"Universal Stones: {universalStones}\n" +
+                      $"Wall Health Bonus: {wallHealthBonus}\n" +
+                      $"Wall Defense Bonus: {wallDefenseBonus}\n" +
+                      $"Health Regen Bonus: {healthRegenBonus}\n" +
+                      $"Tower Damage Bonus: {towerDamageBonus}\n" +
+                      $"Tower Attack Speed Bonus: {towerAttackSpeedBonus}\n" +
+                      $"Evolution Level: {evolutionLevel}";
+
+        File.WriteAllText(resourcesFilePath, data);
     }
 
     // Thêm vàng
@@ -115,6 +167,7 @@ public class ResourceManager : MonoBehaviour
     {
         return towerPieces;
     }
+
     // Thêm đá vạn năng
     public void AddUniversalStone(int amount)
     {
@@ -140,6 +193,7 @@ public class ResourceManager : MonoBehaviour
             Debug.LogWarning("Không đủ đá vạn năng!");
         }
     }
+
     // Lấy số lượng đá vạn năng
     public int GetUniversalStoneCount()
     {
@@ -177,8 +231,6 @@ public class ResourceManager : MonoBehaviour
         healthRegenBonus = 10 * evolutionLevel;
     }
 
-    
-
     // Đổi 100 mảnh tháp lấy 1 đá vạn năng
     public void ExchangeTowerPiecesForUniversalStone()
     {
@@ -192,10 +244,15 @@ public class ResourceManager : MonoBehaviour
             Debug.LogWarning("Không đủ mảnh tháp để đổi.");
         }
     }
+
     // Thông báo sự thay đổi tài nguyên
     private void NotifyResourceChanged()
     {
         OnResourceChanged?.Invoke();
     }
 
+    private void OnApplicationQuit()
+    {
+        SaveResources();
+    }
 }

@@ -104,8 +104,8 @@ MonoBehaviour:
   baseDamage: 20
   baseAttackSpeed: 1
   baseRange: 15
-  unlocked: 1
-  sprite: {fileID: 0}
+  unlocked: 0
+  sprite: {fileID: 1828162429, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
 --- !u!114 &3682291409847096155
 MonoBehaviour:
   m_ObjectHideFlags: 0
