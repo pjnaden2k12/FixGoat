@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8705449817737531116}
   - component: {fileID: 8890656052976498071}
   - component: {fileID: 6222896929197200512}
-  - component: {fileID: 7212613219234781589}
-  - component: {fileID: 1750401102966892413}
+  - component: {fileID: 4016266588800097762}
+  - component: {fileID: 5435598208275450029}
   m_Layer: 0
   m_Name: goblin
   m_TagString: Untagged
@@ -182,7 +182,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.538146, y: 2.99}
   m_EdgeRadius: 0
---- !u!114 &7212613219234781589
+--- !u!114 &4016266588800097762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,24 +191,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1081431065430372772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd91b43302dbbd5408e7894f06e5f748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.6
-  target: {fileID: 0}
---- !u!114 &1750401102966892413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1081431065430372772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c580a986cd54f23409f767c06b2e9b88, type: 3}
+  m_Script: {fileID: 11500000, guid: 350a5c2410b0b2f42b8c7dd5b043fdae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  moveSpeed: 0.6
+  armor: 20
+  moveSpeed: 0.05
   targetPoint: {fileID: 0}
   attackRange: 1
+--- !u!114 &5435598208275450029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081431065430372772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400ab83edb405ee4a86ca60ff16e41e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.2
+  target: {fileID: 0}

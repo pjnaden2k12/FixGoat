@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7544361805832071852}
   - component: {fileID: 904641973008341166}
   - component: {fileID: 2735748440269777646}
-  - component: {fileID: 6488938942292882193}
-  - component: {fileID: 1107137092732289230}
+  - component: {fileID: 3245062300222297938}
+  - component: {fileID: 5844027475523591835}
   m_Layer: 0
   m_Name: big goblin
   m_TagString: Untagged
@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4700696468787374395}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1944, y: 5.9415, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.17, y: 8.469999, z: -0.14187455}
   m_LocalScale: {x: 0.6383664, y: 0.6383664, z: 0.6383664}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -148,7 +148,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.30328602, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -159,7 +159,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.88, y: 2.55}
+  m_Size: {x: 2.273428, y: 2.55}
   m_EdgeRadius: 0
 --- !u!95 &2735748440269777646
 Animator:
@@ -182,7 +182,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6488938942292882193
+--- !u!114 &3245062300222297938
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,24 +191,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4700696468787374395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5944536d0b2bbf0479ae11476472ac60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.6
-  target: {fileID: 0}
---- !u!114 &1107137092732289230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4700696468787374395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37b615d724f717b48bb48121b6b00e0c, type: 3}
+  m_Script: {fileID: 11500000, guid: 350a5c2410b0b2f42b8c7dd5b043fdae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  moveSpeed: 0.6
+  armor: 20
+  moveSpeed: 0.05
   targetPoint: {fileID: 0}
   attackRange: 1
+--- !u!114 &5844027475523591835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4700696468787374395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400ab83edb405ee4a86ca60ff16e41e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.2
+  target: {fileID: 0}
