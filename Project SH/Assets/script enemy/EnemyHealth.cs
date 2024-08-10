@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 100; // Máu tối đa của quái vật
+    public int armor = 20; // Giáp của quái vật
     private int currentHealth; // Máu hiện tại của quái vật
     private Animator animator; // Animator của quái vật
     private bool isDead = false; // Trạng thái chết của quái vật
@@ -43,8 +44,11 @@ public class EnemyHealth : MonoBehaviour
         if (isDead)
             return;
 
-        currentHealth -= damageAmount; // Giảm máu hiện tại
-        Debug.Log("Damage taken: " + damageAmount + " Current Health: " + currentHealth);
+        // Tính toán sát thương sau khi trừ giáp
+        int damageAfterArmor = Mathf.Max(damageAmount - armor, 0);
+
+        currentHealth -= damageAfterArmor; // Giảm máu hiện tại
+        Debug.Log("Damage taken: " + damageAmount + " (after armor: " + damageAfterArmor + ") Current Health: " + currentHealth);
 
         // Kiểm tra nếu máu bằng hoặc ít hơn 0
         if (currentHealth <= 0)
@@ -97,7 +101,7 @@ public class EnemyHealth : MonoBehaviour
     void OnMouseDown()
     {
         // Giảm máu khi nhấp chuột
-        TakeDamage(10); // Số máu bị giảm khi nhấp chuột
+        TakeDamage(50); // Số máu bị giảm khi nhấp chuột
     }
 
     void Move()

@@ -24,7 +24,7 @@ public class SpawnManager : MonoBehaviour
             {
                 SpawnEnemy();
             }
-            spawnCount += 1; // Tăng số lượng quái vật sẽ được spawn trong lần tiếp theo
+            spawnCount += 0; // Tăng số lượng quái vật sẽ được spawn trong lần tiếp theo
             yield return new WaitForSeconds(spawnInterval);
         }
     }
