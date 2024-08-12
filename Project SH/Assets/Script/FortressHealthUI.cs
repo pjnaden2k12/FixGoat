@@ -22,8 +22,8 @@ public class FortressHealthUI : MonoBehaviour
 
     void UpdateHealthUI()
     {
-        // Update the health slider and the TextMeshPro text component
+        // Cập nhật thanh trượt sức khỏe và thành phần văn bản TextMeshPro
         healthSlider.value = fortressHealth.CurrentHealth;
-        healthText.text = "Health: " + fortressHealth.CurrentHealth + "/" + fortressHealth.maxHealth;
+        healthText.text = "Health: " + Mathf.RoundToInt(fortressHealth.CurrentHealth) + "/" + Mathf.RoundToInt(fortressHealth.maxHealth);
     }
 }
