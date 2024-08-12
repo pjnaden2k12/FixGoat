@@ -48,10 +48,7 @@ public class SpawnManager : MonoBehaviour
         int randomTargetIndex = Random.Range(0, targetPoints.Length);
         Transform targetPoint = targetPoints[randomTargetIndex];
 
-        EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-        if (enemyHealth != null)
-        {
-            enemyHealth.targetPoint = targetPoint;
-        }
+        Enemy1Health enemyHealth = enemy.GetComponent<Enemy1Health>();
+      
     }
 }
