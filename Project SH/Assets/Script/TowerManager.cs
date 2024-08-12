@@ -23,9 +23,16 @@ public class TowerManager : MonoBehaviour
 
     private void Awake()
     {
-       
-            /*DontDestroyOnLoad(gameObject); */// Đảm bảo không bị hủy khi scene thay đổi
-        
+        // Kiểm tra xem đã có instance tồn tại chưa
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // Nếu có, hủy bỏ đối tượng này
+        }
+        else
+        {
+            Instance = this; // Nếu không, gán instance này
+            DontDestroyOnLoad(gameObject); // Đảm bảo không bị hủy khi scene thay đổi
+        }
     }
 
     private void Start()

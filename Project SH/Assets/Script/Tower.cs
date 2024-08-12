@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using static TowerManager;
 
 public class Tower : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class Tower : MonoBehaviour
     public float baseDamage = 10f; // Sát thương cơ bản
     public float baseAttackSpeed = 1f; // Tốc độ tấn công cơ bản
     public float baseRange = 5f; // Tầm bắn cơ bản
+    private int upgradeCost = 50; // Chi phí nâng cấp cơ bản
 
     private float damage; // Sát thương hiện tại
     private float attackSpeed; // Tốc độ tấn công hiện tại
@@ -22,14 +22,23 @@ public class Tower : MonoBehaviour
 
     public void Upgrade()
     {
-        if (level < 3) // Kiểm tra cấp độ tối đa
+        int currentUpgradeCost = upgradeCost * level; // Chi phí nâng cấp tăng theo cấp độ
+
+        if (GearManager.Instance != null && GearManager.Instance.SpendGears(currentUpgradeCost))
         {
-            level++;
-            UpdateStats(); // Cập nhật thông số sau khi nâng cấp
+            if (level < 3) // Kiểm tra cấp độ tối đa
+            {
+                level++;
+                UpdateStats(); // Cập nhật thông số sau khi nâng cấp
+            }
+            else
+            {
+                Debug.LogWarning("Tower is already at maximum level!");
+            }
         }
         else
         {
-            Debug.LogWarning("Tower is already at maximum level!");
+            Debug.LogWarning("Not enough gears to upgrade the tower!");
         }
     }
 
@@ -72,5 +81,4 @@ public class Tower : MonoBehaviour
     {
         return range;
     }
-    
 }

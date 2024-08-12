@@ -9,7 +9,8 @@ public class TowerDisplayManager : MonoBehaviour
 
     private TowerManager towerManager;
     private int selectedSlotIndex; // Chỉ số của ô đã chọn
-
+    
+    
     private void Start()
     {
         towerManager = TowerManager.Instance;
@@ -19,7 +20,7 @@ public class TowerDisplayManager : MonoBehaviour
             Debug.LogError("TowerManager.Instance is null. Make sure you have a TowerManager in your scene.");
             return;
         }
-
+        
         DisplayTowers();
     }
 
@@ -46,31 +47,34 @@ public class TowerDisplayManager : MonoBehaviour
         foreach (var tower in towerManager.towers)
         {
             GameObject towerGO = Instantiate(towerPrefab, scrollViewContent.transform);
-            Image towerImage = towerGO.GetComponentInChildren<Image>();
+
+            // Lấy tham chiếu tới các thành phần cần thiết
+            Image childTowerImage = towerGO.transform.Find("ChildImage").GetComponent<Image>(); // Tên của Image con trong Prefab
             Button towerButton = towerGO.GetComponent<Button>();
             TextMeshProUGUI towerText = towerGO.GetComponentInChildren<TextMeshProUGUI>();
 
-            if (towerImage == null || towerText == null)
+            if (childTowerImage == null || towerText == null)
             {
                 Debug.LogError("Image or Text component not found on the prefab.");
                 continue;
             }
 
-            // Cập nhật hình ảnh tháp
-            towerImage.sprite = tower.towerSprite;
+            // Cập nhật hình ảnh tháp vào Image con
+            childTowerImage.sprite = tower.towerSprite;
 
             // Cập nhật trạng thái của nút (có thể nhấn hay không)
             bool isUnlocked = tower.isUnlocked;
             towerButton.interactable = isUnlocked;
             Color buttonColor = isUnlocked ? Color.white : Color.gray;
-            towerImage.color = buttonColor;
+            childTowerImage.color = buttonColor;
 
             // Cập nhật văn bản với chỉ số cơ bản của tháp
-            towerText.text = $"Damage: {tower.baseDamage}\nAttack Speed: {tower.baseAttackSpeed}\nRange: {tower.baseRange}";
+            towerText.text = $"ATK: {tower.baseDamage}\nSPD: {tower.baseAttackSpeed}\nRNG: {tower.baseRange}";
 
             // Gán sự kiện khi người dùng nhấn vào tháp
             towerButton.onClick.AddListener(() => OnTowerButtonClicked(tower));
         }
+
     }
 
     private void OnTowerButtonClicked(TowerManager.TowerData towerData)
@@ -84,7 +88,7 @@ public class TowerDisplayManager : MonoBehaviour
         // Đặt tháp tại vị trí ô đã chọn
         PlaceTowerAtSelectedSlot(towerData);
         // Đóng panel mua tháp
-        TowerManagerInGame.Instance.buyTowerPanel.SetActive(false);
+    TowerManagerInGame.Instance.buyTowerPanel.SetActive(false);
     }
 
     private void PlaceTowerAtSelectedSlot(TowerManager.TowerData towerData)
@@ -104,4 +108,5 @@ public class TowerDisplayManager : MonoBehaviour
 
         Debug.Log($"Đặt tháp {towerData.id} tại vị trí ô {selectedSlotIndex}");
     }
+    
 }
