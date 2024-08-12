@@ -8,6 +8,7 @@ public class TowerDisplayManager : MonoBehaviour
     public GameObject towerPrefab; // Prefab của tháp
 
     private TowerManager towerManager;
+    private int selectedSlotIndex; // Chỉ số của ô đã chọn
 
     private void Start()
     {
@@ -20,6 +21,11 @@ public class TowerDisplayManager : MonoBehaviour
         }
 
         DisplayTowers();
+    }
+
+    public void SetSelectedSlotIndex(int index)
+    {
+        selectedSlotIndex = index;
     }
 
     private void DisplayTowers()
@@ -75,17 +81,27 @@ public class TowerDisplayManager : MonoBehaviour
             return;
         }
 
-        // Kiểm tra xem người chơi có đủ gear không
-        if (GearManager.Instance.SpendGears(50))
+        // Đặt tháp tại vị trí ô đã chọn
+        PlaceTowerAtSelectedSlot(towerData);
+        // Đóng panel mua tháp
+        TowerManagerInGame.Instance.buyTowerPanel.SetActive(false);
+    }
+
+    private void PlaceTowerAtSelectedSlot(TowerManager.TowerData towerData)
+    {
+        // Đảm bảo rằng chỉ số ô hợp lệ
+        if (selectedSlotIndex < 0 || selectedSlotIndex >= TowerManagerInGame.Instance.towerSlots.Length)
         {
-            
-            
-                Debug.Log("Không có vị trí trống để đặt tháp.");
-            
+            Debug.LogError("Selected slot index is out of bounds.");
+            return;
         }
-        else
-        {
-            Debug.Log("Không đủ gear để mua tháp.");
-        }
+
+        GameObject selectedSlot = TowerManagerInGame.Instance.towerSlots[selectedSlotIndex];
+        GameObject newTower = Instantiate(towerData.towerPrefab, selectedSlot.transform.position, Quaternion.identity);
+
+        // Gán tháp làm con của ô đã chọn
+        newTower.transform.SetParent(selectedSlot.transform);
+
+        Debug.Log($"Đặt tháp {towerData.id} tại vị trí ô {selectedSlotIndex}");
     }
 }

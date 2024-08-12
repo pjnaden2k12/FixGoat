@@ -1,20 +1,28 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
-public class EmptySlot : MonoBehaviour
+public class UpgradePanel : MonoBehaviour
 {
-    public int slotIndex; // Chỉ số của vị trí trống
-    public Button slotButton;
+    public Button upgradeButton;
+    public TextMeshProUGUI infoText;
+    private int positionIndex;
 
     private void Start()
     {
-        // Gán sự kiện cho nút khi bấm vào vị trí trống
-        slotButton.onClick.AddListener(OnSlotClicked);
+        upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
     }
 
-    private void OnSlotClicked()
+    public void Setup(int positionIndex)
     {
-        // Mở panel mua tháp khi nhấn vào vị trí trống
-        TowerManagerInGame.Instance.OpenBuyPanel(slotIndex);
+        this.positionIndex = positionIndex;
+        infoText.text = $"Nâng cấp tháp tại vị trí {positionIndex + 1}?";
+    }
+
+    private void OnUpgradeButtonClicked()
+    {
+        // Xử lý nâng cấp tháp tại vị trí
+        Debug.Log("Nâng cấp tháp.");
+        gameObject.SetActive(false); // Ẩn panel sau khi nâng cấp
     }
 }

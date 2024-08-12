@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static TowerManager;
 
 public class Tower : MonoBehaviour
 {
@@ -71,4 +72,5 @@ public class Tower : MonoBehaviour
     {
         return range;
     }
+    
 }

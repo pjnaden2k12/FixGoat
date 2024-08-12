@@ -35,7 +35,7 @@ public class ResourceManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
 
             // Xác định đường dẫn tệp văn bản
             string folderName = "resourceSave";
@@ -50,10 +50,10 @@ public class ResourceManager : MonoBehaviour
             // Tải dữ liệu từ tệp
             LoadResources();
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
     private void LoadResources()

@@ -51,57 +51,67 @@ MonoBehaviour:
     baseAttackSpeed: 0
     baseRange: 0
     towerSprite: {fileID: 1828162429, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
+    towerPrefab: {fileID: 3047024377214578298, guid: e785cd04355a16e4aa6dd246cfe49861, type: 3}
   - id: 2
     isUnlocked: 0
     baseDamage: 0
     baseAttackSpeed: 0
     baseRange: 0
     towerSprite: {fileID: 2089052584, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
+    towerPrefab: {fileID: 4882669298980104042, guid: 997e06e06ce233e43af76ae1f78af017, type: 3}
   - id: 3
     isUnlocked: 0
     baseDamage: 0
     baseAttackSpeed: 0
     baseRange: 0
     towerSprite: {fileID: -397592363, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
+    towerPrefab: {fileID: 6787331825856451133, guid: ff8b6426b741eb84c92080067993e317, type: 3}
   - id: 4
     isUnlocked: 0
     baseDamage: 0
     baseAttackSpeed: 0
     baseRange: 0
     towerSprite: {fileID: -929167022, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
+    towerPrefab: {fileID: 6904090704700178187, guid: f8a66da6ff0a33b4c9dee0469552dbc9, type: 3}
   - id: 5
     isUnlocked: 0
     baseDamage: 0
     baseAttackSpeed: 0
     baseRange: 0
     towerSprite: {fileID: 368767912, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
+    towerPrefab: {fileID: 507705741099155342, guid: 2f6c3cbe2d84e0642a1d8e0d0910c8c8, type: 3}
   - id: 6
     isUnlocked: 0
     baseDamage: 0
     baseAttackSpeed: 0
     baseRange: 0
     towerSprite: {fileID: -1049119346, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
+    towerPrefab: {fileID: 8950572771189519370, guid: 6aca826a713fd8243b5b5e848d3401e4, type: 3}
   - id: 7
     isUnlocked: 0
     baseDamage: 0
     baseAttackSpeed: 0
     baseRange: 0
     towerSprite: {fileID: 830180292, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
+    towerPrefab: {fileID: 388174580525981613, guid: b2bb512edd22a084abdd396037d13472, type: 3}
   - id: 8
     isUnlocked: 0
     baseDamage: 0
     baseAttackSpeed: 0
     baseRange: 0
     towerSprite: {fileID: -82788826, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
+    towerPrefab: {fileID: 1823756636156807389, guid: d2efd023564d9124cbeeaca76313bdb5, type: 3}
   - id: 9
     isUnlocked: 0
     baseDamage: 0
     baseAttackSpeed: 0
     baseRange: 0
     towerSprite: {fileID: 1386168252, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
+    towerPrefab: {fileID: 6768774017856910223, guid: 47855731a5c31aa489f2ef91fd64bc6a, type: 3}
   - id: 10
     isUnlocked: 0
     baseDamage: 0
     baseAttackSpeed: 0
     baseRange: 0
     towerSprite: {fileID: 1782087071, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
+    towerPrefab: {fileID: 2251720547160919898, guid: e33da0833a37f754099024b97cd9ce3d, type: 3}

@@ -1,117 +1,65 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class TowerManagerInGame : MonoBehaviour
 {
-    public static TowerManagerInGame Instance { get; private set; }
+    public GameObject[] towerSlots;  // Các ô chứa tháp
+    public GameObject buyTowerPanel; // Panel mua tháp
+    public GameObject upgradeTowerPanel; // Panel nâng cấp tháp
+    public TowerDisplayManager towerDisplayManager;
 
-    public GameObject buyPanel;
-    public GameObject upgradePanel;
-    public GameObject deletePanel;
-    public Button closeButton;
-
-    public Text towerInfoText;
-
-    private int selectedSlotIndex;
-    public Transform[] slotPositions; // Mảng các vị trí trống để đặt tháp
-    private Tower[] placedTowers; // Mảng lưu trữ các tháp đã được đặt
+    public static TowerManagerInGame Instance; // Để truy cập từ TowerDisplayManager
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-
-        placedTowers = new Tower[slotPositions.Length]; // Khởi tạo mảng các tháp
+        Instance = this;
     }
 
     private void Start()
     {
-        closeButton.onClick.AddListener(CloseAllPanels);
-        CloseAllPanels();
+        // Ẩn các Panel khi bắt đầu
+        buyTowerPanel.SetActive(false);
+        upgradeTowerPanel.SetActive(false);
     }
 
-    public void OnSlotClicked(int slotIndex)
+    void Update()
     {
-        selectedSlotIndex = slotIndex;
-
-        if (placedTowers[slotIndex] != null) // Nếu có tháp ở vị trí này
+        // Kiểm tra sự kiện nhấp chuột
+        if (Input.GetMouseButtonDown(0))
         {
-            OpenUpgradeOrDeletePanel(slotIndex);
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Collider2D hit = Physics2D.OverlapPoint(mousePosition);
+
+            if (hit != null)
+            {
+                // Xác định ô tháp nào đã được nhấp
+                for (int i = 0; i < towerSlots.Length; i++)
+                {
+                    if (hit.gameObject == towerSlots[i])
+                    {
+                        OnSlotClicked(i);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    void OnSlotClicked(int index)
+    {
+        if (towerSlots[index].transform.childCount == 0)
+        {
+            // Nếu ô chưa có tháp, hiển thị panel mua tháp
+            buyTowerPanel.SetActive(true);
+            upgradeTowerPanel.SetActive(false);
+
+            // Truyền chỉ số của ô tháp vào TowerDisplayManager
+            towerDisplayManager.SetSelectedSlotIndex(index);
         }
         else
         {
-            OpenBuyPanel(slotIndex);
+            // Nếu ô đã có tháp, hiển thị panel nâng cấp tháp
+            buyTowerPanel.SetActive(false);
+            upgradeTowerPanel.SetActive(true);
         }
-    }
-
-    public void OpenBuyPanel(int slotIndex)
-    {
-        towerInfoText.text = $"Buy a new tower at slot: {slotIndex + 1}";
-
-        buyPanel.SetActive(true);
-        upgradePanel.SetActive(false);
-        deletePanel.SetActive(false);
-    }
-
-    public void OpenUpgradeOrDeletePanel(int slotIndex)
-    {
-        Tower tower = placedTowers[slotIndex];
-        towerInfoText.text = $"Upgrade or Delete Tower at slot: {slotIndex + 1}\n" +
-                             $"Level: {tower.level}\nDamage: {tower.GetDamage()}\n" +
-                             $"Attack Speed: {tower.GetAttackSpeed()}\nRange: {tower.GetRange()}";
-
-        buyPanel.SetActive(false);
-        upgradePanel.SetActive(true);
-        deletePanel.SetActive(true);
-    }
-
-    public void CloseAllPanels()
-    {
-        buyPanel.SetActive(false);
-        upgradePanel.SetActive(false);
-        deletePanel.SetActive(false);
-    }
-
-    public void OnBuyButtonClicked()
-    {
-        // Mua tháp và đặt nó vào vị trí đã chọn
-        TowerManager.Instance.UnlockTower(selectedSlotIndex);
-
-        GameObject towerPrefab = TowerManager.Instance.towers[selectedSlotIndex].towerPrefab;
-        if (towerPrefab != null)
-        {
-            GameObject towerObject = Instantiate(towerPrefab, slotPositions[selectedSlotIndex].position, Quaternion.identity);
-            placedTowers[selectedSlotIndex] = towerObject.GetComponent<Tower>(); // Lưu tháp đã được đặt
-        }
-
-        CloseAllPanels();
-    }
-
-    public void OnUpgradeButtonClicked()
-    {
-        if (placedTowers[selectedSlotIndex] != null)
-        {
-            placedTowers[selectedSlotIndex].Upgrade(); // Nâng cấp tháp
-        }
-
-        CloseAllPanels();
-    }
-
-    public void OnDeleteButtonClicked()
-    {
-        if (placedTowers[selectedSlotIndex] != null)
-        {
-            Destroy(placedTowers[selectedSlotIndex].gameObject); // Xóa tháp khỏi scene
-            placedTowers[selectedSlotIndex] = null; // Xóa tháp khỏi danh sách
-        }
-
-        CloseAllPanels();
     }
 }

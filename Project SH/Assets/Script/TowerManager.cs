@@ -23,16 +23,9 @@ public class TowerManager : MonoBehaviour
 
     private void Awake()
     {
-        // Kiểm tra xem đã có instance tồn tại chưa
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject); // Nếu có, hủy bỏ đối tượng này
-        }
-        else
-        {
-            Instance = this; // Nếu không, gán instance này
-            DontDestroyOnLoad(gameObject); // Đảm bảo không bị hủy khi scene thay đổi
-        }
+       
+            /*DontDestroyOnLoad(gameObject); */// Đảm bảo không bị hủy khi scene thay đổi
+        
     }
 
     private void Start()
@@ -97,5 +90,17 @@ public class TowerManager : MonoBehaviour
             }
         }
         return unlockedTowers;
+    }
+    public TowerData GetTowerDataById(int id)
+    {
+        foreach (var tower in towers)
+        {
+            if (tower.id == id)
+            {
+                return tower;
+            }
+        }
+        Debug.LogError("Không tìm thấy tháp với ID: " + id);
+        return null;
     }
 }
