@@ -1,44 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class TowerPlacementManager : MonoBehaviour
+public class EmptySlot : MonoBehaviour
 {
-    public static TowerPlacementManager Instance;
+    public int slotIndex; // Chỉ số của vị trí trống
+    public Button slotButton;
 
-    public Transform[] placementPositions; // Các vị trí có thể đặt tháp
-
-    private void Awake()
+    private void Start()
     {
-        // Đảm bảo chỉ có một TowerPlacementManager trong cảnh
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // Giữ TowerPlacementManager qua các cảnh
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        // Gán sự kiện cho nút khi bấm vào vị trí trống
+        slotButton.onClick.AddListener(OnSlotClicked);
     }
 
-    // Phương thức để lấy vị trí trống
-    public Transform GetEmptyPosition()
+    private void OnSlotClicked()
     {
-        foreach (var position in placementPositions)
-        {
-            if (position.childCount == 0) // Kiểm tra nếu vị trí chưa có tháp
-            {
-                return position;
-            }
-        }
-        return null;
-    }
-
-    // Phương thức để đặt tháp vào vị trí
-    public void PlaceTower(GameObject towerPrefab, Transform position)
-    {
-        if (position.childCount == 0) // Kiểm tra nếu vị trí chưa có tháp
-        {
-            Instantiate(towerPrefab, position.position, Quaternion.identity, position);
-        }
+        // Mở panel mua tháp khi nhấn vào vị trí trống
+        TowerManagerInGame.Instance.OpenBuyPanel(slotIndex);
     }
 }

@@ -11,7 +11,7 @@ public class bossbocap : MonoBehaviour
     public Animator animator; // Animator Controller của boss
     private bool isDead = false;
     private bool isInvulnerable = false; // Biến kiểm soát trạng thái bất khả xâm phạm
-    private bool effectTriggered = false; // Biến kiểm soát hiệu ứng
+    //private bool effectTriggered = false; // Biến kiểm soát hiệu ứng
     private GameObject activeInvulnerabilityEffect; // Hiệu ứng bất tử đang hoạt động
 
     // Start is called before the first frame update

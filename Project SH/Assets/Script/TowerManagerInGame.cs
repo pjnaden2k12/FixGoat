@@ -1,53 +1,117 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerManagerInGame : MonoBehaviour
 {
-    public GameObject selectTowerPanel; // Panel chọn tháp
-    public GameObject upgradeTowerPanel; // Panel nâng cấp/xóa tháp
-    public GameObject[] towerPrefabs; // Các prefab của tháp với ID tương ứng
-    public TowerSlot[] towerSlots; // Các ô trên tường thành
+    public static TowerManagerInGame Instance { get; private set; }
 
-    private TowerSlot selectedSlot;
+    public GameObject buyPanel;
+    public GameObject upgradePanel;
+    public GameObject deletePanel;
+    public Button closeButton;
+
+    public Text towerInfoText;
+
+    private int selectedSlotIndex;
+    public Transform[] slotPositions; // Mảng các vị trí trống để đặt tháp
+    private Tower[] placedTowers; // Mảng lưu trữ các tháp đã được đặt
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        placedTowers = new Tower[slotPositions.Length]; // Khởi tạo mảng các tháp
+    }
 
     private void Start()
     {
-        foreach (TowerSlot slot in towerSlots)
+        closeButton.onClick.AddListener(CloseAllPanels);
+        CloseAllPanels();
+    }
+
+    public void OnSlotClicked(int slotIndex)
+    {
+        selectedSlotIndex = slotIndex;
+
+        if (placedTowers[slotIndex] != null) // Nếu có tháp ở vị trí này
         {
-            slot.Initialize(this);
+            OpenUpgradeOrDeletePanel(slotIndex);
+        }
+        else
+        {
+            OpenBuyPanel(slotIndex);
         }
     }
 
-    public void OpenSelectTowerPanel(TowerSlot slot)
+    public void OpenBuyPanel(int slotIndex)
     {
-        selectedSlot = slot;
-        selectTowerPanel.SetActive(true);
-        // Cập nhật panel chọn tháp, làm mờ những tháp chưa mở khóa
+        towerInfoText.text = $"Buy a new tower at slot: {slotIndex + 1}";
+
+        buyPanel.SetActive(true);
+        upgradePanel.SetActive(false);
+        deletePanel.SetActive(false);
     }
 
-    public void OpenUpgradeTowerPanel(TowerSlot slot)
+    public void OpenUpgradeOrDeletePanel(int slotIndex)
     {
-        selectedSlot = slot;
-        upgradeTowerPanel.SetActive(true);
-        // Cập nhật panel nâng cấp/xóa tháp với thông tin tháp hiện tại
+        Tower tower = placedTowers[slotIndex];
+        towerInfoText.text = $"Upgrade or Delete Tower at slot: {slotIndex + 1}\n" +
+                             $"Level: {tower.level}\nDamage: {tower.GetDamage()}\n" +
+                             $"Attack Speed: {tower.GetAttackSpeed()}\nRange: {tower.GetRange()}";
+
+        buyPanel.SetActive(false);
+        upgradePanel.SetActive(true);
+        deletePanel.SetActive(true);
     }
 
-    public void SelectTowerById(int towerId)
+    public void CloseAllPanels()
     {
-        // Gọi khi người chơi chọn tháp từ panel với ID cụ thể
-        GameObject selectedTowerPrefab = towerPrefabs[towerId];
-        selectedSlot.PlaceTower(selectedTowerPrefab);
-        selectTowerPanel.SetActive(false);
+        buyPanel.SetActive(false);
+        upgradePanel.SetActive(false);
+        deletePanel.SetActive(false);
     }
 
-    public void UpgradeTower()
+    public void OnBuyButtonClicked()
     {
-        // Gọi khi người chơi nâng cấp tháp (có thể thay đổi prefab hoặc tăng cấp độ)
-        upgradeTowerPanel.SetActive(false);
+        // Mua tháp và đặt nó vào vị trí đã chọn
+        TowerManager.Instance.UnlockTower(selectedSlotIndex);
+
+        GameObject towerPrefab = TowerManager.Instance.towers[selectedSlotIndex].towerPrefab;
+        if (towerPrefab != null)
+        {
+            GameObject towerObject = Instantiate(towerPrefab, slotPositions[selectedSlotIndex].position, Quaternion.identity);
+            placedTowers[selectedSlotIndex] = towerObject.GetComponent<Tower>(); // Lưu tháp đã được đặt
+        }
+
+        CloseAllPanels();
     }
 
-    public void RemoveTower()
+    public void OnUpgradeButtonClicked()
     {
-        selectedSlot.RemoveTower();
-        upgradeTowerPanel.SetActive(false);
+        if (placedTowers[selectedSlotIndex] != null)
+        {
+            placedTowers[selectedSlotIndex].Upgrade(); // Nâng cấp tháp
+        }
+
+        CloseAllPanels();
+    }
+
+    public void OnDeleteButtonClicked()
+    {
+        if (placedTowers[selectedSlotIndex] != null)
+        {
+            Destroy(placedTowers[selectedSlotIndex].gameObject); // Xóa tháp khỏi scene
+            placedTowers[selectedSlotIndex] = null; // Xóa tháp khỏi danh sách
+        }
+
+        CloseAllPanels();
     }
 }

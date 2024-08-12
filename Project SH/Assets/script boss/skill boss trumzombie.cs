@@ -13,7 +13,7 @@ public class capnhatthanhmaubosstrumzombie : MonoBehaviour
     public Transform targetPoint; // Điểm mục tiêu của quái con
     public Animator animator; // Animator Controller của boss
     private bool isDead = false;
-    private bool effectTriggered = false; // Biến kiểm soát hiệu ứng
+    //private bool effectTriggered = false; // Biến kiểm soát hiệu ứng
 
     // Start is called before the first frame update
     void Start()

@@ -15,6 +15,7 @@ public class TowerManager : MonoBehaviour
         public float baseAttackSpeed;
         public float baseRange;
         public Sprite towerSprite;
+        public GameObject towerPrefab; // Prefab của tháp
     }
 
     public TowerData[] towers;

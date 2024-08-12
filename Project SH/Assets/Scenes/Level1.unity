@@ -3183,6 +3183,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2118618455480950890, guid: 5fcbcca10a77d184fbbf0a25a799e6b1, type: 3}
+      propertyPath: targetPoint
+      value: 
+      objectReference: {fileID: 6692971691118298337}
     - target: {fileID: 7891667944295590476, guid: 5fcbcca10a77d184fbbf0a25a799e6b1, type: 3}
       propertyPath: m_Name
       value: "boss hi\u1EC7p s\u0129 (1)"
@@ -9010,7 +9014,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793644016}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2c72e43d1fb62a4d875fa065dd92df8, type: 3}
   m_Name: 
@@ -9427,7 +9431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 633425325}
-  timeFail: 240
+  timeFail: 2
 --- !u!1 &2006247085
 GameObject:
   m_ObjectHideFlags: 0
@@ -11003,6 +11007,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8559f2780c9f1c94ea0df5b1d707ddb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &6692971691118298337 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4233679958014233108, guid: 5bfdf36b4462adb4680e7930a86023d0, type: 3}
+  m_PrefabInstance: {fileID: 6692971691118298333}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &7394928309704858515
 SpriteRenderer:
   m_ObjectHideFlags: 0

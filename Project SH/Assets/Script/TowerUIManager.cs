@@ -16,7 +16,7 @@ public class TowerUIManager : MonoBehaviour
     public Button unlockButton;
     public Button closeButton; // Thêm biến cho nút đóng panel
 
-    private int selectedTowerIndex = -1;
+    //private int selectedTowerIndex = -1;
 
     private void Start()
     {

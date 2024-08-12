@@ -78,17 +78,10 @@ public class TowerDisplayManager : MonoBehaviour
         // Kiểm tra xem người chơi có đủ gear không
         if (GearManager.Instance.SpendGears(50))
         {
-            // Đặt tháp vào vị trí
-            Transform placementPosition = TowerPlacementManager.Instance.GetEmptyPosition();
-            if (placementPosition != null)
-            {
-                TowerPlacementManager.Instance.PlaceTower(towerPrefab, placementPosition);
-                gameObject.SetActive(false); // Ẩn panel sau khi mua
-            }
-            else
-            {
+            
+            
                 Debug.Log("Không có vị trí trống để đặt tháp.");
-            }
+            
         }
         else
         {
