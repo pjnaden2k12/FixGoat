@@ -4,12 +4,11 @@ public class Tower : MonoBehaviour
 {
     public static Tower Instance { get; private set; }
 
+    public int id; // ID hoặc tên duy nhất cho mỗi tháp
     public int level = 1; // Cấp độ của tháp
     public float baseDamage = 10f; // Sát thương cơ bản
     public float baseAttackSpeed = 1f; // Tốc độ tấn công cơ bản
     public float baseRange = 5f; // Tầm bắn cơ bản
-    public bool unlocked = false; // Trạng thái mở khóa của tháp
-    public Sprite sprite; // Hình ảnh của tháp
 
     private float damage; // Sát thương hiện tại
     private float attackSpeed; // Tốc độ tấn công hiện tại
@@ -17,8 +16,6 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
-        
-        
         UpdateStats(); // Cập nhật thông số khi bắt đầu
     }
 
@@ -37,10 +34,8 @@ public class Tower : MonoBehaviour
 
     public void UpdateStats()
     {
-       
         switch (level)
         {
-            
             case 1:
                 damage = baseDamage * 1f;
                 attackSpeed = baseAttackSpeed * 1f;
@@ -59,14 +54,11 @@ public class Tower : MonoBehaviour
         }
 
         // Hiển thị thông tin tháp khi cập nhật
-        Debug.Log($"Tower Level: {level}, Damage: {damage}, Attack Speed: {attackSpeed}, Range: {range}");
+        Debug.Log($"Tower ID: {id}, Level: {level}, Damage: {damage}, Attack Speed: {attackSpeed}, Range: {range}");
     }
 
     public float GetDamage()
     {
-        
-
-        
         return damage;
     }
 
@@ -78,25 +70,5 @@ public class Tower : MonoBehaviour
     public float GetRange()
     {
         return range;
-    }
-
-    public bool IsUnlocked()
-    {
-        return unlocked;
-    }
-
-    public void Unlock()
-    {
-        unlocked = true;
-    }
-
-    public Sprite GetSprite()
-    {
-        return sprite;
-    }
-
-    public void SetLocked(bool locked)
-    {
-        unlocked = !locked;
     }
 }

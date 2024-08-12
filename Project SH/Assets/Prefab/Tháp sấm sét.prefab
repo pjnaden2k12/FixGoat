@@ -237,12 +237,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc12212ee4ebed14796fb21e52dbf84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 3
   level: 1
   baseDamage: 10
   baseAttackSpeed: 1
   baseRange: 5
-  unlocked: 0
-  sprite: {fileID: -397592363, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
 --- !u!114 &7895771605070270719
 MonoBehaviour:
   m_ObjectHideFlags: 0

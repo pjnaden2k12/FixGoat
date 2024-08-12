@@ -12,7 +12,7 @@ public class SpinManager : MonoBehaviour
     public Image universalStoneImage; // Hình ảnh biểu tượng đá vạn năng
 
     public GameObject rewardPanel; // Panel hiển thị phần thưởng
-    public Image rewardImage; // Hình ảnh phần thưởng trong rewardPanel
+    //public Image rewardImage; // Hình ảnh phần thưởng trong rewardPanel
     public TextMeshProUGUI rewardText; // Text hiển thị số lượng phần thưởng
     public Button closeButton; // Nút thoát rewardPanel
 
@@ -58,7 +58,7 @@ public class SpinManager : MonoBehaviour
         Vector3 originalPosition = chestImage.transform.position;
         float shakeDuration = 1f; // Thời gian rung
         float elapsedTime = 0f;
-        float shakeMagnitude = 10f; // Độ mạnh của rung
+        float shakeMagnitude = 0.2f; // Độ mạnh của rung
 
         while (elapsedTime < shakeDuration)
         {
@@ -79,7 +79,7 @@ public class SpinManager : MonoBehaviour
 
         (string reward, Sprite rewardSprite) = GetRandomReward();
         rewardText.text = "" + reward;
-        rewardImage.sprite = rewardSprite; // Cập nhật hình ảnh phần thưởng
+        //rewardImage.sprite = rewardSprite; // Cập nhật hình ảnh phần thưởng
 
         // Hiển thị panel phần thưởng
         rewardPanel.SetActive(true);

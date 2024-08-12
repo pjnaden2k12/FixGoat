@@ -55,7 +55,9 @@ public class UImanagerUser : MonoBehaviour
     // Hàm gọi khi nhấn nút Cài Đặt
     public void OpenSettings()
     {
-        
+
+        LoginSuccessPanel.SetActive(false); // Ẩn Login Success Panel
+
         SettingPanel.SetActive(true); // Hiện Setting Panel
     }
 
@@ -63,7 +65,11 @@ public class UImanagerUser : MonoBehaviour
     public void CloseSettings()
     {
         SettingPanel.SetActive(false); // Ẩn Setting Panel
+
         
+
+        LoginSuccessPanel.SetActive(true); // Hiện Login Success Panel
+
     }
 
     // Hàm gọi khi nhấn nút Đăng Xuất
@@ -76,5 +82,8 @@ public class UImanagerUser : MonoBehaviour
         PlayerPrefs.DeleteKey("token");
         PlayerPrefs.DeleteKey("username");
         
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Tải lại scene hiện tại
+
     }
 }

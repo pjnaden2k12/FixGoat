@@ -8,7 +8,7 @@ public class ResourceManager : MonoBehaviour
     public int gold { get; private set; }
     public int diamonds { get; private set; }
     public int towerPieces { get; private set; }
-    public int universalStones { get; private set; } // Đá vạn năng
+    public int universalStones { get; private set; }
 
     // Chỉ số vĩnh viễn cho tường thành
     public int wallHealthBonus { get; private set; }
@@ -47,7 +47,7 @@ public class ResourceManager : MonoBehaviour
 
             resourcesFilePath = Path.Combine(folderPath, "resources.txt");
 
-            // Thiết lập giá trị ban đầu cho các tài nguyên
+            // Tải dữ liệu từ tệp
             LoadResources();
         }
         else
@@ -58,36 +58,45 @@ public class ResourceManager : MonoBehaviour
 
     private void LoadResources()
     {
+        // Tải dữ liệu từ tệp văn bản
         if (File.Exists(resourcesFilePath))
         {
             string[] lines = File.ReadAllLines(resourcesFilePath);
-            gold = int.Parse(lines[0].Split(':')[1].Trim());
-            diamonds = int.Parse(lines[1].Split(':')[1].Trim());
-            towerPieces = int.Parse(lines[2].Split(':')[1].Trim());
-            universalStones = int.Parse(lines[3].Split(':')[1].Trim());
-            wallHealthBonus = int.Parse(lines[4].Split(':')[1].Trim());
-            wallDefenseBonus = int.Parse(lines[5].Split(':')[1].Trim());
-            healthRegenBonus = int.Parse(lines[6].Split(':')[1].Trim());
-            towerDamageBonus = float.Parse(lines[7].Split(':')[1].Trim());
-            towerAttackSpeedBonus = float.Parse(lines[8].Split(':')[1].Trim());
-            evolutionLevel = int.Parse(lines[9].Split(':')[1].Trim());
+            if (lines.Length >= 7)
+            {
+                gold = int.Parse(lines[0].Split(':')[1].Trim());
+                diamonds = int.Parse(lines[1].Split(':')[1].Trim());
+                towerPieces = int.Parse(lines[2].Split(':')[1].Trim());
+                universalStones = int.Parse(lines[3].Split(':')[1].Trim());
+                wallHealthBonus = int.Parse(lines[4].Split(':')[1].Trim());
+                wallDefenseBonus = int.Parse(lines[5].Split(':')[1].Trim());
+                healthRegenBonus = int.Parse(lines[6].Split(':')[1].Trim());
+                towerDamageBonus = float.Parse(lines[7].Split(':')[1].Trim());
+                towerAttackSpeedBonus = float.Parse(lines[8].Split(':')[1].Trim());
+                evolutionLevel = int.Parse(lines[9].Split(':')[1].Trim());
+            }
         }
         else
         {
-            // Thiết lập giá trị ban đầu nếu tệp không tồn tại
-            gold = 99999;
-            diamonds = 1999;
+            // Thiết lập giá trị mặc định nếu tệp không tồn tại
+            gold = 5000;
+            diamonds = 1000;
             towerPieces = 1000;
+            universalStones = 0;
             wallHealthBonus = 0;
             wallDefenseBonus = 0;
             healthRegenBonus = 0;
             towerDamageBonus = 0;
             towerAttackSpeedBonus = 0;
+            evolutionLevel = 0;
         }
+
+        NotifyResourceChanged();
     }
 
     private void SaveResources()
     {
+        // Lưu dữ liệu vào tệp văn bản
         string data = $"Gold: {gold}\n" +
                       $"Diamonds: {diamonds}\n" +
                       $"Tower Pieces: {towerPieces}\n" +
@@ -102,20 +111,25 @@ public class ResourceManager : MonoBehaviour
         File.WriteAllText(resourcesFilePath, data);
     }
 
-    // Thêm vàng
+    private void OnApplicationQuit()
+    {
+        SaveResources();
+    }
+
     public void AddGold(int amount)
     {
         gold += amount;
         NotifyResourceChanged();
+        SaveResources();
     }
 
-    // Tiêu vàng
     public void SpendGold(int amount)
     {
         if (gold >= amount)
         {
             gold -= amount;
             NotifyResourceChanged();
+            SaveResources();
         }
         else
         {
@@ -123,20 +137,20 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    // Thêm kim cương
     public void AddDiamonds(int amount)
     {
         diamonds += amount;
         NotifyResourceChanged();
+        SaveResources();
     }
 
-    // Tiêu kim cương
     public void SpendDiamonds(int amount)
     {
         if (diamonds >= amount)
         {
             diamonds -= amount;
             NotifyResourceChanged();
+            SaveResources();
         }
         else
         {
@@ -144,11 +158,11 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    // Thêm mảnh tháp
     public void AddTowerPieces(int amount)
     {
         towerPieces += amount;
         NotifyResourceChanged();
+        SaveResources();
     }
 
     public void SpendTowerPieces(int amount)
@@ -157,36 +171,35 @@ public class ResourceManager : MonoBehaviour
         {
             towerPieces -= amount;
             NotifyResourceChanged();
+            SaveResources();
         }
         else
         {
             Debug.LogWarning("Không đủ mảnh tháp.");
         }
     }
+
     public int GetTowerPieces()
     {
         return towerPieces;
     }
 
-    // Thêm đá vạn năng
     public void AddUniversalStone(int amount)
     {
         universalStones += amount;
         NotifyResourceChanged();
+        SaveResources();
     }
 
-    // Tiêu đá vạn năng để nâng cấp tất cả các tháp
     public void UpgradeAllTowers()
     {
         if (universalStones > 0)
         {
             universalStones--; // Tiêu đá vạn năng
-
-            // Nâng cấp tất cả các tháp
             towerDamageBonus += 5; // Tăng sát thương của tháp
             towerAttackSpeedBonus += 0.1f; // Tăng tốc độ tấn công của tháp
-
             NotifyResourceChanged();
+            SaveResources();
         }
         else
         {
@@ -194,13 +207,11 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    // Lấy số lượng đá vạn năng
     public int GetUniversalStoneCount()
     {
         return universalStones;
     }
 
-    // Tiến hóa nhân vật
     public void Evolve()
     {
         if (evolutionLevel >= maxEvolutionLevel)
@@ -216,6 +227,7 @@ public class ResourceManager : MonoBehaviour
             evolutionLevel++;
             UpdateWallBonuses();
             NotifyResourceChanged();
+            SaveResources();
         }
         else
         {
@@ -223,7 +235,6 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    // Cập nhật các chỉ số vĩnh viễn cho tường thành khi tiến hóa
     private void UpdateWallBonuses()
     {
         wallHealthBonus = 100 * evolutionLevel;
@@ -231,13 +242,13 @@ public class ResourceManager : MonoBehaviour
         healthRegenBonus = 10 * evolutionLevel;
     }
 
-    // Đổi 100 mảnh tháp lấy 1 đá vạn năng
     public void ExchangeTowerPiecesForUniversalStone()
     {
         if (towerPieces >= 100)
         {
             towerPieces -= 100;
             AddUniversalStone(1);
+            SaveResources();
         }
         else
         {
@@ -245,14 +256,8 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    // Thông báo sự thay đổi tài nguyên
     private void NotifyResourceChanged()
     {
         OnResourceChanged?.Invoke();
-    }
-
-    private void OnApplicationQuit()
-    {
-        SaveResources();
     }
 }

@@ -98,12 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc12212ee4ebed14796fb21e52dbf84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 8
   level: 1
   baseDamage: 10
   baseAttackSpeed: 1
   baseRange: 5
-  unlocked: 0
-  sprite: {fileID: -82788826, guid: 04a8fcf0124b35644bf561d8a4a4a272, type: 3}
 --- !u!1 &8679610570633297025
 GameObject:
   m_ObjectHideFlags: 0

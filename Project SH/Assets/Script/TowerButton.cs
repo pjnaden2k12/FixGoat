@@ -1,24 +1,44 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
-public class TowerButtonHandler : MonoBehaviour
+public class TowerPlacementManager : MonoBehaviour
 {
-    public int towerIndex; // Chỉ số của tháp
+    public static TowerPlacementManager Instance;
 
-    private Button button;
+    public Transform[] placementPositions; // Các vị trí có thể đặt tháp
 
-    private void Start()
+    private void Awake()
     {
-        button = GetComponent<Button>();
-        if (button != null)
+        // Đảm bảo chỉ có một TowerPlacementManager trong cảnh
+        if (Instance == null)
         {
-            button.onClick.AddListener(OnButtonClicked);
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Giữ TowerPlacementManager qua các cảnh
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
-    private void OnButtonClicked()
+    // Phương thức để lấy vị trí trống
+    public Transform GetEmptyPosition()
     {
-        // Hiển thị thông tin của tháp được bấm
-        TowerManagerUI.Instance.OnTowerPanelClicked(towerIndex);
+        foreach (var position in placementPositions)
+        {
+            if (position.childCount == 0) // Kiểm tra nếu vị trí chưa có tháp
+            {
+                return position;
+            }
+        }
+        return null;
+    }
+
+    // Phương thức để đặt tháp vào vị trí
+    public void PlaceTower(GameObject towerPrefab, Transform position)
+    {
+        if (position.childCount == 0) // Kiểm tra nếu vị trí chưa có tháp
+        {
+            Instantiate(towerPrefab, position.position, Quaternion.identity, position);
+        }
     }
 }

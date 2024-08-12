@@ -1,51 +1,195 @@
 ﻿using System.Collections;
-
-
-
-using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
-using UnityEngine;
-public class DangKyTaiKhoan : MonoBehaviour
+using UnityEngine.SceneManagement;
+using System.IO;
+
+public class UserAccountManager : MonoBehaviour
 {
-    public TMP_InputField user;
-    public TMP_InputField passwd;
-    public TextMeshProUGUI thongbao;
+    // Các panel
+    public GameObject MainPanel; // Panel chính với nút Đăng ký, Đăng nhập
+    public GameObject RegisterPanel; // Panel đăng ký
+    public GameObject LoginPanel; // Panel đăng nhập
+    public GameObject LoginSuccessPanel; // Panel sau khi đăng nhập thành công
+    public GameObject ConfirmDeletePanel; // Panel xác nhận xóa dữ liệu
+
+    // Các trường đăng ký
+    public TMP_InputField userRegister;
+    public TMP_InputField passwdRegister;
     public TMP_InputField confirmPassword;
-    public void DangKyButton()
+    public TextMeshProUGUI thongbaoRegister;
+
+    // Các trường đăng nhập
+    public TMP_InputField userLogin;
+    public TMP_InputField passwdLogin;
+    public TextMeshProUGUI thongbaoLogin;
+
+    // Hàm khởi tạo
+    void Start()
     {
-        StartCoroutine(DangKy());
-    }
-    //Đây là phương thức dùng để đăng ký
-    private IEnumerator DangKy()
-    {
-        if (passwd.text != confirmPassword.text)
+        // Kiểm tra trạng thái đăng nhập khi khởi động
+        if (PlayerPrefs.HasKey("token"))
         {
-            thongbao.text = "Mật khẩu không khớp!";
+            OnLoginSuccess();
+        }
+        else
+        {
+            MainPanel.SetActive(true);
+        }
+
+        // Ẩn panel xác nhận xóa dữ liệu khi khởi động
+        ConfirmDeletePanel.SetActive(false);
+    }
+
+    // Mở panel đăng ký
+    public void OpenRegisterPanel()
+    {
+        MainPanel.SetActive(false);
+        RegisterPanel.SetActive(true);
+    }
+
+    // Mở panel đăng nhập
+    public void OpenLoginPanel()
+    {
+        MainPanel.SetActive(false);
+        LoginPanel.SetActive(true);
+    }
+
+    // Đóng panel đăng ký hoặc đăng nhập, trở về Main Panel
+    public void ClosePanel()
+    {
+        RegisterPanel.SetActive(false);
+        LoginPanel.SetActive(false);
+        MainPanel.SetActive(true);
+    }
+
+    // Đăng ký tài khoản
+    public void RegisterButton()
+    {
+        StartCoroutine(Register());
+    }
+
+    // Đăng nhập tài khoản
+    public void LoginButton()
+    {
+        StartCoroutine(Login());
+    }
+
+    // Hiển thị panel xác nhận xóa dữ liệu
+    public void ShowConfirmDeletePanel()
+    {
+        ConfirmDeletePanel.SetActive(true);
+    }
+
+    // Xóa dữ liệu người dùng
+    public void DeleteAllData()
+    {
+        // Xóa thông tin người dùng
+        PlayerPrefs.DeleteAll();
+
+        // Xóa tệp văn bản
+        string folderName = "resourceSave";
+        string folderPath = Path.Combine(Application.persistentDataPath, folderName);
+        string resourcesFilePath = Path.Combine(folderPath, "resources.txt");
+        if (File.Exists(resourcesFilePath))
+        {
+            File.Delete(resourcesFilePath);
+        }
+
+        // Đưa người dùng về màn hình chính
+        MainPanel.SetActive(true);
+        LoginSuccessPanel.SetActive(false);
+
+        Debug.Log("Tất cả dữ liệu đã bị xóa!");
+
+        // Ẩn panel xác nhận
+        ConfirmDeletePanel.SetActive(false);
+    }
+
+    // Hủy bỏ xóa dữ liệu
+    public void CancelDelete()
+    {
+        ConfirmDeletePanel.SetActive(false);
+    }
+
+    // Phương thức xử lý đăng ký
+    private IEnumerator Register()
+    {
+        if (passwdRegister.text != confirmPassword.text)
+        {
+            thongbaoRegister.text = "Mật khẩu không khớp!";
             yield break;
         }
-        WWWForm dataForm = new WWWForm(); //khởi tạo 1 form
-        dataForm.AddField("user", user.text); //trường User của form
-        dataForm.AddField("passwd", passwd.text); //trường password của form
 
-        //Khởi tạo 1 kết nối tới đường dẫn chứa file php
+        WWWForm dataForm = new WWWForm();
+        dataForm.AddField("user", userRegister.text);
+        dataForm.AddField("passwd", passwdRegister.text);
+
         UnityWebRequest www = UnityWebRequest.Post("https://fpl.expvn.com/dangky.php", dataForm);
-        yield return www.SendWebRequest(); //Tạm dừng Coroutine và chờ tới khi hoành thành việc kết nối mới tiếp tục chạy đoạn mã bên dưới
-        if (!www.isDone)
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
         {
-            print("Kết nối không thành công");
+            thongbaoRegister.text = "Kết nối không thành công";
         }
-        else if (www.isDone)
+        else
         {
-            string get = www.downloadHandler.text; //Nếu kết nối thành công thì PHP sẽ in ra dòng thông báo và mình lấy về để   xử lý
+            string get = www.downloadHandler.text;
             switch (get)
             {
-                case "exist": thongbao.text = "Tài khoản đã tồn tại"; break;
-                case "OK": thongbao.text = "Đăng ký thành công"; break;
-                case "ERROR": thongbao.text = "Đăng ký không thành công"; break;
-                default: thongbao.text = "Không kết nối được tới server"; break;
+                case "exist": thongbaoRegister.text = "Tài khoản đã tồn tại"; break;
+                case "OK": thongbaoRegister.text = "Đăng ký thành công"; break;
+                case "ERROR": thongbaoRegister.text = "Đăng ký không thành công"; break;
+                default: thongbaoRegister.text = "Không kết nối được tới server"; break;
             }
         }
+    }
+
+    // Phương thức xử lý đăng nhập
+    private IEnumerator Login()
+    {
+        WWWForm dataForm = new WWWForm();
+        dataForm.AddField("user", userLogin.text);
+        dataForm.AddField("passwd", passwdLogin.text);
+
+        UnityWebRequest www = UnityWebRequest.Post("https://fpl.expvn.com/dangnhap.php", dataForm);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            thongbaoLogin.text = "Kết nối không thành công";
+        }
+        else
+        {
+            string get = www.downloadHandler.text;
+            if (get == "empty")
+            {
+                thongbaoLogin.text = "Vui lòng nhập đầy đủ thông tin đăng nhập";
+            }
+            else if (string.IsNullOrEmpty(get))
+            {
+                thongbaoLogin.text = "Tài khoản hoặc mật khẩu không chính xác";
+            }
+            else if (get.Contains("Lỗi"))
+            {
+                thongbaoLogin.text = "Không kết nối được tới server";
+            }
+            else
+            {
+                thongbaoLogin.text = "Đăng nhập thành công";
+                PlayerPrefs.SetString("token", get);
+                OnLoginSuccess();
+            }
+        }
+    }
+
+    // Phương thức xử lý khi đăng nhập thành công
+    private void OnLoginSuccess()
+    {
+        LoginPanel.SetActive(false);
+        RegisterPanel.SetActive(false);
+        MainPanel.SetActive(false);
+        LoginSuccessPanel.SetActive(true);
     }
 }
