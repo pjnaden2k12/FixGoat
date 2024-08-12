@@ -8,7 +8,6 @@ public class Enemy1Health : MonoBehaviour
     private int currentHealth; // Máu hiện tại của quái vật
     private Animator animator; // Animator của quái vật
     private bool isDead = false; // Trạng thái chết của quái vật
-    public float moveSpeed = 0.5f; // Tốc độ di chuyển của quái vật
     public float attackRange = 1.0f; // Phạm vi để quái vật bắt đầu tấn công
 
     private Rigidbody rb;
