@@ -1748,6 +1748,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390866390}
   m_CullTransparentMesh: 1
+--- !u!114 &402259257 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6214513093131038752, guid: 29232029d0c77d8458975bfdd47a9d90, type: 3}
+  m_PrefabInstance: {fileID: 5626014922781866536}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938cb0f9656cd274e9604d66f0c8209b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &415047298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3027,7 +3038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &528860541
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7917,15 +7928,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baaefa3402da89c4d9baa3295474bbd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPanels: []
+  towerManager: {fileID: 402259257}
+  resourceManager: {fileID: 185410992}
+  towerPanel: {fileID: 302204415}
+  towerButtonPrefab: {fileID: 4551456020986848384, guid: f2c6a24bc1fcc3849aa903ad0aa10619, type: 3}
   towerInfoPanel: {fileID: 843556343}
-  towerDetailImage: {fileID: 0}
-  towerDetailText: {fileID: 0}
-  closeButton: {fileID: 1956443643}
+  infoImage: {fileID: 124526077}
+  infoDamage: {fileID: 913543280}
+  infoAttackSpeed: {fileID: 1124406423}
+  infoRange: {fileID: 254878094}
   unlockButton: {fileID: 754663191}
-  placeholderSprite: {fileID: 0}
-  towerSprites: []
-  towerDescriptions: []
+  closeButton: {fileID: 1956443643}
 --- !u!4 &1612658791
 Transform:
   m_ObjectHideFlags: 0
@@ -8410,7 +8423,6 @@ MonoBehaviour:
   universalStoneText: {fileID: 483038591}
   universalStoneImage: {fileID: 1000210721}
   rewardPanel: {fileID: 1784573813}
-  rewardImage: {fileID: 0}
   rewardText: {fileID: 390866392}
   closeButton: {fileID: 2117465048}
   chestImage: {fileID: 1667823934}
