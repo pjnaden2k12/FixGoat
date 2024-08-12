@@ -1,28 +1,44 @@
 ﻿using UnityEngine;
 
-public class TowerPlacementPoint : MonoBehaviour
+public class TowerSlot : MonoBehaviour
 {
-    public int positionIndex; // Chỉ số của vị trí (0, 1, 2, 3)
+    public GameObject currentTower; // Prefab tháp hiện tại trên ô
+    public Transform towerPosition; // Vị trí mà prefab tháp sẽ được đặt
+
+    private TowerManagerInGame towerManager;
+
+    public void Initialize(TowerManagerInGame manager)
+    {
+        towerManager = manager;
+    }
+
+    public void PlaceTower(GameObject towerPrefab)
+    {
+        // Đặt tháp xuống ô
+        currentTower = Instantiate(towerPrefab, towerPosition.position, Quaternion.identity, towerPosition);
+    }
+
+    public void RemoveTower()
+    {
+        // Xóa tháp khỏi ô
+        if (currentTower != null)
+        {
+            Destroy(currentTower);
+            currentTower = null;
+        }
+    }
 
     private void OnMouseDown()
     {
-        if (TowerManagerInGame.Instance != null)
+        if (currentTower == null)
         {
-            Tower existingTower = GetComponentInChildren<Tower>();
-            if (existingTower == null)
-            {
-                // Vị trí chưa có tháp, hiển thị bảng mua tháp
-                TowerManagerInGame.Instance.DisplayBuyPanel(positionIndex, gameObject);
-            }
-            else
-            {
-                // Vị trí đã có tháp, hiển thị bảng nâng cấp tháp
-                TowerManagerInGame.Instance.DisplayUpgradePanel(existingTower);
-            }
+            // Nếu ô trống, mở panel chọn tháp
+            towerManager.OpenSelectTowerPanel(this);
         }
         else
         {
-            Debug.LogError("TowerManagerInGame instance is not set.");
+            // Nếu đã có tháp, mở panel nâng cấp/xóa tháp
+            towerManager.OpenUpgradeTowerPanel(this);
         }
     }
 }
