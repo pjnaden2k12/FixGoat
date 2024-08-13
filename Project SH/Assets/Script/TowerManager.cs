@@ -110,16 +110,42 @@ public class TowerManager : MonoBehaviour
     private void SaveTowerData()
     {
         List<string> lines = new List<string>();
-        foreach (var tower in towers)
+        for (int i = 0; i < towers.Length; i++)
         {
-            lines.Add($"{tower.id},{tower.isUnlocked},{tower.baseDamage},{tower.baseAttackSpeed},{tower.baseRange}");
+            var tower = towers[i];
+            string towerData = $"{tower.id},{tower.isUnlocked},{tower.baseDamage},{tower.baseAttackSpeed},{tower.baseRange}";
+            lines.Add(towerData);
+
+            // Lưu vào PlayerPrefs
+            PlayerPrefs.SetString($"TowerData_{i}", towerData);
         }
+
+        // Lưu vào file
         File.WriteAllLines(saveFilePath, lines);
+        PlayerPrefs.Save(); // Lưu tất cả thay đổi vào PlayerPrefs
     }
 
     private void LoadTowerData()
     {
-        if (File.Exists(saveFilePath))
+        bool dataLoaded = false;
+
+        for (int i = 0; i < towers.Length; i++)
+        {
+            string towerData = PlayerPrefs.GetString($"TowerData_{i}", null);
+            if (!string.IsNullOrEmpty(towerData))
+            {
+                string[] data = towerData.Split(',');
+                towers[i].id = int.Parse(data[0]);
+                towers[i].isUnlocked = bool.Parse(data[1]);
+                towers[i].baseDamage = float.Parse(data[2]);
+                towers[i].baseAttackSpeed = float.Parse(data[3]);
+                towers[i].baseRange = float.Parse(data[4]);
+                dataLoaded = true;
+            }
+        }
+
+        // Nếu không có dữ liệu trong PlayerPrefs, load từ file
+        if (!dataLoaded && File.Exists(saveFilePath))
         {
             string[] lines = File.ReadAllLines(saveFilePath);
             for (int i = 0; i < lines.Length && i < towers.Length; i++)
@@ -130,10 +156,10 @@ public class TowerManager : MonoBehaviour
                 towers[i].baseDamage = float.Parse(data[2]);
                 towers[i].baseAttackSpeed = float.Parse(data[3]);
                 towers[i].baseRange = float.Parse(data[4]);
-                // Sprite cần được gán qua Editor hoặc Load từ Resources
             }
         }
     }
+
 
     private void NotifyTowersOfUpdate()
     {

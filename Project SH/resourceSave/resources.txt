@@ -1,0 +1,10 @@
+Gold: 5000
+Diamonds: 1000
+Tower Pieces: 1000
+Universal Stones: 0
+Wall Health Bonus: 0
+Wall Defense Bonus: 0
+Health Regen Bonus: 0
+Tower Damage Bonus: 0
+Tower Attack Speed Bonus: 0
+Evolution Level: 0

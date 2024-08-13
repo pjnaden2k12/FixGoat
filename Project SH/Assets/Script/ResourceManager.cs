@@ -71,11 +71,25 @@ public class ResourceManager : MonoBehaviour
 
     private void LoadResources()
     {
-        // Tải dữ liệu từ tệp văn bản
-        if (File.Exists(resourcesFilePath))
+        // Kiểm tra và tải dữ liệu từ PlayerPrefs trước
+        if (PlayerPrefs.HasKey("Gold"))
         {
+            gold = PlayerPrefs.GetInt("Gold");
+            diamonds = PlayerPrefs.GetInt("Diamonds");
+            towerPieces = PlayerPrefs.GetInt("TowerPieces");
+            universalStones = PlayerPrefs.GetInt("UniversalStones");
+            wallHealthBonus = PlayerPrefs.GetInt("WallHealthBonus");
+            wallDefenseBonus = PlayerPrefs.GetInt("WallDefenseBonus");
+            healthRegenBonus = PlayerPrefs.GetInt("HealthRegenBonus");
+            towerDamageBonus = PlayerPrefs.GetFloat("TowerDamageBonus");
+            towerAttackSpeedBonus = PlayerPrefs.GetFloat("TowerAttackSpeedBonus");
+            evolutionLevel = PlayerPrefs.GetInt("EvolutionLevel");
+        }
+        else if (File.Exists(resourcesFilePath))
+        {
+            // Nếu không có trong PlayerPrefs, tải từ file
             string[] lines = File.ReadAllLines(resourcesFilePath);
-            if (lines.Length >= 7)
+            if (lines.Length >= 10)
             {
                 gold = int.Parse(lines[0].Split(':')[1].Trim());
                 diamonds = int.Parse(lines[1].Split(':')[1].Trim());
@@ -91,7 +105,7 @@ public class ResourceManager : MonoBehaviour
         }
         else
         {
-            // Thiết lập giá trị mặc định nếu tệp không tồn tại
+            // Thiết lập giá trị mặc định nếu không có tệp hoặc PlayerPrefs
             gold = 5000;
             diamonds = 1000;
             towerPieces = 1000;
@@ -107,9 +121,10 @@ public class ResourceManager : MonoBehaviour
         NotifyResourceChanged();
     }
 
+
     private void SaveResources()
     {
-        // Lưu dữ liệu vào tệp văn bản
+        // Lưu vào file
         string data = $"Gold: {gold}\n" +
                       $"Diamonds: {diamonds}\n" +
                       $"Tower Pieces: {towerPieces}\n" +
@@ -122,7 +137,22 @@ public class ResourceManager : MonoBehaviour
                       $"Evolution Level: {evolutionLevel}";
 
         File.WriteAllText(resourcesFilePath, data);
+
+        // Lưu vào PlayerPrefs
+        PlayerPrefs.SetInt("Gold", gold);
+        PlayerPrefs.SetInt("Diamonds", diamonds);
+        PlayerPrefs.SetInt("TowerPieces", towerPieces);
+        PlayerPrefs.SetInt("UniversalStones", universalStones);
+        PlayerPrefs.SetInt("WallHealthBonus", wallHealthBonus);
+        PlayerPrefs.SetInt("WallDefenseBonus", wallDefenseBonus);
+        PlayerPrefs.SetInt("HealthRegenBonus", healthRegenBonus);
+        PlayerPrefs.SetFloat("TowerDamageBonus", towerDamageBonus);
+        PlayerPrefs.SetFloat("TowerAttackSpeedBonus", towerAttackSpeedBonus);
+        PlayerPrefs.SetInt("EvolutionLevel", evolutionLevel);
+
+        PlayerPrefs.Save(); // Lưu tất cả thay đổi vào PlayerPrefs
     }
+
 
     private void OnApplicationQuit()
     {
@@ -273,6 +303,18 @@ public class ResourceManager : MonoBehaviour
     {
         OnResourceChanged?.Invoke();
     }
-    
+    public void ClearResources()
+    {
+        // Xóa dữ liệu trong PlayerPrefs
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+
+        // Xóa file lưu trữ nếu cần
+        if (File.Exists(resourcesFilePath))
+        {
+            File.Delete(resourcesFilePath);
+        }
+    }
+
 
 }

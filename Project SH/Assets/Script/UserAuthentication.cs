@@ -101,7 +101,7 @@ public class UserAccountManager : MonoBehaviour
         MainPanel.SetActive(true);
         LoginSuccessPanel.SetActive(false);
 
-        Debug.Log("Tất cả dữ liệu đã bị xóa!");
+        Debug.Log("All data deleted!");
 
         // Ẩn panel xác nhận
         ConfirmDeletePanel.SetActive(false);
@@ -118,7 +118,7 @@ public class UserAccountManager : MonoBehaviour
     {
         if (passwdRegister.text != confirmPassword.text)
         {
-            thongbaoRegister.text = "Mật khẩu không khớp!";
+            thongbaoRegister.text = "Password no same!";
             yield break;
         }
 
@@ -131,17 +131,17 @@ public class UserAccountManager : MonoBehaviour
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            thongbaoRegister.text = "Kết nối không thành công";
+            thongbaoRegister.text = "Ket noi khong thanh cong";
         }
         else
         {
             string get = www.downloadHandler.text;
             switch (get)
             {
-                case "exist": thongbaoRegister.text = "Tài khoản đã tồn tại"; break;
-                case "OK": thongbaoRegister.text = "Đăng ký thành công"; break;
-                case "ERROR": thongbaoRegister.text = "Đăng ký không thành công"; break;
-                default: thongbaoRegister.text = "Không kết nối được tới server"; break;
+                case "exist": thongbaoRegister.text = "Tai khoan da ton tai"; break;
+                case "OK": thongbaoRegister.text = "Dang ky thanh cong"; break;
+                case "ERROR": thongbaoRegister.text = "Dang ky khong thanh cong"; break;
+                default: thongbaoRegister.text = "Khong ket noi duoc toi server"; break;
             }
         }
     }
@@ -158,26 +158,26 @@ public class UserAccountManager : MonoBehaviour
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            thongbaoLogin.text = "Kết nối không thành công";
+            thongbaoLogin.text = "Connect Fail";
         }
         else
         {
             string get = www.downloadHandler.text;
             if (get == "empty")
             {
-                thongbaoLogin.text = "Vui lòng nhập đầy đủ thông tin đăng nhập";
+                thongbaoLogin.text = "Emty";
             }
             else if (string.IsNullOrEmpty(get))
             {
-                thongbaoLogin.text = "Tài khoản hoặc mật khẩu không chính xác";
+                thongbaoLogin.text = "User or pass don't true";
             }
-            else if (get.Contains("Lỗi"))
+            else if (get.Contains("Error"))
             {
-                thongbaoLogin.text = "Không kết nối được tới server";
+                thongbaoLogin.text = "Sever no connect";
             }
             else
             {
-                thongbaoLogin.text = "Đăng nhập thành công";
+                thongbaoLogin.text = "Login done";
                 PlayerPrefs.SetString("token", get);
                 OnLoginSuccess();
             }
