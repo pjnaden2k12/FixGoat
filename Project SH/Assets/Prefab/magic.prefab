@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8243475323069557005}
   - component: {fileID: 4508936675724290652}
   - component: {fileID: 2327960960561417005}
-  - component: {fileID: 8121789857437742232}
-  - component: {fileID: 8415340369324593709}
+  - component: {fileID: 4722342518307556388}
+  - component: {fileID: -3125035693490271348}
   m_Layer: 0
   m_Name: magic
   m_TagString: Untagged
@@ -182,7 +182,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.1055331, y: 3.38}
   m_EdgeRadius: 0
---- !u!114 &8121789857437742232
+--- !u!114 &4722342518307556388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,24 +191,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1720754151253152809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83c376593d643874ea3d9eb636494700, type: 3}
+  m_Script: {fileID: 11500000, guid: c20b8c59e41ca99428b861cbefe0972e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  stopYPosition: -2.8
+  animator: {fileID: 0}
+  attackDamage: 10
+  attackAnimationTrigger: Attack
+  attackRadius: 0.5
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &-3125035693490271348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720754151253152809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4ba527643531e438096833840076b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  moveSpeed: 0.6
-  targetPoint: {fileID: 0}
+  armor: 20
   attackRange: 1
---- !u!114 &8415340369324593709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1720754151253152809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6b67f9ae99e06748ae29b319a597fd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.6
-  target: {fileID: 0}
+  attackDamage: 10
+  attackInterval: 1
+  fortress: {fileID: 0}

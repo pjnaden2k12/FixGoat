@@ -5,10 +5,13 @@ using TMPro;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;       // Mảng chứa các loại quái vật (prefab)
-    public float spawnInterval = 2f;       // Khoảng thời gian giữa các lần spawn
-    public Transform[] spawnPoints;         // Mảng chứa các điểm spawn
-    public Transform[] targetPoints;        // Mảng chứa các điểm mục tiêu trên tường thành
-
+    public float spawnInterval = 10f;       // Khoảng thời gian giữa các lần spawn
+    public float spawnXMin = -8.5f;          // Giới hạn x nhỏ nhất cho điểm spawn
+    public float spawnXMax = 8f;           // Giới hạn x lớn nhất cho điểm spawn
+    public float spawnYMin = 10f;           // Giới hạn y nhỏ nhất cho điểm spawn (cao hơn)
+    public float spawnYMax = 20f;           // Giới hạn y lớn nhất cho điểm spawn (cao hơn)
+    public float targetXMin = -5f;          // Giới hạn x nhỏ nhất cho điểm mục tiêu
+    public float targetXMax = 5f;           // Giới hạn x lớn nhất cho điểm mục tiêu
     private float spawnCount;                 // Số lượng quái vật sẽ được spawn trong mỗi lần spawn
 
     void Start()
@@ -32,23 +35,28 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnEnemy()
     {
-        if (enemyPrefabs.Length == 0 || spawnPoints.Length == 0 || targetPoints.Length == 0) return;
+        if (enemyPrefabs.Length == 0) return;
 
         // Chọn một prefab quái vật ngẫu nhiên từ mảng
         int randomEnemyIndex = Random.Range(0, enemyPrefabs.Length);
         GameObject enemyPrefab = enemyPrefabs[randomEnemyIndex];
 
-        // Chọn một điểm spawn ngẫu nhiên từ mảng
-        int randomSpawnIndex = Random.Range(0, spawnPoints.Length);
-        Transform spawnPoint = spawnPoints[randomSpawnIndex];
+        // Chọn một điểm spawn ngẫu nhiên trong phạm vi x đã định
+        Vector3 spawnPosition = new Vector3(
+            Random.Range(spawnXMin, spawnXMax),
+            0, // Nếu điểm spawn chỉ thay đổi trên trục x, giữ y = 0 hoặc giá trị tùy chỉnh
+            0 // Giữ z = 0 hoặc giá trị tùy chỉnh
+        );
 
         // Spawn quái vật tại điểm spawn
-        GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+        GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
 
-        // Chọn một điểm mục tiêu ngẫu nhiên từ mảng và gán cho quái vật
-        int randomTargetIndex = Random.Range(0, targetPoints.Length);
-        Transform targetPoint = targetPoints[randomTargetIndex];
+        // Chọn một điểm mục tiêu ngẫu nhiên trong phạm vi x đã định
+        Vector3 targetPosition = new Vector3(
+            Random.Range(targetXMin, targetXMax),
+            0, // Nếu điểm mục tiêu chỉ thay đổi trên trục x, giữ y = 0 hoặc giá trị tùy chỉnh
+            0 // Giữ z = 0 hoặc giá trị tùy chỉnh
+            );
 
-        enemy.GetComponent<enemyAI>().SetTarget(targetPoint.position);
     }
 }

@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8705449817737531116}
   - component: {fileID: 8890656052976498071}
   - component: {fileID: 6222896929197200512}
-  - component: {fileID: 8625233725031522455}
+  - component: {fileID: 3511609955070952507}
+  - component: {fileID: -8606641134992019125}
   m_Layer: 0
   m_Name: goblin
   m_TagString: Enemy
@@ -181,7 +182,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.538146, y: 2.99}
   m_EdgeRadius: 0
---- !u!114 &8625233725031522455
+--- !u!114 &3511609955070952507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,9 +191,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1081431065430372772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd07bb8cf8d4a0440b7cab160a156df4, type: 3}
+  m_Script: {fileID: 11500000, guid: c20b8c59e41ca99428b861cbefe0972e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  stopYPosition: -2.8
+  animator: {fileID: 0}
+  attackDamage: 10
+  attackAnimationTrigger: Attack
+  attackRadius: 0.5
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &-8606641134992019125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081431065430372772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4ba527643531e438096833840076b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  moveSpeed: 0.5
-  attackRange: 0.01
+  armor: 20
+  attackRange: 1
+  attackDamage: 10
+  attackInterval: 1
+  fortress: {fileID: 0}

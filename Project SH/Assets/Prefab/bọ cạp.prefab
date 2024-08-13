@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6757189518089097960}
   - component: {fileID: 4338638317799350676}
   - component: {fileID: 8222967029473092235}
-  - component: {fileID: 2656250237894014986}
-  - component: {fileID: 323900422115994057}
+  - component: {fileID: 3852524854713654646}
+  - component: {fileID: 4698970472636619670}
   m_Layer: 0
   m_Name: "b\u1ECD c\u1EA1p"
   m_TagString: Enemy2
@@ -182,7 +182,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.92, y: 2.26}
   m_EdgeRadius: 0
---- !u!114 &2656250237894014986
+--- !u!114 &3852524854713654646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,24 +191,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 5423175340387061450}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42ff3e4156bbd044dba962ed13e298e3, type: 3}
+  m_Script: {fileID: 11500000, guid: c20b8c59e41ca99428b861cbefe0972e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  stopYPosition: -2.8
+  animator: {fileID: 0}
+  attackDamage: 10
+  attackAnimationTrigger: Attack
+  attackRadius: 0.5
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &4698970472636619670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5423175340387061450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4ba527643531e438096833840076b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  moveSpeed: 0.6
-  targetPoint: {fileID: 0}
+  armor: 20
   attackRange: 1
---- !u!114 &323900422115994057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5423175340387061450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 178e0064bc664a34c926e6eccf31b241, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.6
-  target: {fileID: 0}
+  attackDamage: 10
+  attackInterval: 1
+  fortress: {fileID: 0}

@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7544361805832071852}
   - component: {fileID: 904641973008341166}
   - component: {fileID: 2735748440269777646}
-  - component: {fileID: 6488938942292882193}
-  - component: {fileID: 1107137092732289230}
+  - component: {fileID: 2802611077754769748}
+  - component: {fileID: 6250011387444699522}
   m_Layer: 0
   m_Name: big goblin
   m_TagString: Untagged
@@ -182,7 +182,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6488938942292882193
+--- !u!114 &2802611077754769748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,12 +191,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4700696468787374395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5944536d0b2bbf0479ae11476472ac60, type: 3}
+  m_Script: {fileID: 11500000, guid: c20b8c59e41ca99428b861cbefe0972e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.6
-  target: {fileID: 0}
---- !u!114 &1107137092732289230
+  speed: 1
+  stopYPosition: -2.8
+  animator: {fileID: 0}
+  attackDamage: 10
+  attackAnimationTrigger: Attack
+  attackRadius: 0.5
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &6250011387444699522
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,10 +212,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4700696468787374395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37b615d724f717b48bb48121b6b00e0c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b4ba527643531e438096833840076b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  moveSpeed: 0.6
-  targetPoint: {fileID: 0}
+  armor: 20
   attackRange: 1
+  attackDamage: 10
+  attackInterval: 1
+  fortress: {fileID: 0}
