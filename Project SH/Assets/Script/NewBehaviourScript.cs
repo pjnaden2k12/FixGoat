@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class TokenCheck : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        string token = PlayerPrefs.GetString("token", string.Empty);
+        if (string.IsNullOrEmpty(token))
+        {
+            Debug.LogWarning("Token không hợp lệ hoặc chưa được lưu.");
+        }
+        else
+        {
+            Debug.Log("Token hiện tại: " + token);
+        }
     }
 }

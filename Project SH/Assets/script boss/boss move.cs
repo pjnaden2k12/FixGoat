@@ -7,12 +7,19 @@ public class BossMovement : MonoBehaviour
     public Transform targetPoint; // Điểm mà boss sẽ di chuyển tới
     private Rigidbody2D rb;
     private Animator animator; // Animator để điều khiển animation
-
+    private FortressHealth fortressHealth; // Instance của FortressHealth
+    public float damebooss = 100f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>(); // Lấy Animator component
 
+        // Tìm FortressHealth trong scene
+        fortressHealth = FindObjectOfType<FortressHealth>(); // Cập nhật nếu có nhiều đối tượng FortressHealth
+        if (fortressHealth == null)
+        {
+            Debug.LogError("Không tìm thấy FortressHealth trong scene.");
+        }
     }
 
     void Update()
@@ -45,7 +52,12 @@ public class BossMovement : MonoBehaviour
         // Xử lý khi boss tấn công tường thành
         Debug.Log("Boss tấn công tường thành!");
         animator.SetBool("IsAttacking", true); // Kích hoạt animation tấn công
-        // Bạn có thể thêm các hành động tấn công tại đây
+
+        // Gọi phương thức TakeDamage trên tường thành
+        if (fortressHealth != null)
+        {
+            fortressHealth.TakeDamage(damebooss); // Thay đổi 10f thành lượng sát thương phù hợp
+        }
     }
 
     void StopAttack()

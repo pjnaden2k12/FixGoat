@@ -9,6 +9,10 @@ public class RewardManager : MonoBehaviour
     public TextMeshProUGUI diamondsText;
     public TextMeshProUGUI towerPiecesText;
 
+    private void Start()
+    {
+        rewardPanel.SetActive(false);
+    }
     private void Awake()
     {
         // Singleton pattern: đảm bảo chỉ có một instance duy nhất của RewardManager

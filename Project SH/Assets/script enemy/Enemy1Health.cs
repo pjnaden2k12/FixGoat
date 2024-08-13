@@ -97,8 +97,8 @@ public class Enemy1Health : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void OnMouseDown()
-    {
-        TakeDamage(50);
-    }
+    //void OnMouseDown()
+    //{
+    //    TakeDamage(50);
+    //}
 }

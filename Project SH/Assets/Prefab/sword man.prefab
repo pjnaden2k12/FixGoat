@@ -148,7 +148,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.34396738, y: 0}
+  m_Offset: {x: -0.5826247, y: -0.16522408}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -159,7 +159,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.682065, y: 2.94}
+  m_Size: {x: 0.5157795, y: 1.2877464}
   m_EdgeRadius: 0
 --- !u!95 &2763086086899796131
 Animator:
@@ -197,7 +197,7 @@ MonoBehaviour:
   speed: 1
   stopYPosition: -2.8
   animator: {fileID: 2763086086899796131}
-  attackDamage: 10
+  attackDamage: 50
   attackAnimationTrigger: Attack
   attackRadius: 0.5
   wallLayer:
@@ -216,5 +216,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5785a3a0108fc144482c4fc29ee044dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  armor: 20
+  maxHealth: 50
+  armor: 10
