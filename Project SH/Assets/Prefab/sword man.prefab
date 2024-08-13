@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 2396775029362558783}
   - component: {fileID: 1478858539489549180}
   - component: {fileID: 2763086086899796131}
-  - component: {fileID: 3382838784985655146}
-  - component: {fileID: 5397352605782347766}
   m_Layer: 0
   m_Name: sword man
   m_TagString: Untagged
@@ -30,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3164766679461762757}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.36, y: 5.83, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.059999943, y: 7.77, z: -0.14187455}
   m_LocalScale: {x: 0.5397, y: 0.5397, z: 0.5397}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -182,33 +180,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3382838784985655146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3164766679461762757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 089c605be7d56e44a84b1f9642665a90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.4
-  target: {fileID: 0}
---- !u!114 &5397352605782347766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3164766679461762757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d466cd15a3899264fb30d3770f990a81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  moveSpeed: 0.4
-  targetPoint: {fileID: 0}
-  attackRange: 1
