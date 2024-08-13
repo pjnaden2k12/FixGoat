@@ -36,7 +36,7 @@ public class bossthayma : MonoBehaviour
     private IEnumerator MoveAndScale()
     {
         // Di chuyển boss (giả sử boss di chuyển theo phương ngang)
-        float moveDuration = 5f;
+        float moveDuration = 9f;
         float elapsedTime = 0f;
 
         while (elapsedTime < moveDuration)
