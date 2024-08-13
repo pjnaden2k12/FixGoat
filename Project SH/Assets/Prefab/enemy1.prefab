@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8830956866352738378}
   - component: {fileID: 3133128092031148472}
   - component: {fileID: 5019826854285966130}
+  - component: {fileID: -1717057097268140563}
+  - component: {fileID: 3871857377481031454}
   m_Layer: 0
   m_Name: enemy1
   m_TagString: Enemy
@@ -180,3 +182,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.01, y: 2.56}
   m_EdgeRadius: 0
+--- !u!114 &-1717057097268140563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162413286374201126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb58c50e535e9cd449f7d71e711a82a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.5
+--- !u!114 &3871857377481031454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162413286374201126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5785a3a0108fc144482c4fc29ee044dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  armor: 20
+  attackRange: 1
