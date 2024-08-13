@@ -15,15 +15,17 @@ public class capnhatthanhmaubosshiepsi : MonoBehaviour
     private bool effectTriggered = false; // Biến kiểm soát hiệu ứng
     private GameObject activeInvulnerabilityEffect; // Hiệu ứng bất tử đang hoạt động
 
-    // Tham chiếu đến GameManager
-    public GameManager gameManager;
-
     // Start is called before the first frame update
     void Start()
     {
         luongmauhientai = luongmautoida;
         thanhmaubossgiapsat.CapNhatThanhMau(luongmauhientai, luongmautoida);
     }
+
+    //private void OnMouseDown()
+    //{
+    //    TakeDamage(200); // Gọi phương thức TakeDamage khi boss bị click
+    //}
 
     public void TakeDamage(float damage)
     {
@@ -34,7 +36,7 @@ public class capnhatthanhmaubosshiepsi : MonoBehaviour
 
             if (luongmauhientai <= luongmautoida * 0.6f && !effectTriggered)
             {
-                StartCoroutine(MakeInvulnerable(10f)); // Boss không chịu sát thương trong 10 giây
+                StartCoroutine(MakeInvulnerable(10f)); // Boss không chịu sát thương trong 1 giây
                 effectTriggered = true; // Đánh dấu rằng hiệu ứng đã được kích hoạt
             }
 
@@ -82,19 +84,13 @@ public class capnhatthanhmaubosshiepsi : MonoBehaviour
             explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
         }
 
-        // Đợi hiệu ứng nổ hoàn tất
-        yield return new WaitForSeconds(0.9f);
-
-        // Tính điểm và gửi điểm số lên server
-        if (gameManager != null)
-        {
-            gameManager.OnBossDefeated(); // Tính điểm và gửi lên server
-        }
+        // Đợi animation hoàn tất (ở đây là 0 giây)
+        yield return new WaitForSeconds(0f);
 
         // Xóa đối tượng boss khỏi cảnh
         Destroy(gameObject);
 
-        // Xóa hiệu ứng nổ sau 0.9 giây
+        // Xóa hiệu ứng nổ sau 2 giây
         if (explosion != null)
         {
             Destroy(explosion, 0.9f);

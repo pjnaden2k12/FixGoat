@@ -98,25 +98,25 @@ public class SpinManager : MonoBehaviour
         if (randomValue < 50)
         {
             ResourceManager.Instance.AddTowerPieces(10);
-            rewardDescription = "10 mảnh tháp";
+            rewardDescription = "10 piece tower";
             rewardSprite = Resources.Load<Sprite>("Path/To/TowerPieces10Image");
         }
         else if (randomValue < 80)
         {
             ResourceManager.Instance.AddTowerPieces(20);
-            rewardDescription = "20 mảnh tháp";
+            rewardDescription = "20 piece tower";
             rewardSprite = Resources.Load<Sprite>("Path/To/TowerPieces20Image");
         }
         else if (randomValue < 95)
         {
             ResourceManager.Instance.AddTowerPieces(50);
-            rewardDescription = "50 mảnh tháp";
+            rewardDescription = "50 piece tower";
             rewardSprite = Resources.Load<Sprite>("Path/To/TowerPieces50Image");
         }
         else
         {
             ResourceManager.Instance.AddUniversalStone(1); // Thêm 1 đá vạn năng
-            rewardDescription = "Đá vạn năng";
+            rewardDescription = "Stone color";
             rewardSprite = Resources.Load<Sprite>("Path/To/UniversalStoneImage");
         }
 
