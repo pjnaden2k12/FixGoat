@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using DG.Tweening; // Đảm bảo bạn đã thêm DOTween vào dự án của mình
 using UnityEngine.UI;
-using TMPro;
+
 public class TowerManagerInGame : MonoBehaviour
 {
     public GameObject[] towerSlots;  // Các ô chứa tháp
     public GameObject buyTowerPanel; // Panel mua tháp
     public GameObject upgradeTowerPanel; // Panel nâng cấp tháp
-    public TowerDisplayManager towerDisplayManager;
+    public TowerDisplayManager towerDisplayManager; // Tham chiếu đến TowerDisplayManager
     public GameObject closeBuyPanelButton; // Nút đóng panel mua tháp
     public GameObject closeUpgradePanelButton; // Nút đóng panel nâng cấp tháp
 
@@ -84,6 +84,10 @@ public class TowerManagerInGame : MonoBehaviour
             SetPanelScale(upgradeTowerPanel, Vector3.zero);
             // Phóng to panel nâng cấp tháp
             upgradeTowerPanel.transform.DOScale(Vector3.one, 0.5f);
+
+            // Truyền tháp hiện tại vào TowerUpgradeManager
+            Tower tower = towerSlots[index].transform.GetChild(0).GetComponent<Tower>();
+            TowerUpgradeManager.Instance.ShowUpgradePanel(tower);
         }
     }
 
@@ -116,6 +120,19 @@ public class TowerManagerInGame : MonoBehaviour
         if (panel != null)
         {
             panel.transform.localScale = scale;
+        }
+    }
+
+    // Phương thức để xóa tháp từ một ô
+    public void RemoveTower(Tower tower)
+    {
+        foreach (GameObject slot in towerSlots)
+        {
+            if (slot.transform.childCount > 0 && slot.transform.GetChild(0).gameObject == tower.gameObject)
+            {
+                Destroy(tower.gameObject); // Xóa tháp khỏi game
+                break;
+            }
         }
     }
 }

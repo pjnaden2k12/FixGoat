@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Để kiểm tra tên cảnh
 
 public class TowerManager : MonoBehaviour
 {
     public static TowerManager Instance { get; private set; }
+    private static bool isInMenuScene = false;
 
     [System.Serializable]
     public class TowerData
@@ -23,15 +25,49 @@ public class TowerManager : MonoBehaviour
 
     private void Awake()
     {
-        // Kiểm tra xem đã có instance tồn tại chưa
-        if (Instance != null && Instance != this)
+        // Kiểm tra nếu đã có instance tồn tại chưa
+        if (Instance == null)
         {
-            Destroy(gameObject); // Nếu có, hủy bỏ đối tượng này
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            // Kiểm tra xem đang ở menu không
+            if (isInMenuScene)
+            {
+                Destroy(gameObject); // Xóa đối tượng nếu nó đang ở menu
+            }
+            else
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+        }
+    }
+
+    private void OnEnable()
+    {
+        // Đăng ký sự kiện để theo dõi khi chuyển cảnh
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        // Hủy đăng ký sự kiện khi không còn sử dụng
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Kiểm tra xem có đang ở cảnh menu không
+        if (scene.name == "MainMenuScene") // Thay đổi "MenuScene" thành tên cảnh menu của bạn
+        {
+            isInMenuScene = true;
         }
         else
         {
-            Instance = this; // Nếu không, gán instance này
-            DontDestroyOnLoad(gameObject); // Đảm bảo không bị hủy khi scene thay đổi
+            isInMenuScene = false;
         }
     }
 

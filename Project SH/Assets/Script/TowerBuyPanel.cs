@@ -85,11 +85,21 @@ public class TowerDisplayManager : MonoBehaviour
             return;
         }
 
-        // Đặt tháp tại vị trí ô đã chọn
-        PlaceTowerAtSelectedSlot(towerData);
-        // Đóng panel mua tháp
-    TowerManagerInGame.Instance.buyTowerPanel.SetActive(false);
+        // Kiểm tra và trừ gear khi mua tháp
+        if (GearManager.Instance.SpendGears(50)) // Thay đổi 50 nếu cần số gear khác
+        {
+            // Đặt tháp tại vị trí ô đã chọn
+            PlaceTowerAtSelectedSlot(towerData);
+
+            // Đóng panel mua tháp
+            TowerManagerInGame.Instance.buyTowerPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Không đủ gear để mua tháp!");
+        }
     }
+
 
     private void PlaceTowerAtSelectedSlot(TowerManager.TowerData towerData)
     {

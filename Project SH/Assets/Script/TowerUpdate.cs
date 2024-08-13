@@ -4,83 +4,98 @@ using TMPro;
 
 public class TowerUpgradeManager : MonoBehaviour
 {
-    public static TowerUpgradeManager Instance { get; private set; }
+    public GameObject upgradeTowerPanel; // Panel nâng cấp tháp
+    public Button upgradeButton; // Nút nâng cấp tháp
+    public Button removeTowerButton; // Nút xóa tháp
+    public TextMeshProUGUI towerInfoText; // Text hiển thị thông tin tháp
 
-    [SerializeField] private GameObject upgradePanel; // Bảng nâng cấp tháp
-    [SerializeField] private TextMeshProUGUI towerStatsText; // Văn bản hiển thị chỉ số tháp
-    [SerializeField] private Button upgradeButton; // Nút nâng cấp
-    [SerializeField] private Button closeButton; // Nút đóng bảng
+    private Tower currentTower; // Tháp hiện tại đang được nâng cấp
 
-    private Tower selectedTower;
+    public static TowerUpgradeManager Instance; // Để truy cập từ TowerManagerInGame
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
     }
 
     private void Start()
     {
-        upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
-        closeButton.onClick.AddListener(CloseUpgradePanel);
-    }
+        // Ẩn panel nâng cấp tháp khi bắt đầu
+        upgradeTowerPanel.SetActive(false);
 
-    // Mở bảng nâng cấp và hiển thị thông tin tháp
-    public void OpenUpgradePanel(Tower tower)
-    {
-        selectedTower = tower;
-        UpdateTowerStatsText();
-        upgradePanel.SetActive(true);
-    }
-
-    // Cập nhật văn bản hiển thị chỉ số tháp và trạng thái nút nâng cấp
-    private void UpdateTowerStatsText()
-    {
-        if (selectedTower != null)
+        // Thêm sự kiện cho các nút
+        if (upgradeButton != null)
         {
-            towerStatsText.text = $"Level: {selectedTower.level}\n" +
-                                  $"Damage: {selectedTower.GetDamage()}\n" +
-                                  $"Attack Speed: {selectedTower.GetAttackSpeed()}\n" +
-                                  $"Range: {selectedTower.GetRange()}\n" +
-                                  $"Upgrade Cost: {50 * selectedTower.level} Gears";
-
-            // Kiểm tra cấp độ và cập nhật trạng thái nút nâng cấp
-            if (selectedTower.level >= 3)
-            {
-                upgradeButton.interactable = false;
-                ColorBlock colors = upgradeButton.colors;
-                colors.normalColor = Color.gray; // Màu sắc mờ khi không thể nâng cấp
-                upgradeButton.colors = colors;
-            }
-            else
-            {
-                upgradeButton.interactable = true;
-                ColorBlock colors = upgradeButton.colors;
-                colors.normalColor = Color.white; // Màu sắc bình thường khi có thể nâng cấp
-                upgradeButton.colors = colors;
-            }
+            upgradeButton.onClick.AddListener(UpgradeTower);
+        }
+        if (removeTowerButton != null)
+        {
+            removeTowerButton.onClick.AddListener(RemoveTower);
         }
     }
 
-    // Xử lý khi nhấn nút nâng cấp
-    private void OnUpgradeButtonClicked()
+    public void ShowUpgradePanel(Tower tower)
     {
-        if (selectedTower != null)
+        currentTower = tower;
+        if (currentTower != null)
         {
-            selectedTower.Upgrade();
-            UpdateTowerStatsText(); // Cập nhật lại thông số và trạng thái nút sau khi nâng cấp
+            // Cập nhật thông tin tháp
+            UpdateTowerInfo();
+
+            // Hiển thị panel nâng cấp tháp
+            upgradeTowerPanel.SetActive(true);
         }
     }
 
-    // Đóng bảng nâng cấp
-    public void CloseUpgradePanel()
+    private void UpdateTowerInfo()
     {
-        upgradePanel.SetActive(false);
+        // Cập nhật thông tin tháp vào TextMeshProUGUI
+        if (towerInfoText != null && currentTower != null)
+        {
+            towerInfoText.text = $"Tower Level: {currentTower.level}\n" +
+                                  $"Damage: {currentTower.GetDamage()}\n" +
+                                  $"Attack Speed: {currentTower.GetAttackSpeed()}\n" +
+                                  $"Cost: {currentTower.upgradeCost} Gear";
+
+            // Cập nhật trạng thái nút nâng cấp
+            UpdateUpgradeButtonState();
+        }
+    }
+
+    private void UpdateUpgradeButtonState()
+    {
+        if (upgradeButton != null && currentTower != null)
+        {
+            // Kiểm tra xem tháp đã đạt đến cấp tối đa chưa
+            bool isMaxLevel = currentTower.level >= currentTower.maxLevel; // Giả định bạn có thuộc tính maxLevel
+            upgradeButton.interactable = !isMaxLevel;
+            upgradeButton.GetComponent<Image>().color = isMaxLevel ? Color.gray : Color.white; // Thay đổi màu sắc nút
+        }
+    }
+
+    private void UpgradeTower()
+    {
+        if (currentTower != null)
+        {
+            // Thực hiện nâng cấp tháp
+            currentTower.Upgrade();
+            // Cập nhật thông tin tháp sau khi nâng cấp
+            UpdateTowerInfo();
+        }
+    }
+
+    private void RemoveTower()
+    {
+        if (currentTower != null)
+        {
+            TowerManagerInGame.Instance.RemoveTower(currentTower);
+            CloseUpgradePanel(); // Đóng panel nâng cấp sau khi xóa tháp
+        }
+    }
+
+    private void CloseUpgradePanel()
+    {
+        // Ẩn panel nâng cấp tháp
+        upgradeTowerPanel.SetActive(false);
     }
 }
