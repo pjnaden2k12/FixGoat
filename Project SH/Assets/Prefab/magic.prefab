@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8243475323069557005}
   - component: {fileID: 4508936675724290652}
   - component: {fileID: 2327960960561417005}
-  - component: {fileID: 1566534815533573401}
-  - component: {fileID: 8748589783201356885}
+  - component: {fileID: 6519940228458980161}
+  - component: {fileID: -7194640349619854837}
   m_Layer: 0
   m_Name: magic
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720754151253152809}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.02000022, y: 8.08, z: -0.11680473}
   m_LocalScale: {x: 0.43944842, y: 0.43944842, z: 0.43944842}
   m_ConstrainProportionsScale: 0
@@ -182,7 +182,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.1055331, y: 3.38}
   m_EdgeRadius: 0
---- !u!114 &1566534815533573401
+--- !u!114 &6519940228458980161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720754151253152809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb58c50e535e9cd449f7d71e711a82a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.5
+--- !u!114 &-7194640349619854837
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,16 +210,3 @@ MonoBehaviour:
   maxHealth: 100
   armor: 20
   attackRange: 1
---- !u!114 &8748589783201356885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1720754151253152809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f022bbb7061495a449f3899a5cd630b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.5
