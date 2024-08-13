@@ -144,18 +144,6 @@ MonoBehaviour:
   luongmautoida: 1000
   explosionEffect: {fileID: 3933253136156760907, guid: 755b2fef2dfe36f4cad0196d5cffd5a5, type: 3}
   animator: {fileID: 0}
---- !u!114 &276325034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 276325026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c002e8fcc3d194a44a26d95e63ab53b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &596636107
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,9 +824,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2281118212336271621, guid: e8cae7c344b79be4793e33b2c08dae42, type: 3}
       insertIndex: 2
       addedObject: {fileID: 276325033}
-    - targetCorrespondingSourceObject: {fileID: 2281118212336271621, guid: e8cae7c344b79be4793e33b2c08dae42, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 276325034}
   m_SourcePrefab: {fileID: 100100000, guid: e8cae7c344b79be4793e33b2c08dae42, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

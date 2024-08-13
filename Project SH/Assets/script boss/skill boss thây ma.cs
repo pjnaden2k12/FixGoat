@@ -9,14 +9,14 @@ public class bossthayma : MonoBehaviour
     public GameObject explosionEffect; // Prefab hiệu ứng nổ
     public Animator animator; // Animator Controller của boss
     private bool isDead = false;
-    //private bool effectTriggered = false; // Biến kiểm soát hiệu ứng
+    private bool hasScaledUp = false; // Biến kiểm soát việc phóng to
 
     // Start is called before the first frame update
     void Start()
     {
         luongmauhientai = luongmautoida;
         thanhmaubossgiapsat.CapNhatThanhMau(luongmauhientai, luongmautoida);
-        // Không còn gọi Coroutine để sinh quái con
+        StartCoroutine(MoveAndScale());
     }
 
     private void OnMouseDown()
@@ -33,6 +33,34 @@ public class bossthayma : MonoBehaviour
         }
     }
 
+    private IEnumerator MoveAndScale()
+    {
+        // Di chuyển boss (giả sử boss di chuyển theo phương ngang)
+        float moveDuration = 5f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < moveDuration)
+        {
+            // Thay đổi vị trí boss (di chuyển về phía trước hoặc hướng cụ thể)
+            transform.Translate(Vector3.forward * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Sau khi di chuyển 5 giây
+        if (!hasScaledUp)
+        {
+            // Phóng to boss 2 lần
+            transform.localScale *= 2f;
+            hasScaledUp = true;
+
+            // Tăng gấp đôi máu hiện tại
+            luongmautoida *= 2;
+            luongmauhientai = luongmautoida;
+            thanhmaubossgiapsat.CapNhatThanhMau(luongmauhientai, luongmautoida);
+        }
+    }
+
     private IEnumerator Die()
     {
         if (isDead) yield break; // Kiểm tra nếu boss đã chết, thoát khỏi coroutine
@@ -40,6 +68,7 @@ public class bossthayma : MonoBehaviour
         isDead = true;
         luongmauhientai = 0;
         thanhmaubossgiapsat.CapNhatThanhMau(luongmauhientai, luongmautoida);
+
         Debug.Log("Boss is dead.");
 
         // Hiển thị hiệu ứng nổ chỉ một lần

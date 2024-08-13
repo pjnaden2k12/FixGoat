@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 421159632}
   - component: {fileID: 421159631}
   - component: {fileID: 421159630}
+  - component: {fileID: 421159634}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -321,6 +322,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &421159634
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421159629}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 04027a5063066e147afa216a1c1d7dc5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &828309688
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +438,7 @@ MonoBehaviour:
   thanhmaubossgiapsat: {fileID: 80042389}
   luongmauhientai: 0
   luongmautoida: 1000
-  explosionEffect: {fileID: 0}
+  explosionEffect: {fileID: 7071952418447646015, guid: a489c2f653598e842bdd8b3cd1795963, type: 3}
   animator: {fileID: 0}
 --- !u!1 &1488081757
 GameObject:
@@ -775,11 +797,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4865596183072772082, guid: 6c5b20ede75dc2e4182828f9e014c3d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.22
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4865596183072772082, guid: 6c5b20ede75dc2e4182828f9e014c3d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.26
+      value: 5.05
       objectReference: {fileID: 0}
     - target: {fileID: 4865596183072772082, guid: 6c5b20ede75dc2e4182828f9e014c3d2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -817,6 +839,18 @@ PrefabInstance:
       propertyPath: targetPoint
       value: 
       objectReference: {fileID: 1488081758}
+    - target: {fileID: 7530360466294555904, guid: 6c5b20ede75dc2e4182828f9e014c3d2, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6372688
+      objectReference: {fileID: 0}
+    - target: {fileID: 7530360466294555904, guid: 6c5b20ede75dc2e4182828f9e014c3d2, type: 3}
+      propertyPath: m_Size.y
+      value: 2.1939526
+      objectReference: {fileID: 0}
+    - target: {fileID: 7530360466294555904, guid: 6c5b20ede75dc2e4182828f9e014c3d2, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.2980237
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
