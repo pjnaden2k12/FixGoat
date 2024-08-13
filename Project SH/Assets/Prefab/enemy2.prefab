@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5305553069671780949}
   - component: {fileID: 5276962161697684018}
   - component: {fileID: 7217564464641475017}
+  - component: {fileID: 616874919401279518}
+  - component: {fileID: 4966509031715324480}
   m_Layer: 0
   m_Name: enemy2
   m_TagString: Untagged
@@ -28,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4838917831623843642}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.03999996, y: 8.01, z: 0.048084408}
   m_LocalScale: {x: 0.5247, y: 0.5247, z: 0.5247}
   m_ConstrainProportionsScale: 0
@@ -180,3 +182,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.831773, y: 2.93}
   m_EdgeRadius: 0
+--- !u!114 &616874919401279518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4838917831623843642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5785a3a0108fc144482c4fc29ee044dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  armor: 20
+  attackRange: 1
+--- !u!114 &4966509031715324480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4838917831623843642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f022bbb7061495a449f3899a5cd630b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.5

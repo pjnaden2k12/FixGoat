@@ -9,9 +9,14 @@ public class Enemy1Health : MonoBehaviour
     private Animator animator; // Animator của quái vật
     private bool isDead = false; // Trạng thái chết của quái vật
     public float attackRange = 1.0f; // Phạm vi để quái vật bắt đầu tấn công
+    public int attackDamage = 10; // Sát thương gây ra cho tường thành
+    public float attackInterval = 1.0f; // Khoảng thời gian giữa các lần tấn công
 
     private Rigidbody rb;
     private bool isAttacking = false; // Trạng thái tấn công của quái vật
+    private float lastAttackTime = 0f; // Thời gian của lần tấn công cuối cùng
+
+    public GameObject fortress; // Đối tượng tường thành
 
     void Start()
     {
@@ -30,6 +35,15 @@ public class Enemy1Health : MonoBehaviour
 
     void Update()
     {
+        // Kiểm tra nếu quái vật trong phạm vi tấn công của tường thành
+        if (fortress != null && !isDead)
+        {
+            float distanceToFortress = Vector3.Distance(transform.position, fortress.transform.position);
+            if (distanceToFortress <= attackRange)
+            {
+                AttackFortress();
+            }
+        }
     }
 
     // Hàm gọi để gây sát thương cho quái vật
@@ -69,7 +83,6 @@ public class Enemy1Health : MonoBehaviour
         // Bắt đầu coroutine để làm mờ dần rồi biến mất
         StartCoroutine(FadeOutAndDestroy());
     }
-
     // Coroutine để làm mờ dần rồi biến mất
     IEnumerator FadeOutAndDestroy()
     {
@@ -96,5 +109,20 @@ public class Enemy1Health : MonoBehaviour
     {
         // Giảm máu khi nhấp chuột
         TakeDamage(50); // Số máu bị giảm khi nhấp chuột
+    }
+
+    // Hàm tấn công tường thành
+    void AttackFortress()
+    {
+        if (Time.time > lastAttackTime + attackInterval)
+        {
+            FortressHealth fortressHealth = fortress.GetComponent<FortressHealth>();
+            if (fortressHealth != null)
+            {
+                fortressHealth.TakeDamage(attackDamage);
+                Debug.Log("Fortress attacked! Damage: " + attackDamage);
+            }
+            lastAttackTime = Time.time;
+        }
     }
 }

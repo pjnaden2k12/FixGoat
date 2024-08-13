@@ -715,6 +715,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4837281241872353586, guid: 2f660f6dc079c1548b935f5cc6cc3454, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5570616266564715565, guid: 2f660f6dc079c1548b935f5cc6cc3454, type: 3}
       propertyPath: m_Name
       value: osgarman
@@ -725,7 +729,7 @@ PrefabInstance:
       objectReference: {fileID: 1049225389}
     - target: {fileID: 6134007787705713200, guid: 2f660f6dc079c1548b935f5cc6cc3454, type: 3}
       propertyPath: m_SortingLayer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6134007787705713200, guid: 2f660f6dc079c1548b935f5cc6cc3454, type: 3}
       propertyPath: m_SortingLayerID
@@ -735,7 +739,8 @@ PrefabInstance:
       propertyPath: thanhmaubossgiapsat
       value: 
       objectReference: {fileID: 886834270}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5591487177793392780, guid: 2f660f6dc079c1548b935f5cc6cc3454, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

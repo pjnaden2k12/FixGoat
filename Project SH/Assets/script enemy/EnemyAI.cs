@@ -10,7 +10,7 @@ public class enemyAI : MonoBehaviour
     public float moveSpeed = 0.05f;
     public float attackRange = 1.0f;
     private bool isAttacking = false;
-    private Vector2 targetPosition;
+    public Vector2 targetPosition;
 
     void Start()
     {

@@ -56,7 +56,7 @@ public class UImanagerUser : MonoBehaviour
     public void OpenSettings()
     {
 
-        LoginSuccessPanel.SetActive(false); // Ẩn Login Success Panel
+        
 
         SettingPanel.SetActive(true); // Hiện Setting Panel
     }

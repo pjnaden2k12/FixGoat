@@ -29,4 +29,10 @@ public class GameTimer : MonoBehaviour
         isGamePaused = pause;
         Time.timeScale = pause ? 0 : 1;
     }
+
+    // New method to get the elapsed time
+    public float GetTimeElapsed()
+    {
+        return timeElapsed;
+    }
 }

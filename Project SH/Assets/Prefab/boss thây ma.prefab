@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4865596183072772082}
   - component: {fileID: 2410157774694855916}
   - component: {fileID: 1022223918828115476}
-  - component: {fileID: 5738333219967994085}
   - component: {fileID: 7530360466294555904}
   - component: {fileID: 784962526090419675}
+  - component: {fileID: 35253559268324799}
   m_Layer: 0
   m_Name: "boss th\xE2y ma"
   m_TagString: Untagged
@@ -109,20 +109,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5738333219967994085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3410301896205408809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5056b109a17d0448d89d2f946ca246, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  targetPoint: {fileID: 0}
 --- !u!61 &7530360466294555904
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -155,7 +141,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.2929465, y: 0}
+  m_Offset: {x: -1.2929465, y: 0.2980237}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -166,7 +152,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.114107, y: 2.79}
+  m_Size: {x: 1.6372688, y: 2.1939526}
   m_EdgeRadius: 0
 --- !u!50 &784962526090419675
 Rigidbody2D:
@@ -195,3 +181,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &35253559268324799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3410301896205408809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c2f717169a2444c9ded47210833f81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thanhmaubossgiapsat: {fileID: 0}
+  luongmauhientai: 0
+  luongmautoida: 1000
+  explosionEffect: {fileID: 7071952418447646015, guid: a489c2f653598e842bdd8b3cd1795963, type: 3}
+  animator: {fileID: 0}
