@@ -690,6 +690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696087698a7c10a4db1c774b76252bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToPreserve: MainMenuScene
   evolveCost: 1000
   maxEvolutionLevel: 10
 --- !u!4 &185410993

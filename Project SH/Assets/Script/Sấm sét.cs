@@ -39,7 +39,7 @@ public class LightningBolt : MonoBehaviour
                 //Gây sát thương cho mục tiêu
                 if (target.CompareTag("Enemy"))
                 {
-                    target.GetComponent<enemyAI>().TakeDamage(damage);
+                    target.GetComponent<Enemy1Health>().TakeDamage(damage);
                     Destroy(gameObject, lifetime);
                 }
                 else if (target.CompareTag("Boss"))

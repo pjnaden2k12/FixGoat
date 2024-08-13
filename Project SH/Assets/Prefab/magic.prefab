@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 8243475323069557005}
   - component: {fileID: 4508936675724290652}
   - component: {fileID: 2327960960561417005}
-  - component: {fileID: 6519940228458980161}
-  - component: {fileID: -7194640349619854837}
+  - component: {fileID: 2904120522110401126}
+  - component: {fileID: 2409936045833068600}
   m_Layer: 0
   m_Name: magic
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720754151253152809}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.02000022, y: 8.08, z: -0.11680473}
   m_LocalScale: {x: 0.43944842, y: 0.43944842, z: 0.43944842}
   m_ConstrainProportionsScale: 0
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1917113841
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fd5e9ca3b90fb6e4ca11d3cc28f275c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -182,7 +182,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.1055331, y: 3.38}
   m_EdgeRadius: 0
---- !u!114 &6519940228458980161
+--- !u!114 &2904120522110401126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,11 +191,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1720754151253152809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb58c50e535e9cd449f7d71e711a82a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 976dae37039e84a48b6b083c72e6e120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
---- !u!114 &-7194640349619854837
+  speed: 1
+  stopYPosition: -2.8
+  animator: {fileID: 8243475323069557005}
+  attackDamage: 10
+  attackAnimationTrigger: Attack
+  attackRadius: 0.5
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  attackInterval: 1
+--- !u!114 &2409936045833068600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,4 +218,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   armor: 20
-  attackRange: 1

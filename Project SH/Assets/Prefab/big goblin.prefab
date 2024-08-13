@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 2631125135661272836}
   - component: {fileID: 7544361805832071852}
   - component: {fileID: 904641973008341166}
+  - component: {fileID: 1584741642851294383}
   - component: {fileID: 2735748440269777646}
-  - component: {fileID: -9173496817656735617}
-  - component: {fileID: -3231874821846165000}
+  - component: {fileID: 8891116093592107942}
   m_Layer: 0
   m_Name: big goblin
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4700696468787374395}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.17, y: 8.469999, z: -0.14187455}
   m_LocalScale: {x: 0.6383664, y: 0.6383664, z: 0.6383664}
   m_ConstrainProportionsScale: 0
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -386730899
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 71abd58ad008b614a94fe029bc212a6a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -161,6 +161,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.273428, y: 2.55}
   m_EdgeRadius: 0
+--- !u!114 &1584741642851294383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4700696468787374395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5785a3a0108fc144482c4fc29ee044dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  armor: 20
 --- !u!95 &2735748440269777646
 Animator:
   serializedVersion: 5
@@ -182,7 +196,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-9173496817656735617
+--- !u!114 &8891116093592107942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,22 +205,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4700696468787374395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb58c50e535e9cd449f7d71e711a82a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 976dae37039e84a48b6b083c72e6e120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
---- !u!114 &-3231874821846165000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4700696468787374395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5785a3a0108fc144482c4fc29ee044dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  armor: 20
-  attackRange: 1
+  speed: 1
+  stopYPosition: -2.8
+  animator: {fileID: 2735748440269777646}
+  attackDamage: 10
+  attackAnimationTrigger: Attack
+  attackRadius: 0.5
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  attackInterval: 1

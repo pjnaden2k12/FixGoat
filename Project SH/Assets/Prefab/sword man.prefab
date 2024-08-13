@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 2396775029362558783}
   - component: {fileID: 1478858539489549180}
   - component: {fileID: 2763086086899796131}
-  - component: {fileID: -7534389175034868469}
-  - component: {fileID: 7458144836539828214}
+  - component: {fileID: 5769039404896831462}
+  - component: {fileID: 6361424852619055488}
   m_Layer: 0
   m_Name: sword man
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3164766679461762757}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.059999943, y: 7.77, z: -0.14187455}
   m_LocalScale: {x: 0.5397, y: 0.5397, z: 0.5397}
   m_ConstrainProportionsScale: 0
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1917113841
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 18d67d3ef1a293343bcea34e03507229, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -182,7 +182,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-7534389175034868469
+--- !u!114 &5769039404896831462
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,11 +191,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3164766679461762757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb58c50e535e9cd449f7d71e711a82a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 976dae37039e84a48b6b083c72e6e120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
---- !u!114 &7458144836539828214
+  speed: 1
+  stopYPosition: -2.8
+  animator: {fileID: 2763086086899796131}
+  attackDamage: 10
+  attackAnimationTrigger: Attack
+  attackRadius: 0.5
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  attackInterval: 1
+--- !u!114 &6361424852619055488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,4 +218,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   armor: 20
-  attackRange: 1

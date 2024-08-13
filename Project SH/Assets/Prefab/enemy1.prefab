@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8830956866352738378}
   - component: {fileID: 3133128092031148472}
   - component: {fileID: 5019826854285966130}
-  - component: {fileID: -1717057097268140563}
-  - component: {fileID: 3871857377481031454}
+  - component: {fileID: 5341155471561635228}
+  - component: {fileID: 5109297646643143980}
   m_Layer: 0
   m_Name: enemy1
   m_TagString: Enemy
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.9341, y: 6.7836, z: 0}
-  m_LocalScale: {x: 0.59108776, y: 0.59108776, z: 0.59108776}
+  m_LocalScale: {x: 0.6071956, y: 0.63895154, z: 0.63895154}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1917113841
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: df0f6ae3f320c8c41b63c19ee3511ffc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -166,10 +166,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.3898692, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -180,9 +180,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.01, y: 2.56}
+  m_Size: {x: 2.2302618, y: 2.56}
   m_EdgeRadius: 0
---- !u!114 &-1717057097268140563
+--- !u!114 &5341155471561635228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,11 +191,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 162413286374201126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb58c50e535e9cd449f7d71e711a82a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 976dae37039e84a48b6b083c72e6e120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
---- !u!114 &3871857377481031454
+  speed: 1
+  stopYPosition: -2.8
+  animator: {fileID: 8830956866352738378}
+  attackDamage: 10
+  attackAnimationTrigger: Attack
+  attackRadius: 0.5
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  attackInterval: 1
+--- !u!114 &5109297646643143980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,4 +218,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   armor: 20
-  attackRange: 1

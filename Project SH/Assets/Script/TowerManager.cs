@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement; // Để kiểm tra tên cảnh
-
+using System.IO;
 public class TowerManager : MonoBehaviour
 {
     public static TowerManager Instance { get; private set; }
@@ -22,6 +21,7 @@ public class TowerManager : MonoBehaviour
 
     public TowerData[] towers;
     private string saveFilePath;
+    private List<Tower> allTowers = new List<Tower>(); // Danh sách tháp để cập nhật
 
     private void Awake()
     {
@@ -94,6 +94,19 @@ public class TowerManager : MonoBehaviour
         }
     }
 
+    public void UpdateTowerData(int id, float newBaseDamage, float newBaseAttackSpeed, float newBaseRange)
+    {
+        TowerData towerData = GetTowerDataById(id);
+        if (towerData != null)
+        {
+            towerData.baseDamage = newBaseDamage;
+            towerData.baseAttackSpeed = newBaseAttackSpeed;
+            towerData.baseRange = newBaseRange;
+            SaveTowerData();
+            NotifyTowersOfUpdate();
+        }
+    }
+
     private void SaveTowerData()
     {
         List<string> lines = new List<string>();
@@ -122,6 +135,17 @@ public class TowerManager : MonoBehaviour
         }
     }
 
+    private void NotifyTowersOfUpdate()
+    {
+        foreach (var tower in allTowers)
+        {
+            if (tower != null)
+            {
+                tower.UpdateStats(); // Cập nhật các tháp khi dữ liệu thay đổi
+            }
+        }
+    }
+
     public List<TowerData> GetUnlockedTowers()
     {
         List<TowerData> unlockedTowers = new List<TowerData>();
@@ -134,6 +158,7 @@ public class TowerManager : MonoBehaviour
         }
         return unlockedTowers;
     }
+
     public TowerData GetTowerDataById(int id)
     {
         foreach (var tower in towers)
@@ -145,5 +170,21 @@ public class TowerManager : MonoBehaviour
         }
         Debug.LogError("Không tìm thấy tháp với ID: " + id);
         return null;
+    }
+
+    public void RegisterTower(Tower tower)
+    {
+        if (!allTowers.Contains(tower))
+        {
+            allTowers.Add(tower);
+        }
+    }
+
+    public void UnregisterTower(Tower tower)
+    {
+        if (allTowers.Contains(tower))
+        {
+            allTowers.Remove(tower);
+        }
     }
 }

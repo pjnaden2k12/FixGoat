@@ -1,33 +1,47 @@
-using UnityEngine;
-using TMPro;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public HighscoreManager highscoreManager; // Reference to HighscoreManager
-    public GearManager gearManager; // Reference to GearManager
-    public GameTimer gameTimer; // Reference to GameTimer
-    public int currentLevel = 1; // Current level, should be updated according to the game
+    public static GameManager Instance { get; private set; }
 
-    // Call this method when the boss is defeated
-    public void OnBossDefeated()
+    private float levelCompletionTime; // Thời gian hoàn thành cấp độ
+    private int currentLevelId; // ID của cấp độ hiện tại
+
+    private void Awake()
     {
-        // Get the total gear and completion time
-        int totalGears = gearManager.totalGears;
-        float completionTime = gameTimer.GetTimeElapsed(); // Make sure to implement GetTimeElapsed() in GameTimer
-
-        // Set level, totalGear, and completionTime
-        HighscoreCalculator highscoreCalculator = highscoreManager.GetComponent<HighscoreCalculator>();
-        highscoreCalculator.level = currentLevel;
-        highscoreCalculator.totalGear = totalGears;
-        highscoreCalculator.completionTime = completionTime;
-
-        // Submit highscore
-        if (highscoreManager != null)
+        // Đảm bảo chỉ có một GameManager trong cảnh
+        if (Instance == null)
         {
-            highscoreManager.SubmitHighscore();
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
-        // Optionally, load the victory screen or menu
-        // SceneManager.LoadScene("VictoryScene");
+    // Gán thời gian hoàn thành cấp độ
+    public void SetLevelCompletionTime(float time)
+    {
+        levelCompletionTime = time;
+    }
+
+    // Lấy thời gian hoàn thành cấp độ
+    public float GetLevelCompletionTime()
+    {
+        return levelCompletionTime;
+    }
+
+    // Gán ID cấp độ hiện tại
+    public void SetCurrentLevelId(int id)
+    {
+        currentLevelId = id;
+    }
+
+    // Lấy ID cấp độ hiện tại
+    public int GetCurrentLevelId()
+    {
+        return currentLevelId;
     }
 }

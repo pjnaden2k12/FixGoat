@@ -1,36 +1,44 @@
 ﻿using UnityEngine;
+using static TowerManager;
 
 public class Tower : MonoBehaviour
 {
-    public string nametower;
-    public int id; // ID hoặc tên duy nhất cho mỗi tháp
-    public int level = 1; // Cấp độ của tháp
-    public float baseDamage = 10f; // Sát thương cơ bản
-    public float baseAttackSpeed = 1f; // Tốc độ tấn công cơ bản
-    public float baseRange = 5f; // Tầm bắn cơ bản
-    public int upgradeCost = 50; // Chi phí nâng cấp cơ bản
+    public int id;
+    public int level = 1;
+    public int upgradeCost = 50;
     public int maxLevel = 3;
 
-    
-    private float damage; // Sát thương hiện tại
-    private float attackSpeed; // Tốc độ tấn công hiện tại
-    private float range; // Tầm bắn hiện tại
+    private float damage;
+    private float attackSpeed;
+    private float range;
 
     void Start()
     {
-        UpdateStats(); // Cập nhật thông số khi bắt đầu
+        // Đăng ký tháp với TowerManager
+        if (TowerManager.Instance != null)
+        {
+            TowerManager.Instance.RegisterTower(this);
+        }
+        UpdateStats();
+    }
+
+    private void OnDestroy()
+    {
+        // Hủy đăng ký tháp với TowerManager
+        if (TowerManager.Instance != null)
+        {
+            TowerManager.Instance.UnregisterTower(this);
+        }
     }
 
     public void Upgrade()
     {
-        
-
         if (GearManager.Instance != null && GearManager.Instance.SpendGears(upgradeCost))
         {
-            if (level < maxLevel) // Kiểm tra cấp độ tối đa
+            if (level < maxLevel)
             {
                 level++;
-                UpdateStats(); // Cập nhật thông số sau khi nâng cấp
+                UpdateStats();
             }
             else
             {
@@ -45,23 +53,27 @@ public class Tower : MonoBehaviour
 
     public void UpdateStats()
     {
-        switch (level)
+        TowerData towerData = TowerManager.Instance.GetTowerDataById(id);
+        if (towerData != null)
         {
-            case 1:
-                damage = baseDamage * 1f;
-                attackSpeed = baseAttackSpeed * 1f;
-                range = baseRange * 1f;
-                break;
-            case 2:
-                damage = baseDamage * 2f; // Tăng sát thương ở cấp độ 2
-                attackSpeed = baseAttackSpeed * 1.5f; // Tăng tốc độ tấn công ở cấp độ 2
-                range = baseRange * 1.2f; // Tăng tầm bắn ở cấp độ 2
-                break;
-            case 3:
-                damage = baseDamage * 3f; // Tăng sát thương ở cấp độ 3
-                attackSpeed = baseAttackSpeed * 2f; // Tăng tốc độ tấn công ở cấp độ 3
-                range = baseRange * 1.5f; // Tăng tầm bắn ở cấp độ 3
-                break;
+            switch (level)
+            {
+                case 1:
+                    damage = towerData.baseDamage * 1f;
+                    attackSpeed = towerData.baseAttackSpeed * 1f;
+                    range = towerData.baseRange * 1f;
+                    break;
+                case 2:
+                    damage = towerData.baseDamage * 2f;
+                    attackSpeed = towerData.baseAttackSpeed * 1.5f;
+                    range = towerData.baseRange * 1.2f;
+                    break;
+                case 3:
+                    damage = towerData.baseDamage * 3f;
+                    attackSpeed = towerData.baseAttackSpeed * 2f;
+                    range = towerData.baseRange * 1.5f;
+                    break;
+            }
         }
     }
 
@@ -79,5 +91,4 @@ public class Tower : MonoBehaviour
     {
         return range;
     }
-    
 }

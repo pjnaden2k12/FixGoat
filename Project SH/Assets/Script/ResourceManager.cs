@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.IO;
-
+using UnityEngine.SceneManagement; // Để kiểm tra tên cảnh
 public class ResourceManager : MonoBehaviour
 {
-    public static ResourceManager Instance { get; private set; }
+    public string sceneToPreserve;
 
+    public static ResourceManager Instance { get; private set; }
+    
     public int gold { get; private set; }
     public int diamonds { get; private set; }
     public int towerPieces { get; private set; }
@@ -32,10 +34,21 @@ public class ResourceManager : MonoBehaviour
 
     private void Awake()
     {
+
         if (Instance == null)
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject);
+            // Kiểm tra tên cảnh hiện tại
+            string currentScene = SceneManager.GetActiveScene().name;
+            if (currentScene == sceneToPreserve)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
 
             // Xác định đường dẫn tệp văn bản
             string folderName = "resourceSave";
@@ -50,10 +63,10 @@ public class ResourceManager : MonoBehaviour
             // Tải dữ liệu từ tệp
             LoadResources();
         }
-        //else
-        //{
-        //    Destroy(gameObject);
-        //}
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void LoadResources()
@@ -260,4 +273,6 @@ public class ResourceManager : MonoBehaviour
     {
         OnResourceChanged?.Invoke();
     }
+    
+
 }

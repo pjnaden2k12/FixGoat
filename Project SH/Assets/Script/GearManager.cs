@@ -55,4 +55,9 @@ public class GearManager : MonoBehaviour
         }
         return false;
     }
+    public float GetGearCount()
+    {
+
+    return totalGears; }
+
 }

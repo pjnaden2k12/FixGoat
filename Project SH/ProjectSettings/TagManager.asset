@@ -9,11 +9,12 @@ TagManager:
   - TowerPosition1
   - Boss
   - Wall
+  - vacham
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wall
   - Water
   - UI
   - 

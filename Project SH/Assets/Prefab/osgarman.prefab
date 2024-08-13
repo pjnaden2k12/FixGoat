@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6554024893179363527}
   - component: {fileID: 3498495663870369574}
   - component: {fileID: 4837281241872353586}
-  - component: {fileID: 5591487177793392780}
   - component: {fileID: 6783018917473018603}
   m_Layer: 0
   m_Name: osgarman
@@ -75,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -386730899
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: -1886969371, guid: a26d100e9b6803045a9776c0eb504d94, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -182,20 +181,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5591487177793392780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5570616266564715565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5056b109a17d0448d89d2f946ca246, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  targetPoint: {fileID: 0}
 --- !u!114 &6783018917473018603
 MonoBehaviour:
   m_ObjectHideFlags: 0

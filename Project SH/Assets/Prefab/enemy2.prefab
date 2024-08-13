@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 5305553069671780949}
   - component: {fileID: 5276962161697684018}
   - component: {fileID: 7217564464641475017}
-  - component: {fileID: 8731017265248296109}
-  - component: {fileID: -6280854083137726699}
+  - component: {fileID: 8811022481626889863}
+  - component: {fileID: 76519535281717864}
   m_Layer: 0
   m_Name: enemy2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4838917831623843642}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.03999996, y: 8.01, z: 0.048084408}
   m_LocalScale: {x: 0.5247, y: 0.5247, z: 0.5247}
   m_ConstrainProportionsScale: 0
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1917113841
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9f67c8991c2db284d9e9729808cc6c0c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -182,20 +182,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.831773, y: 2.93}
   m_EdgeRadius: 0
---- !u!114 &8731017265248296109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4838917831623843642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb58c50e535e9cd449f7d71e711a82a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.5
---- !u!114 &-6280854083137726699
+--- !u!114 &8811022481626889863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,4 +196,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   armor: 20
-  attackRange: 1
+--- !u!114 &76519535281717864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4838917831623843642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976dae37039e84a48b6b083c72e6e120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  stopYPosition: -2.8
+  animator: {fileID: 5305553069671780949}
+  attackDamage: 10
+  attackAnimationTrigger: Attack
+  attackRadius: 0.5
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  attackInterval: 1

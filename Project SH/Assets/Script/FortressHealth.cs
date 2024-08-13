@@ -6,10 +6,7 @@ public class FortressHealth : MonoBehaviour
     private float currentHealth;
     private float currentDefense;
     private float currentHealthRegen;
-
-    private float timeSinceLastDamage; // Biến để theo dõi thời gian từ lần cuối bị tấn công
-    public float healthRegenDelay = 3f; // Thời gian chờ trước khi bắt đầu hồi máu
-
+    public int levelId;
     public float MaxHealth
     {
         get { return maxHealth; }
@@ -28,12 +25,7 @@ public class FortressHealth : MonoBehaviour
 
     private void Update()
     {
-        timeSinceLastDamage += Time.deltaTime;
-
-        if (timeSinceLastDamage >= healthRegenDelay)
-        {
-            RegenerateHealth();
-        }
+        RegenerateHealth();
     }
 
     public void TakeDamage(float damage)
@@ -48,14 +40,13 @@ public class FortressHealth : MonoBehaviour
         {
             Die();
         }
-
-        timeSinceLastDamage = 0f; // Reset thời gian từ lần cuối bị tấn công
     }
 
     private void RegenerateHealth()
     {
+        // Hồi máu dựa trên giá trị hồi máu và thời gian đã trôi qua
         currentHealth += currentHealthRegen * Time.deltaTime;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Đảm bảo máu không vượt quá maxHealth
     }
 
     private void ApplyPermanentBonuses()
@@ -67,13 +58,16 @@ public class FortressHealth : MonoBehaviour
         }
 
         currentDefense = ResourceManager.Instance.wallDefenseBonus;
-        currentHealthRegen = ResourceManager.Instance.healthRegenBonus;
-        maxHealth += ResourceManager.Instance.wallHealthBonus;
+        currentHealthRegen = ResourceManager.Instance.healthRegenBonus; // Lấy giá trị hồi máu từ ResourceManager
+        maxHealth += ResourceManager.Instance.wallHealthBonus; // Cập nhật maxHealth
     }
 
     private void Die()
     {
         Debug.Log("Tường thành đã bị phá hủy!");
-        Destroy(gameObject);
+        Time.timeScale = 0f;
+
+        // Thực hiện các hành động khác khi tường thành bị phá hủy (nếu cần)
+        RewardManager.Instance.ShowRewardPanel(levelId);
     }
 }

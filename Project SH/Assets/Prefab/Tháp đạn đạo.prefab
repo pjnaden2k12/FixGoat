@@ -100,11 +100,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc12212ee4ebed14796fb21e52dbf84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nametower: 
   id: 1
   level: 1
-  baseDamage: 20
+  baseDamage: 50
   baseAttackSpeed: 1
   baseRange: 15
+  upgradeCost: 50
+  maxLevel: 3
 --- !u!114 &3682291409847096155
 MonoBehaviour:
   m_ObjectHideFlags: 0

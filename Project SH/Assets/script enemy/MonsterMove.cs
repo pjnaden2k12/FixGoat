@@ -9,8 +9,9 @@ public class MonsterMovement : MonoBehaviour
     public string attackAnimationTrigger = "Attack"; // Tên trigger animation tấn công
     public float attackRadius = 0.5f; // Bán kính để kiểm tra va chạm với tường thành
     public LayerMask wallLayer; // Layer của tường thành
+    public float attackInterval = 1.0f; // Khoảng thời gian giữa các lần tấn công
 
-    private bool hasAttacked = false; // Để đảm bảo chỉ tấn công một lần
+    private float lastAttackTime = 0f; // Thời gian của lần tấn công cuối cùng
 
     void Update()
     {
@@ -20,8 +21,11 @@ public class MonsterMovement : MonoBehaviour
         // Kiểm tra nếu quái vật đã đạt đến vị trí dừng
         if (transform.position.y <= stopYPosition)
         {
-            // Nếu quái vật chưa tấn công
-            if (!hasAttacked)
+            // Đảm bảo quái vật không di chuyển qua vị trí dừng
+            transform.position = new Vector3(transform.position.x, stopYPosition, transform.position.z);
+
+            // Kiểm tra nếu đã đến thời điểm tấn công tiếp theo
+            if (Time.time > lastAttackTime + attackInterval)
             {
                 // Kích hoạt animation tấn công
                 if (animator != null)
@@ -32,12 +36,9 @@ public class MonsterMovement : MonoBehaviour
                 // Gây sát thương lên tường thành
                 DealDamageToWall();
 
-                // Đánh dấu rằng quái vật đã tấn công
-                hasAttacked = true;
+                // Cập nhật thời gian của lần tấn công cuối cùng
+                lastAttackTime = Time.time;
             }
-
-            // Đảm bảo quái vật không di chuyển qua vị trí dừng
-            transform.position = new Vector3(transform.position.x, stopYPosition, transform.position.z);
         }
     }
 
