@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Project SH/Assets/Script/GameManager.cs.meta
 guid: 4f715c5bbadbfbb45b02441a074bba1a
+========
+guid: 1b4ba527643531e438096833840076b8
+>>>>>>>> ab955c7a74cf86879c8705775d0562d5699ec74b:Project SH/Assets/script enemy/MonsterHealth.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
