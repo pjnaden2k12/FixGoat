@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     // Phương thức về màn chính
     void GoToMainMenu()
     {
+        rewardPanel.SetActive(false);
         // Tải scene chính của trò chơi (giả sử là scene có tên "MainMenu")
         SceneManager.LoadScene("MainMenuScene");
     }
